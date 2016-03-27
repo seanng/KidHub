@@ -1,0 +1,49 @@
+ <!-- SIGN IN / SIGN UP MODAL -->
+
+<div class="modal fade" id="signin-modal" tabindex="-1" role="dialog" aria-labelledby="modal-header-label" aria-hidden="true" ng-hide="$root.currentUser">
+  <div class="modal-dialog">
+    <div class="modal-content">
+
+      <div class="modal-header"> <!-- modal-header -->
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+        <h4 class="modal-title" ng-show="signin">Sign in</h4>
+        <h4 class="modal-title" ng-hide="signin">Sign up</h4>
+      </div> <!-- /.modal-header -->
+
+      <div class="modal-body"> <!-- modal-body -->
+        <form role="form">
+          <div class="form-group"> <!-- form-group, username -->
+            <div class="input-group hide" id= "usernamediv">
+              <input type="name" class="form-control" id="uName" placeholder="Username">
+              <label for="uName" class="input-group-addon glyphicon glyphicon-user"></label>
+            </div>
+          </div>
+          <div class="form-group"> <!-- form-group, email -->
+            <div class="input-group">
+              <input type="email" ng-model="user.email" class="form-control" id="uLogin" placeholder="Email">
+              <label for="uLogin" class="input-group-addon glyphicon glyphicon-envelope"></label>
+            </div>
+          </div>
+          <div class="form-group"> <!-- form-group, password -->
+            <div class="input-group">
+              <input type="password" ng-model="user.password" class="form-control" id="uPassword" placeholder="Password">
+              <label for="uPassword" class="input-group-addon glyphicon glyphicon-lock"></label>
+            </div> <!-- /.input-group -->
+          </div>
+          <div id="lower-modal-text" ng-hide="signin">
+            Have an account? <a ng-click="signin=!signin">Sign in</a>
+          </div>
+          <div id="lower-modal-text" ng-show="signin">
+            Don't have an account? <a ng-click="signin=!signin">Sign up!</a>
+          </div> <!-- /.checkbox -->
+        </form>
+      </div> <!-- /.modal-body -->
+
+      <div class="modal-footer" id="modal-footer-sign-in">
+        <button class="form-control btn btn-primary" ng-show="signin" ng-click="runSignIn()">Sign in</button>
+        <button class="form-control btn btn-primary" ng-hide="signin" ng-click="runSignUp()">Sign up</button>
+      </div> <!-- /#modal-footer-sign-in-modal -->
+
+    </div>
+  </div>
+</div>
