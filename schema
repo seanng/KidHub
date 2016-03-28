@@ -25,6 +25,7 @@ Activities: {
   description: description,
   district: district,
   ages: ages,
+  tokens: number,
   category: category,
   retail_price: retail_price,
   address: address,
@@ -32,10 +33,22 @@ Activities: {
   phone: phone,
   cancellable: string,
   rules: [string1, string2, string3],
-  duration: minutes,
-  times: [{
-    day: day,
-    time: time,
-    date: date
-  }]
+  duration: minutes
+}
+
+Timeslots: {
+  _id: id,
+  activity_id: id,
+  activity_name: string,
+  date: date,
+  time: time,
+  duration: number,
+  description: string,
+  district: string,
+  ages: [numbers],
+  category: category,
+  tokens: number,
+  google_id: google_id,
+  occupied_spaces: number,
+  total_spaces: number
 }

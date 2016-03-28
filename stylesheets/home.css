@@ -4,7 +4,8 @@
 }
 
 .home-right {
-
+  border-left: 1px silver solid;
+  height: 300px;
 }
 
 ul.results-day-tabs {
@@ -31,3 +32,10 @@ ul.results-day-tabs {
 
 }
 
+#allFilters {
+  margin-bottom: 15px;
+}
+
+#filterBottom {
+  margin-bottom: 15px;
+}
