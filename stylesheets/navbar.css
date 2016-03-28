@@ -1,5 +1,9 @@
+.home-left {
+  text-align: center;
+}
+
 nav.navbar.navbar-default.appnavbar {
-  margin-bottom: 0px;
+  margin-bottom: 1px;
   padding: 5px;
 }
 
@@ -9,4 +13,25 @@ nav.navbar.navbar-default.appnavbar {
 
 span.glyphicon.glyphicon-user {
   font-size: 24px;
+}
+
+#nav-username {
+  margin-right: 20px;
+}
+
+span.glyphicon.glyphicon-piggy-bank {
+  font-size: 24px;
+}
+
+#nav-bank > .dropdown-menu li:hover .sub-menu {
+    visibility: visible;
+}
+
+#nav-bank > .dropdown:hover .dropdown-menu {
+    display: block;
+    text-align: center;
+}
+
+#bank-hovered > li {
+  margin-top: 10px;
 }

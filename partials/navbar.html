@@ -24,9 +24,21 @@
       </form> -->
 
       <!-- User dropdown -->
-      <ul class="nav navbar-nav navbar-right" ng-show="$root.currentUser">
+      <ul class="nav navbar-nav navbar-right" id="nav-bank" ng-show="$root.currentUser">
         <li class="dropdown">
-          <a href="#" class="dropdown-toggle" id="nav-username" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span class="glyphicon glyphicon-user"></span></a>
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-piggy-bank"></span></a>
+          <ul class="dropdown-menu" id="bank-hovered">
+            <li>You have:</li>
+            <li>5 tokens left</li>
+            <li><button type="button" class="btn btn-success" data-toggle="modal" data-target="#topup-modal">Top up</button></li>
+          </ul>
+        </li>
+      </ul>
+
+      <!-- Credits details -->
+      <ul class="nav navbar-nav navbar-right" id="nav-username" ng-show="$root.currentUser">
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span class="glyphicon glyphicon-user"></span></a>
           <ul class="dropdown-menu">
             <li><a id="profile-url" href="#">Profile</a></li>
             <li role="separator" class="divider"></li>

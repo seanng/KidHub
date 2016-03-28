@@ -7,8 +7,23 @@
 
 }
 
+ul.results-day-tabs {
+  padding-top: 18px;
+  padding-bottom: 18px;
+  padding-left: 0px;
+  margin-bottom: 0px;
+  text-align: justify;
+  width: 100%;
+  display: table;
+}
+
+#creditFilterSlider {
+  margin: 10px;
+  height: 10px;
+}
+
 .day-tab {
-  display: inline;
+  display: table-cell;
   text-align: center;
 }
 

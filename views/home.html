@@ -5,7 +5,33 @@
         <span class="day-tab-{{date}}"> {{date}} </span>
       </li>
     </ul>
+    <div id="allFilters">
+      <div class="row">
+        <div class="col-md-6 filteration" id="timeFilter">
 
+          <div id="timeSlider"></div>
+        </div>
+        <div class="col-md-6 filteration" id="ageFilter">
+          age picker here
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xs-6 filteration">
+          <div id="creditFilterSlider"></div>
+        </div>
+        <div class="col-xs-6 filteration">
+          <button type="button" class="btn btn-warning" ng-click="showMoreFilters=!showMoreFilters">More Filters</button>
+        </div>
+      </div>
+      <div id="moreFilters" ng-hide="!showMoreFilters">
+        More filters here
+
+        <button type="button" class="btn btn-success" ng-click="filterSelected()">Filter</button>
+      </div>
+    </div>
+    <div class="container-fluid" id="homeFeed" ng-hide="showMoreFilters">
+      Feed items here
+    </div>
   </div>
   <div class="col-md-5 home-right">
     Map here!
