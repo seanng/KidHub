@@ -5,7 +5,6 @@ if (Meteor.isClient) {
       $location.path('/home');
     }
 
-
   }]);
 }
 

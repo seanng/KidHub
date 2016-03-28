@@ -12,12 +12,12 @@ if (Meteor.isClient) {
     $scope.runSignIn = function() {
       var email = $scope.user.email;
       var password = $scope.user.password;
-      Meteor.loginWithPassword({
-        email: email,
-        password: password
-      }, function(){
+      console.log(password);
+      Meteor.loginWithPassword(email, password, function(){
         //data-toggle close modal with jQuery
-        $location.path('/home');
+        window.location.href = '/home';
+        $scope.user.email = '';
+        $scope.user.password = '';
       });
     };
 
@@ -29,7 +29,9 @@ if (Meteor.isClient) {
         password: password
       }, function(){
         //data-toggle close modal with jQuery
-        $location.path('/home');
+        window.location.href = '/home';
+        $scope.user.email = '';
+        $scope.user.password = '';
       });
     };
 

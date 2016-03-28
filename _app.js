@@ -2,7 +2,7 @@
 Activities = new Mongo.Collection('activities');
 
 if (Meteor.isClient) {
-    angular.module('KidHubApp', ['angular-meteor', 'accounts.ui', 'ui.router']);
+    angular.module('KidHubApp', ['angular-meteor', 'accounts.ui', 'ui.router', 'ui.bootstrap']);
 
     angular.module('KidHubApp').config(function($urlRouterProvider, $stateProvider, $locationProvider){
       $locationProvider.html5Mode(true);
@@ -10,19 +10,19 @@ if (Meteor.isClient) {
       $stateProvider
         .state('welcome',{
           url: '/',
-          templateUrl: 'welcome.html',
+          templateUrl: 'views/welcome.html',
           controller: 'WelcomeCtrl',
           authenticate: false
         })
         .state('home',{
           url: '/home',
-          templateUrl: 'home.html',
+          templateUrl: 'views/home.html',
           controller: 'HomeCtrl',
           authenticate: true
         })
         .state('activity',{
           url: '/activities/:activityId',
-          templateUrl: 'activity.html',
+          templateUrl: 'views/activity.html',
           controller: 'ActivityCtrl',
           authenticate: true
         });
