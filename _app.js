@@ -69,8 +69,8 @@ if (Meteor.isServer) {
     // code to run on server at startup
   });
 
-  Meteor.publish('products', function(){
-
+  Meteor.publish('activities', function(){
+    // return queries that are called from client.
   });
 
 }

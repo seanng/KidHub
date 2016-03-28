@@ -16,6 +16,7 @@ if (Meteor.isClient) {
         email: email,
         password: password
       }, function(){
+        //data-toggle close modal with jQuery
         $location.path('/home');
       });
     };
@@ -27,6 +28,7 @@ if (Meteor.isClient) {
         email: email,
         password: password
       }, function(){
+        //data-toggle close modal with jQuery
         $location.path('/home');
       });
     };
@@ -36,9 +38,11 @@ if (Meteor.isClient) {
 
 
 if (Meteor.isServer) {
-  // Meteor.users.update(user._id, { $set:
-  //   {
-  //     "emails.0.verified": true
-  //   }
-  // });
+  Accounts.onCreateUser(function(options, user){
+    Meteor.setTimeout(function(){
+      Meteor.users.update(user._id, { $set:
+      { "emails.0.verified": true }});
+    }, 4000);
+    return user;
+  });
 }

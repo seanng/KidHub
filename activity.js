@@ -1,4 +1,6 @@
 if (Meteor.isClient) {
+  Meteor.subscribe('activityInfo');
+
   angular.module('KidHubApp')
   .controller('ActivityCtrl', ['$scope','$meteor', '$stateParams', function($scope, $meteor, $stateParams){
 
@@ -9,4 +11,8 @@ if (Meteor.isClient) {
 
 
 if (Meteor.isServer) {
+  Meteor.publish('activityInfo', function(){
+    console.log(Activities);
+    return Activities.find({});
+  });
 }

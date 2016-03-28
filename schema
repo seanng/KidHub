@@ -1,0 +1,41 @@
+Users: {
+  _id: id,
+  email: email,
+  first_name: first_name,
+  last_name: last_name,
+  children: [{
+    name: name,
+    birthday: date,
+    gender: gender
+  }, {
+    name: name2,
+    birthday: date2,
+    gender: gender2
+  }],
+  tokens: tokens,
+  registrations: {
+    activity_id: id,
+    name: name
+  }
+}
+
+Activities: {
+  _id: id,
+  name: name,
+  description: description,
+  district: district,
+  ages: ages,
+  category: category,
+  retail_price: retail_price,
+  address: address,
+  google_id: google_id,
+  phone: phone,
+  cancellable: string,
+  rules: [string1, string2, string3],
+  duration: minutes,
+  times: [{
+    day: day,
+    time: time,
+    date: date
+  }]
+}
