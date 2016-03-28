@@ -7,10 +7,11 @@
 </head>
 
 <body ng-app="KidHubApp">
-  <navbar ng-controller="NavbarCtrl"></navbar>
+  <navbar ng-controller="NavbarCtrl" ng-show="$root.currentUser"></navbar>
 
   <div ui-view></div>
   <signinmodal ng-controller="SigninCtrl"></signinmodal>
+  <topupmodal ng-controller="TopupCtrl"></topupmodal>
   <footer>
     <!-- Footer goes here using ng-include="'footer.html'" -->
   </footer>

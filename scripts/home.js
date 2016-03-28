@@ -8,6 +8,12 @@ if (Meteor.isClient) {
       $('#timeSlider').slider();
     });
 
+    angular.module('KidHubApp').directive("feed", function() {
+      return {
+        templateUrl: "partials/feed.html"
+      };
+    });
+
 
     $(function(){
       $('#creditFilterSlider').slider({max: 5}).slider("pips",{ rest: 'label'});

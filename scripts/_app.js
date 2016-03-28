@@ -21,6 +21,7 @@ if (Meteor.isClient) {
           authenticate: true
         })
         .state('activity',{
+          // url: '/activity',
           url: '/activities/:activityId',
           templateUrl: 'views/activity.html',
           controller: 'ActivityCtrl',
@@ -54,6 +55,11 @@ if (Meteor.isClient) {
     angular.module('KidHubApp').directive("signinmodal", function() {
       return {
           templateUrl: "partials/signinmodal.html"
+      };
+    });
+    angular.module('KidHubApp').directive("topupmodal", function() {
+      return {
+          templateUrl: "partials/topupmodal.html"
       };
     });
 
