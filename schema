@@ -25,6 +25,7 @@ Activities: {
   description: description,
   district: district,
   ages: ages,
+  photo: url,
   tokens: number,
   category: category,
   retail_price: retail_price,

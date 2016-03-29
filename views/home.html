@@ -1,8 +1,8 @@
 <div class="homepage container-fluid">
   <div class="col-md-7 home-left">
     <ul class="results-day-tabs">
-      <li class="day-tab" ng-repeat="date in dayTabs">
-        <span class="day-tab-{{date}}"> {{date}} </span>
+      <li class="day-tab" ng-repeat="date in dayTabs" ng-click="selectDate(date)" ng-class="{'selected-day-tab': selectedDayTab == date}">
+        <span class="day-tab-{{date}} hvr-back-pulse"> {{date}} </span>
       </li>
     </ul>
     <div id="allFilters">
@@ -30,7 +30,7 @@
       </div>
     </div>
     <div class="container-fluid" id="homeFeed" ng-hide="showMoreFilters">
-      <feed ng-controller="FeedCtrl"></feed>
+      <feed></feed>
     </div>
   </div>
   <div class="col-md-5 home-right">

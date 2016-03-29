@@ -1,18 +1,18 @@
-<div class="col-sm-6 feed-item" ng-repeat="timeslot in timeslots" ng-click="">
+<div class="col-sm-6 feed-item" ng-repeat="timeslot in timeslots | filter:timeslotFilter" ng-click="">
   <div class="row feed-item-top">
-    <a href="/activity/{{timeslot.activity_id}}"><div class="col-sm-6 a-time">
+    <a ui-sref="activity({activityId: timeslot.activity_id})"><div class="col-sm-6 a-time">
     <p>{{timeslot.time}}</p>
     <p>{{timeslot.duration}} minutes</p>
     </div></a>
     <div class="col-sm-6 a-cost">{{timeslot.tokens}}</div>
   </div>
-  <a href="/activity/{{timeslot.activity_id}}">
-  <div class="row feed-item-middle">
-    <h5>{{timeslot.activity_name}}</h5>
-    <p>{{timeslot.district}}</p>
-  </div>
-  <div class="row feed-item-bottom">
-    Ages: {{timeslot.ages}}
-  </div>
+  <a ui-sref="activity({activityId: timeslot.activity_id})">
+    <div class="row feed-item-middle">
+      <h5>{{timeslot.activity_name}}</h5>
+      <p>{{timeslot.district}}</p>
+    </div>
+    <div class="row feed-item-bottom">
+      Ages: {{timeslot.ages}}
+    </div>
   </a>
 </div>

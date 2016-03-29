@@ -2,16 +2,18 @@
   <base href="/">
   <title>Kid Hub</title>
   <script src="https://code.jquery.com/ui/1.11.1/jquery-ui.js"></script>
-
+  <link href="stylesheets/hover-min.css" rel="stylesheet" media="all">
   <link rel="stylesheet" href="https://code.jquery.com/ui/1.10.4/themes/flick/jquery-ui.css">
 </head>
 
 <body ng-app="KidHubApp">
-  <navbar ng-controller="NavbarCtrl" ng-show="$root.currentUser"></navbar>
+  <navbar ng-show="$root.currentUser"></navbar>
 
   <div ui-view></div>
-  <signinmodal ng-controller="SigninCtrl"></signinmodal>
-  <topupmodal ng-controller="TopupCtrl"></topupmodal>
+
+  <signinmodal></signinmodal>
+  <topupmodal></topupmodal>
+
   <footer>
     <!-- Footer goes here using ng-include="'footer.html'" -->
   </footer>

@@ -1,10 +1,10 @@
 if (Meteor.isClient) {
   angular.module('KidHubApp')
-  .controller('NavbarCtrl', ['$scope','$meteor', '$location', function($scope, $meteor,$location){
+  .controller('NavbarCtrl', ['$scope','$meteor', '$location', '$state', function($scope, $meteor,$location, $state){
 
     $scope.signOut = function() {
       Meteor.logout(function(){
-        $location.path('/');
+        $state.go('welcome');
       });
     };
 

@@ -1,21 +1,64 @@
-This is the activity html page for {{ activityId }}.
-
 <div class="activity-page container-fluid">
   <div class="row cover-photo">
     COVER PHOTO HERE
   </div>
   <div class="row middle">
     <div class="col-md-6 mid-left">
-      <h3>Junior Muay Thai</h3>
-      <p>Lorem Ipsum blablabla</p>
+      <h3>{{activity.name}}</h3>
+      <br/>
+      <p>{{activity.description}}</p>
     </div>
     <div class="col-md-6 mid-right">
-      <div class="col-xs-6 details"></div>
-      <div class="col-xs-6 booking-section"></div>
+      <div class="col-xs-6 activity-details">
+        <h6>Ages:</h6>
+        <p>{{ageLow}} - {{ageHigh}}</p>
+        <h6>Category:</h6>
+        <p>{{activity.category}}</p>
+        <h6>Retail Price:</h6>
+        <p>{{activity.price}}</p>
+      </div>
+      <div class="col-xs-6 booking-section">
+
+      </div>
     </div>
   </div>
   <div class="row bottom">
-    <div class="col-md-6 information"></div>
-    <div class="col-md-6 activity-map"></div>
+    <div class="col-md-6 information">
+      <div class="row activity-rules">
+        <div class="col-xs-4 activity-rules-label">
+          Rules:
+        </div>
+        <div class="col-xs-8 activity-rules-content">
+          {{activity.rules}}
+        </div>
+      </div>
+      <div class="row activity-cancellable">
+        <div class="col-xs-4 activity-cancellable-label">
+          Cancellable:
+        </div>
+        <div class="col-xs-8 activity-cancellable-content">
+          {{activity.cancellable}}
+        </div>
+      </div>
+      <div class="row activity-address">
+        <div class="col-xs-4 activity-address-label">
+          Address:
+        </div>
+        <div class="col-xs-8 activity-address-content">
+          {{activity.address}}
+        </div>
+      </div>
+      <div class="row activity-address">
+        <div class="col-xs-4 activity-phone-label">
+          Phone Number:
+        </div>
+        <div class="col-xs-8 activity-phone-content">
+          {{activity.phone}}
+        </div>
+      </div>
+    </div>
+    <div class="col-md-6 activity-map">
+
+    </div>
   </div>
 </div>

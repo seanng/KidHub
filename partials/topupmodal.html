@@ -1,11 +1,29 @@
-
-
 <div class="modal fade" id="topup-modal" ng-hide="!$root.currentUser" aria-hidden="true" aria-labelledby="modal-topup">
   <div class="modal-dialog">
     <div class="modal-content">
+
       <div class="modal-header">
         <button class="close" type="button" data-dismiss="modal" aria-hidden="true">x</button>
+        <h4 class="topupmodal-title">Top up tokens</h4>
+        <br/>
+        <progressbar max="3" value="progressvalue"></progressbar>
+      </div>
 
+      <div class="modal-body">
+        <div id="topup-step1" ng-show="progressvalue===1">
+          progressvalue 1
+        </div>
+        <div id="topup-step2" ng-show="progressvalue===2">
+          progressvalue2
+        </div>
+        <div id="topup-step3" ng-show="progressvalue===3">
+          progressvalue3
+        </div>
+      </div>
+
+      <div class="modal-footer">
+        <button class="btn btn-danger" ng-click="backAction()" ng-show="progressvalue===2">Back</button>
+        <button class="btn btn-primary" ng-click="nextAction()">{{nextButton}}</button>
       </div>
     </div>
   </div>

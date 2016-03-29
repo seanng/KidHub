@@ -8,21 +8,17 @@ if (Meteor.isClient) {
       $location.path('/home');
     }
 
-    $( document ).ready(function() {
+    scaleVideoContainer();
 
+    initBannerVideoSize('.video-container .poster img');
+    initBannerVideoSize('.video-container .filter');
+    initBannerVideoSize('.video-container video');
+
+    $(window).on('resize', function() {
         scaleVideoContainer();
-
-        initBannerVideoSize('.video-container .poster img');
-        initBannerVideoSize('.video-container .filter');
-        initBannerVideoSize('.video-container video');
-
-        $(window).on('resize', function() {
-            scaleVideoContainer();
-            scaleBannerVideoSize('.video-container .poster img');
-            scaleBannerVideoSize('.video-container .filter');
-            scaleBannerVideoSize('.video-container video');
-        });
-
+        scaleBannerVideoSize('.video-container .poster img');
+        scaleBannerVideoSize('.video-container .filter');
+        scaleBannerVideoSize('.video-container video');
     });
 
     function scaleVideoContainer() {

@@ -9,13 +9,12 @@
 }
 
 ul.results-day-tabs {
-  padding-top: 18px;
-  padding-bottom: 18px;
   padding-left: 0px;
-  margin-bottom: 0px;
+  margin-bottom: 10px;
   text-align: justify;
   width: 100%;
   display: table;
+  border: 1px silver solid;
 }
 
 #creditFilterSlider {
@@ -25,7 +24,16 @@ ul.results-day-tabs {
 
 .day-tab {
   display: table-cell;
+  padding-top: 18px;
+  padding-bottom: 18px;
   text-align: center;
+  color: grey;
+  background: white;
+}
+
+.selected-day-tab {
+  background: blue;
+  color: white;
 }
 
 .home-left {

@@ -1,69 +1,49 @@
 // Users = new Mongo.Collection('users');
-Activities = new Mongo.Collection('activities');
+Activities = new Mongo.Collection('activities', {idGeneration: 'MONGO'});
+Timeslots = new Mongo.Collection('timeslots', {idGeneration: 'MONGO'});
+ObjectID = Meteor.Collection.ObjectID;
+
+Array.min = function( array ){
+  return Math.min.apply( Math, array );
+};
+Array.max = function( array ){
+  return Math.max.apply( Math, array );
+};
 
 if (Meteor.isClient) {
-    angular.module('KidHubApp', ['angular-meteor', 'accounts.ui', 'ui.router', 'ui.bootstrap']);
+  angular.module('KidHubApp', ['angular-meteor', 'accounts.ui', 'ui.router', 'ui.bootstrap']);
 
-    angular.module('KidHubApp').config(function($urlRouterProvider, $stateProvider, $locationProvider){
-      $locationProvider.html5Mode(true);
+  angular.module('KidHubApp').config(function($urlRouterProvider, $stateProvider, $locationProvider){
+    $locationProvider.html5Mode(true);
 
-      $stateProvider
-        .state('welcome',{
-          url: '/',
-          templateUrl: 'views/welcome.html',
-          controller: 'WelcomeCtrl',
-          authenticate: false
-        })
-        .state('home',{
-          url: '/home',
-          templateUrl: 'views/home.html',
-          controller: 'HomeCtrl',
-          authenticate: true
-        })
-        .state('activity',{
-          // url: '/activity',
-          url: '/activities/:activityId',
-          templateUrl: 'views/activity.html',
-          controller: 'ActivityCtrl',
-          authenticate: true
-        });
+    $stateProvider
+      .state('welcome',{
+        url: '/',
+        templateUrl: 'views/welcome.html',
+        controller: 'WelcomeCtrl',
+        authenticate: false
+      })
+      .state('home',{
+        url: '/home',
+        templateUrl: 'views/home.html',
+        controller: 'HomeCtrl',
+        authenticate: true
+      })
+      .state('activity',{
+        url: '/activities/:activityId',
+        templateUrl: 'views/activity.html',
+        controller: 'ActivityCtrl',
+        authenticate: true
+      });
 
-      $urlRouterProvider.otherwise('/');
-    });
+    $urlRouterProvider.otherwise('/');
+  });
 
+  function onReady(){
+    angular.bootstrap(document, ['KidHubApp']);
+  }
 
-
-    // angular.module('KidHubApp').run(function($rootScope, $state){
-    //   $rootScope.$on('$stateChangeStart', function(event, toState, toParams, fromState, fromParams, options){
-    //     $rootScope.currentUserId = Meteor.userId();
-    //   });
-    // });
-
-
-    function onReady(){
-      angular.bootstrap(document, ['KidHubApp']);
-    }
-
-    angular.element(document).ready(onReady);
-
-    angular.module('KidHubApp').directive("navbar", function() {
-      return {
-          templateUrl: "partials/navbar.html"
-      };
-    });
-
-    angular.module('KidHubApp').directive("signinmodal", function() {
-      return {
-          templateUrl: "partials/signinmodal.html"
-      };
-    });
-    angular.module('KidHubApp').directive("topupmodal", function() {
-      return {
-          templateUrl: "partials/topupmodal.html"
-      };
-    });
-
-
+  angular.element(document).ready(onReady);
 }
 
 Meteor.methods({
