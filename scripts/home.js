@@ -2,6 +2,8 @@ if (Meteor.isClient) {
   angular.module('KidHubApp')
   .controller('HomeCtrl', ['$scope','$meteor', function($scope, $meteor){
 
+    console.log(faker.fake("{{name.lastName}}, {{name.firstName}} {{name.suffix}}"));
+
     $scope.selectDate = function (date) {
       $scope.selectedDayTab = date;
       var startOfDayUTC = new Date(moment(date + ' ' + moment().year()).utc().startOf('day').format());
