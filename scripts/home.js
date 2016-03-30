@@ -2,9 +2,8 @@ if (Meteor.isClient) {
   angular.module('KidHubApp')
   .controller('HomeCtrl', ['$scope','$meteor', function($scope, $meteor){
 
-    $scope.timeslotFilter = {
-      district: [],
-      category: []
+    $scope.timeslotFilters = {
+      //district, category.
     };
 
     $scope.moreFilters = {
@@ -42,7 +41,7 @@ if (Meteor.isClient) {
         if ($scope.moreFilters.hasOwnProperty(key)) {
           for (var boolean in $scope.moreFilters[key]){
             if ($scope.moreFilters[key][boolean] === true){
-              $scope.timeslotFilter[key].push(boolean);
+              $scope.timeslotFilters[key].push(boolean);
             }
           }
         }
@@ -58,16 +57,16 @@ if (Meteor.isClient) {
     var populateFeedByDate = function(value){
       var start = moment(value).startOf('day').toDate();
       var end = moment(value).endOf('day').toDate();
-      console.log(start, end);
       var timeslots = Timeslots.find({date: {$gte: start, $lte: end}}).fetch();
       timeslots.forEach(function(act){
         act.ageLow = Array.min(act.ages);
         act.ageHigh = Array.max(act.ages);
         act.activity_id = act.activity_id._str;
+        act.time = moment(act.date).format('hA');
       });
-
       $scope.timeslots = timeslots;
       console.log($scope.timeslots);
+      stroll.bind('.feed-item-actual');
     };
 
     var generateDayTabs = function() {

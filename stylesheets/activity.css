@@ -1,5 +1,15 @@
 .row.cover-photo {
   height: 350px;
+  margin-bottom: 15px;
+}
+
+#activity-title-container {
+  z-index: 1000;
+  text-align: center;
+  top: 40%;
+  width: 100%;
+  position: absolute;
+  color: #fff;
 }
 
 .activity-details {
@@ -14,6 +24,12 @@
   height: 350px;
 }
 
+#selectTimeslot {
+  text-align: center;
+}
+
 #reserveButton {
-  margin-top: 20px;
+  width: 100%;
+  margin-bottom: 25px;
+  padding: 15px;
 }

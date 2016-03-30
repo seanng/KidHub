@@ -28,6 +28,7 @@ ul.results-day-tabs {
 
 .col-xs-6.a-cost {
   font-size: 24px;
+  text-align: right;
 }
 
 .col-md-7.home-left {
@@ -41,7 +42,6 @@ ul.results-day-tabs {
 }
 
 .feed-item-actual {
-  background: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.5)), url("https://d3ui957tjb5bqd.cloudfront.net/images/screenshots/products/22/228/228908/d8y1ucsf8z2b3k4vcqrq5id0rr9p0i00ehhqent2jwtqsxuwforyfm3ikkd5dznl-f.jpg?1415208277") no-repeat center;
   margin: 5px;
   padding: 16px;
 }
@@ -51,16 +51,18 @@ ul.results-day-tabs {
   text-decoration: none;
 }
 
+div.feed-item-actual > a {
+  color: white;
+}
+
+div.col-sm-6.a-time {
+  color: white;
+}
+
+
 a:link{
   text-decoration: none!important;
-
 }
-
-a.category-option {
-
-}
-
-
 
 .filter-subtitle-label {
   text-align: center;
@@ -77,7 +79,7 @@ a.category-option {
   text-align: center;
 }
 
-.day-tab {
+li.day-tab {
   display: table-cell;
   padding-top: 18px;
   padding-bottom: 18px;
@@ -91,7 +93,7 @@ a.filter-selected {
   font-weight: bold;
 }
 
-.selected-day-tab {
+li.day-tab.selected-day-tab {
   background: blue;
   color: white;
 }

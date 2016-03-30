@@ -92,6 +92,7 @@ if (Meteor.isServer) {
         });
       }
     });
+    console.log('creating timeslots.');
   }
 
   Meteor.startup(function () {

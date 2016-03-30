@@ -1,10 +1,12 @@
 <div class="homepage container-fluid">
   <div class="col-md-7 home-left">
+    <a href="#">
     <ul class="results-day-tabs">
-      <li class="day-tab" ng-repeat="date in dayTabs" ng-click="selectDate(date)" ng-class="{'selected-day-tab': selectedDayTab == date.formatted}">
-        <span class="hvr-back-pulse"> {{date.formatted}} </span>
+      <li class="hvr-float-shadow day-tab" ng-repeat="date in dayTabs" ng-click="selectDate(date)" ng-class="{'selected-day-tab': selectedDayTab == date.formatted}">
+        <span> {{date.formatted}} </span>
       </li>
     </ul>
+    </a>
     <div id="allFilters">
       <div class="row">
         <div class="col-md-6 filteration" id="timeFilter">
@@ -50,19 +52,19 @@
             <div class="col-xs-4 filter-selections"><a href="#" class="category-option" ng-click="moreFilters.category['Dance']=!moreFilters.category['Dance']" ng-class="{'filter-selected': moreFilters.category['Dance']}">Dance</a></div>
             <div class="col-xs-4 filter-selections"><a href="#" class="category-option" ng-click="moreFilters.category['Tech']=!moreFilters.category['Tech']" ng-class="{'filter-selected': moreFilters.category['Tech']}">Tech</a></div>
           </div>
-        <button type="button" class="btn btn-warning" ng-click="cancelFilters()">Cancel</button>
+        <button type="button" class="btn btn-danger" ng-click="cancelFilters()">Cancel</button>
         <button type="button" class="btn btn-success" ng-click="applyFilters()">Apply</button>
       </div>
     </div>
     <div class="container-fluid" id="homeFeed" ng-hide="showMoreFilters">
-      <div class="col-sm-6 feed-div" ng-repeat="timeslot in timeslots | filter:timeslotFilter" ng-click="">
-        <div class="feed-item-actual">
+      <div class="col-sm-6 feed-div" ng-repeat="timeslot in timeslots | filter:timeslotFilters" ng-click="">
+        <div class="feed-item-actual" style="background: linear-gradient(rgba(0,0,0,0.5),rgba(0,0,0,0.5)), url('{{timeslot.imageURL}}') center;">
           <div class="row feed-item-top">
             <a ui-sref="activity({activityId: timeslot.activity_id})"><div class="col-sm-6 a-time">
             <p>{{timeslot.time}}</p>
             <p>60 minutes</p>
             </div></a>
-            <div class="col-sm-6 a-cost">{{timeslot.tokens}}</div>
+            <div class="col-xs-6 a-cost"><button type="submit" class="btn btn-warning btn-large">{{timeslot.tokens}} <span class="glyphicon glyphicon-copyright-mark"></span></button></div>
           </div>
           <a ui-sref="activity({activityId: timeslot.activity_id})">
             <div class="row feed-item-middle">
@@ -78,9 +80,9 @@
     </div>
   </div>
   <div class="col-md-5 home-right" id="homeGoogleMap">
-    <ui-gmap-google-map center="map.center" zoom="map.zoom">
+    <!-- <ui-gmap-google-map center="map.center" zoom="map.zoom">
       <ui-gmap-marker ng-repeat="timeslot in timeslots | filter:timeslotFilter" idKey="timeslot._id" coords="{latitude: timeslot.placeLat, longitude: timeslot.placeLong}"></ui-gmap-marker>
-    </ui-gmap-google-map>
+    </ui-gmap-google-map> -->
   </div>
 </div>
 
