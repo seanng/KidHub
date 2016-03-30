@@ -1,9 +1,4 @@
 if (Meteor.isClient) {
-  angular.module('KidHubApp').directive("feed", function() {
-    return {
-      templateUrl: "partials/feed.html"
-    };
-  });
 
   angular.module('KidHubApp').directive("navbar", function() {
     return {

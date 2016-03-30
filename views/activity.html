@@ -15,10 +15,15 @@
         <h6>Category:</h6>
         <p>{{activity.category}}</p>
         <h6>Retail Price:</h6>
-        <p>{{activity.price}}</p>
+        <p>{{activity.retail_price}}</p>
       </div>
       <div class="col-xs-6 booking-section">
-
+        <div id="selectTimeslot">
+          <select class="form-control">
+            <option ng-repeat="date in dates">{{date}}</option>
+          </select>
+           <button id="reserveButton" class="form-control btn btn-default">Reserve ( {{activity.tokens}} <span class="glyphicon glyphicon-copyright-mark"></span> )</button>
+        </div>
       </div>
     </div>
   </div>
@@ -29,7 +34,7 @@
           Rules:
         </div>
         <div class="col-xs-8 activity-rules-content">
-          {{activity.rules}}
+          <p ng-repeat="rule in activity.rules"> - {{rule}}</p>
         </div>
       </div>
       <div class="row activity-cancellable">
@@ -57,8 +62,9 @@
         </div>
       </div>
     </div>
-    <div class="col-md-6 activity-map">
-
+    <div class="col-md-6 activity-map" id="activityGoogleMap">
+      <ui-gmap-google-map center="map.center" zoom="map.zoom">
+      </ui-gmap-google-map>
     </div>
   </div>
 </div>

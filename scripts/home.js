@@ -2,48 +2,120 @@ if (Meteor.isClient) {
   angular.module('KidHubApp')
   .controller('HomeCtrl', ['$scope','$meteor', function($scope, $meteor){
 
-    console.log(faker.fake("{{name.lastName}}, {{name.firstName}} {{name.suffix}}"));
-
-    $scope.selectDate = function (date) {
-      $scope.selectedDayTab = date;
-      var startOfDayUTC = new Date(moment(date + ' ' + moment().year()).utc().startOf('day').format());
-      var endOfDateUTC = new Date(moment(date + ' ' + moment().year()).utc().endOf('day').format());
-      $scope.timeslots = Timeslots.find({ gte: {date: startOfDayUTC }, lte: {date: endOfDateUTC} }).fetch(); // method 1
+    $scope.timeslotFilter = {
+      district: [],
+      category: []
     };
 
-    $scope.timeslotFilter = {
-      district: 'Kennedy Town'
+    $scope.moreFilters = {
+      district: {
+        "Hong Kong Island": false,
+        "Kowloon": false,
+        "New Territories": false
+      },
+      category: {
+        "Play": false,
+        "Academic": false,
+        "Camp": false,
+        "Arts & Crafts": false,
+        "Music": false,
+        "Science": false,
+        "Sports": false,
+        "Dance": false,
+        "Tech": false
+      }
+    };
+
+    $scope.cancelFilters = function(){
+      for (var key in $scope.moreFilters){
+        if ($scope.moreFilters.hasOwnProperty(key)) {
+          for (var boolean in $scope.moreFilters[key]){
+            $scope.moreFilters[key][boolean] = false;
+          }
+        }
+      }
+      $scope.showMoreFilters = false;
+    };
+
+    $scope.applyFilters = function(){
+      for (var key in $scope.moreFilters){
+        if ($scope.moreFilters.hasOwnProperty(key)) {
+          for (var boolean in $scope.moreFilters[key]){
+            if ($scope.moreFilters[key][boolean] === true){
+              $scope.timeslotFilter[key].push(boolean);
+            }
+          }
+        }
+      }
+    };
+
+    //Run this on ng-click a date
+    $scope.selectDate = function (date) {
+      $scope.selectedDayTab = date.formatted;
+      populateFeedByDate(date.value);
+    };
+
+    var populateFeedByDate = function(value){
+      var start = moment(value).startOf('day').toDate();
+      var end = moment(value).endOf('day').toDate();
+      console.log(start, end);
+      var timeslots = Timeslots.find({date: {$gte: start, $lte: end}}).fetch();
+      timeslots.forEach(function(act){
+        act.ageLow = Array.min(act.ages);
+        act.ageHigh = Array.max(act.ages);
+        act.activity_id = act.activity_id._str;
+      });
+
+      $scope.timeslots = timeslots;
+      console.log($scope.timeslots);
     };
 
     var generateDayTabs = function() {
       $scope.dayTabs = [];
       for (var i = 0; i < 8; i++) {
-        var date = moment().add(i, 'd').format("D MMM");
-        $scope.dayTabs.push(date);
+        var date = moment().add(i, 'd');
+        var formattedDate = date.format("D MMM");
+        $scope.dayTabs.push({
+          formatted: formattedDate,
+          value: date
+        });
       }
-      $scope.selectedDayTab = $scope.dayTabs[0];
+      $scope.selectedDayTab = $scope.dayTabs[0].formatted;
     };
 
+
+
+    // MAP Stuff
+
+    // var drawMarker = function(map, timeslot){
+    //   var latlng = {lat: timeslot.placeLat, lng: timeslot.placeLong};
+    //   var marker = new google.maps.Marker({
+    //     position: latlng,
+    //     map: map,
+    //     title: timeslot.name
+    //   });
+
+    //   marker.addListener('click', function(){
+    //     $('[data-name="'+pin.place.name+'"]')[0].click(function () {
+    //     });
+    //   });
+    // };
+
+    // var renderMap = function() {
+    //   var map = new google.maps.Map(document.getElementById('googlemap'), {
+    //     center: {lat: 22.2783, lng: 114.1747},
+    //     scrollwheel: false,
+    //     zoom: 12
+    //   });
+
+    // };
+
+    $scope.map = { center: { latitude: 22.2783, longitude: 114.1747}, zoom: 12};
+
+
+    //INITIALIZATION
     var init = function () {
       $scope.showMoreFilters = false;
-      // $scope.timeslots = Timeslots.find().fetch(); // method 2
-      $scope.timeslots = [{ // tmp fake data
-        activity_id: 543,
-        time: '10:45am',
-        duration: '45',
-        tokens: 4,
-        activity_name: "Junior Muay Thai",
-        district: 'Kennedy Town',
-        ages: '2-10'
-      },{
-        activity_id: 12345,
-        time: '11:45am',
-        duration: '30',
-        tokens: 2,
-        activity_name: "Arm Wrestling",
-        district: 'New Territories',
-        ages: '10+'
-      }];
 
       $(function(){
         $('#timeSlider').slider();
@@ -51,6 +123,7 @@ if (Meteor.isClient) {
       });
 
       generateDayTabs();
+      populateFeedByDate($scope.dayTabs.value);
     };
 
     init();
@@ -60,4 +133,5 @@ if (Meteor.isClient) {
 
 
 if (Meteor.isServer) {
+
 }

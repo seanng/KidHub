@@ -53,3 +53,6 @@ Timeslots: {
   occupied_spaces: number,
   total_spaces: number
 }
+
+
+

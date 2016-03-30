@@ -26,3 +26,4 @@ autopublish
 insecure
 momentjs:moment
 gbit:faker
+angularui:angular-google-maps

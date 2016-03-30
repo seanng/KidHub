@@ -5,3 +5,15 @@
 .activity-details {
   border: 1px silver solid;
 }
+
+.row.activity-address {
+  margin-bottom: 12px;
+}
+
+#activityGoogleMap > .angular-google-map {
+  height: 350px;
+}
+
+#reserveButton {
+  margin-top: 20px;
+}

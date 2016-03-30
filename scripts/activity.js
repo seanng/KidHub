@@ -9,6 +9,19 @@ if (Meteor.isClient) {
       $scope.activity = Activities.findOne({_id: activityID});
       $scope.ageLow = Array.min($scope.activity.ages);
       $scope.ageHigh = Array.max($scope.activity.ages);
+      $scope.dates = [];
+
+      var allTimeslots = Timeslots.find({activity_id: activityID}, {sort: {date: 1}}).fetch();
+      // sort alltimeslots by time
+      allTimeslots.forEach(function(elem){
+        var event = moment(elem.date).format("ddd, D/M")+ " "+ moment(elem.date).format("ha");
+        $scope.dates.push(event);
+      });
+
+
+
+      $scope.map = { center: { latitude: $scope.activity.placeLat, longitude: $scope.activity.placeLong}, zoom: 12};
+
     } else {
       $state.go('home');
     }

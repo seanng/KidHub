@@ -22,6 +22,61 @@ ul.results-day-tabs {
   height: 10px;
 }
 
+#moreFilters {
+  text-align: left;
+}
+
+.col-xs-6.a-cost {
+  font-size: 24px;
+}
+
+.col-md-7.home-left {
+  max-height: 100%;
+}
+
+.col-sm-6.feed-div {
+  margin-bottom: 5px;
+  text-decoration: none;
+  padding: 0px 8px;
+}
+
+.feed-item-actual {
+  background: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.5)), url("https://d3ui957tjb5bqd.cloudfront.net/images/screenshots/products/22/228/228908/d8y1ucsf8z2b3k4vcqrq5id0rr9p0i00ehhqent2jwtqsxuwforyfm3ikkd5dznl-f.jpg?1415208277") no-repeat center;
+  margin: 5px;
+  padding: 16px;
+}
+
+#homeFeed {
+  overflow: scroll;
+  text-decoration: none;
+}
+
+a:link{
+  text-decoration: none!important;
+
+}
+
+a.category-option {
+
+}
+
+
+
+.filter-subtitle-label {
+  text-align: center;
+}
+
+.filter-subtitle {
+  padding-top: 10px;
+  padding-bottom: 20px;
+}
+
+.filter-selections {
+  margin-bottom: 25px;
+  padding-left: 12px;
+  text-align: center;
+}
+
 .day-tab {
   display: table-cell;
   padding-top: 18px;
@@ -31,9 +86,23 @@ ul.results-day-tabs {
   background: white;
 }
 
+a.filter-selected {
+  color: red !important;
+  font-weight: bold;
+}
+
 .selected-day-tab {
   background: blue;
   color: white;
+}
+
+#homeGoogleMap {
+  padding-left: 0px;
+  padding-right: 0px;
+}
+
+#homeGoogleMap > .angular-google-map {
+  height: 100%;
 }
 
 .home-left {
