@@ -2,51 +2,121 @@ if (Meteor.isClient) {
   angular.module('KidHubApp')
   .controller('HomeCtrl', ['$scope','$meteor', function($scope, $meteor){
 
-    $scope.timeslotFilters = {
-      //district, category.
+    $scope.timeslotFilters = function(timeslot) {
+      return checkFilter(timeslot, 'district') && checkFilter(timeslot, 'category') && checkAge(timeslot); // && checkRange(timeslot)
     };
 
-    $scope.moreFilters = {
-      district: {
-        "Hong Kong Island": false,
-        "Kowloon": false,
-        "New Territories": false
-      },
-      category: {
-        "Play": false,
-        "Academic": false,
-        "Camp": false,
-        "Arts & Crafts": false,
-        "Music": false,
-        "Science": false,
-        "Sports": false,
-        "Dance": false,
-        "Tech": false
+    function checkFilter (timeslot, key) { // 'district'
+      var filtersArr = $scope.appliedFilters[key]; // ['Hong Kong Island']
+      var value     = timeslot[key];                 // whatever the distrct for the timeslot ''
+
+      if (filtersArr.length > 0) {
+        var valueIndex = filtersArr.indexOf(value);
+        if (valueIndex == -1){
+          return false;
+        }
       }
+      return true;
+    }
+
+    function checkAge (timeslot) {
+      var ageArray = timeslot.ages;
+      if ($scope.appliedFilters.age.length > 0){
+        for (var i=0; i < $scope.appliedFilters.age.length; i++) {
+          var ageGroupStr = $scope.appliedFilters.age[i];
+          var min = $scope.ageGroups[ageGroupStr].ageLow;
+          var max = $scope.ageGroups[ageGroupStr].ageHigh;
+          var ageLow = timeslot.ageLow;
+          var ageHigh = timeslot.ageHigh;
+
+          if ((ageLow < min && min < ageHigh) || (ageLow < max && max < ageHigh) || (min < ageLow && ageHigh < max) ) {
+            return true;
+          }
+        }
+        return false;
+      }
+      return true;
+    }
+
+
+    $scope.appliedFilters = {
+      district: [],
+      category: [],
+      age:      []
+    };
+
+    $scope.ageGroups = {
+      '0-2': {
+        ageLow: 0,
+        ageHigh: 2
+      },
+      '2-5': {
+        ageLow: 2,
+        ageHigh: 5
+      },
+      '5-10': {
+        ageLow: 5,
+        ageHigh: 10
+      },
+      '10+': {
+        ageLow: 10,
+        ageHigh: 18
+      }
+    };
+
+    $scope.filters = {
+      district: ["Hong Kong Island", "Kowloon", "New Territories"],
+      category: ["Play", "Academic", "Camp", "Arts & Crafts", "Music", "Science", "Sports", "Dance", "Tech"],
+      age: ['0-2', '2-5', '5-10', '10+']
+    };
+
+    $scope.selectFilter = function (key, value) {
+      var valueIndex = $scope.appliedFilters[key].indexOf(value);
+      valueIndex === -1 ? $scope.appliedFilters[key].push(value) : $scope.appliedFilters[key].splice(valueIndex, 1);
+      console.log($scope.appliedFilters);
+    };
+
+    $scope.isFilterSelected = function (key, value) {
+      return $scope.appliedFilters[key].indexOf(value) != -1;
     };
 
     $scope.cancelFilters = function(){
-      for (var key in $scope.moreFilters){
-        if ($scope.moreFilters.hasOwnProperty(key)) {
-          for (var boolean in $scope.moreFilters[key]){
-            $scope.moreFilters[key][boolean] = false;
-          }
-        }
+      for (var key in $scope.appliedFilters) {
+        $scope.appliedFilters[key] =[];
       }
-      $scope.showMoreFilters = false;
     };
 
-    $scope.applyFilters = function(){
-      for (var key in $scope.moreFilters){
-        if ($scope.moreFilters.hasOwnProperty(key)) {
-          for (var boolean in $scope.moreFilters[key]){
-            if ($scope.moreFilters[key][boolean] === true){
-              $scope.timeslotFilters[key].push(boolean);
-            }
-          }
-        }
-      }
-    };
+    // $scope.moreFilters = {
+    //   district: {
+    //     "Hong Kong Island": false,
+    //     "Kowloon": false,
+    //     "New Territories": false
+    //   },
+    //   category: {
+    //     "Play": false,
+    //     "Academic": false,
+    //     "Camp": false,
+    //     "Arts & Crafts": false,
+    //     "Music": false,
+    //     "Science": false,
+    //     "Sports": false,
+    //     "Dance": false,
+    //     "Tech": false
+    //   }
+    // };
+
+    // $scope.applyFilters = function(){
+    //   for (var key in $scope.moreFilters){
+    //     if ($scope.moreFilters.hasOwnProperty(key)) {
+    //       for (var boolean in $scope.moreFilters[key]){
+    //         if ($scope.moreFilters[key][boolean] === true){
+
+    //           $scope.timeslotFilters[key].push(boolean);
+    //         }
+    //       }
+    //     }
+    //   }
+    // };
 
     //Run this on ng-click a date
     $scope.selectDate = function (date) {

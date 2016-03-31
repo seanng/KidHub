@@ -10,11 +10,17 @@
     <div id="allFilters">
       <div class="row">
         <div class="col-md-6 filteration" id="timeFilter">
-
           <div id="timeSlider"></div>
         </div>
         <div class="col-md-6 filteration" id="ageFilter">
-          age picker here
+          <h5 class="ages-label">Ages:</h5>
+          <ul class="age-filters">
+            <li ng-repeat="ageRange in filters.age" class="age-filter-selection" ng-click="selectFilter('age', ageRange)">
+              <a href="#" ng-class="{'filter-selected': isFilterSelected('age', ageRange)}">
+                {{ageRange}}
+              </a>
+            </li>
+          </ul>
         </div>
       </div>
       <div class="row" id="filterBottom">
@@ -22,38 +28,38 @@
           <div id="creditFilterSlider"></div>
         </div>
         <div class="col-xs-6 filteration">
-          <button type="button" class="btn btn-warning" ng-click="showMoreFilters=!showMoreFilters">More Filters</button>
+          <button type="button" class="btn btn-default btn-lg" ng-model="showMoreFilters" btn-checkbox btn-checkbox-true="true" btn-checkbox-false="false">
+            More Filters
+          </button>
         </div>
       </div>
-      <div id="moreFilters" ng-hide="!showMoreFilters">
+      <div collapse="!showMoreFilters" id="moreFilters">
         <div class="row filter-subtitle">
           <div class="col-xs-4">
             <h5 class="filter-subtitle-label">Locations:</h5>
           </div>
         </div>
-          <div class="row filter-locations">
-            <div class="col-xs-4 filter-selections"><a href="#" class="category-option" ng-click="moreFilters.district['Hong Kong Island']=!moreFilters.district['Hong Kong Island']" ng-class="{'filter-selected': moreFilters.district['Hong Kong Island']}">HK Island</a></div>
-            <div class="col-xs-4 filter-selections"><a href="#" class="category-option" ng-click="moreFilters.district['Kowloon']=!moreFilters.district['Kowloon']" ng-class="{'filter-selected': moreFilters.district['Kowloon']}">Kowloon</a></div>
-            <div class="col-xs-4 filter-selections"><a href="#" class="category-option" ng-click="moreFilters.district['New Territories']=!moreFilters.district['New Territories']" ng-class="{'filter-selected': moreFilters.district['New Territories']}">N.T.</a></div>
+        <div class="row filter-locations">
+          <div ng-repeat="location in filters.district" class="col-xs-4 filter-selections">
+            <a href="#"
+               class="category-option"
+               ng-click="selectFilter('district', location)"
+               ng-class="{'filter-selected': isFilterSelected('district', location)}">{{location}}</a>
           </div>
-          <div class="row filter-subtitle">
-            <div class="col-xs-4">
-              <h5 class="filter-subtitle-label">Categories:</h5>
-            </div>
+        </div>
+        <div class="row filter-subtitle">
+          <div class="col-xs-4">
+            <h5 class="filter-subtitle-label">Categories:</h5>
           </div>
-          <div class="row filter-categories">
-            <div class="col-xs-4 filter-selections"><a href="#" class="category-option" ng-click="moreFilters.category['Play']=!moreFilters.category['Play']" ng-class="{'filter-selected': moreFilters.category['Play']}">Play</a></div>
-            <div class="col-xs-4 filter-selections"><a href="#" class="category-option" ng-click="moreFilters.category['Academic']=!moreFilters.category['Academic']" ng-class="{'filter-selected': moreFilters.category['Academic']}">Academic</a></div>
-            <div class="col-xs-4 filter-selections"><a href="#" class="category-option" ng-click="moreFilters.category['Camp']=!moreFilters.category['Camp']" ng-class="{'filter-selected': moreFilters.category['Camp']}">Camp</a></div>
-            <div class="col-xs-4 filter-selections"><a href="#" class="category-option" ng-click="moreFilters.category['Arts & Crafts']=!moreFilters.category['Arts & Crafts']" ng-class="{'filter-selected': moreFilters.category['Arts & Crafts']}">Arts & Crafts</a></div>
-            <div class="col-xs-4 filter-selections"><a href="#" class="category-option" ng-click="moreFilters.category['Music']=!moreFilters.category['Music']" ng-class="{'filter-selected': moreFilters.category['Music']}">Music</a></div>
-            <div class="col-xs-4 filter-selections"><a href="#" class="category-option" ng-click="moreFilters.category['Science']=!moreFilters.category['Science']" ng-class="{'filter-selected': moreFilters.category['Science']}">Science</a></div>
-            <div class="col-xs-4 filter-selections"><a href="#" class="category-option" ng-click="moreFilters.category['Sports']=!moreFilters.category['Sports']" ng-class="{'filter-selected': moreFilters.category['Sports']}">Sports</a></div>
-            <div class="col-xs-4 filter-selections"><a href="#" class="category-option" ng-click="moreFilters.category['Dance']=!moreFilters.category['Dance']" ng-class="{'filter-selected': moreFilters.category['Dance']}">Dance</a></div>
-            <div class="col-xs-4 filter-selections"><a href="#" class="category-option" ng-click="moreFilters.category['Tech']=!moreFilters.category['Tech']" ng-class="{'filter-selected': moreFilters.category['Tech']}">Tech</a></div>
+        </div>
+        <div class="row filter-categories">
+          <div ng-repeat="cat in filters.category" class="col-xs-4 filter-selections">
+            <a href="#"
+               class="category-option"
+               ng-click="selectFilter('category', cat)"
+               ng-class="{'filter-selected': isFilterSelected('category', cat)}">{{cat}}</a>
           </div>
-        <button type="button" class="btn btn-danger" ng-click="cancelFilters()">Cancel</button>
-        <button type="button" class="btn btn-success" ng-click="applyFilters()">Apply</button>
+        </div>
       </div>
     </div>
     <div class="container-fluid" id="homeFeed" ng-hide="showMoreFilters">
