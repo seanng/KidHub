@@ -13,7 +13,7 @@ Array.max = function( array ){
 
 if (Meteor.isClient) {
 
-  angular.module('KidHubApp', ['angular-meteor', 'accounts.ui', 'ui.router', 'ui.bootstrap', 'ngMaterial', 'rzModule', 'uiGmapgoogle-maps']);
+  angular.module('KidHubApp', ['angular-meteor', 'accounts.ui', 'ui.router', 'ui.bootstrap', 'ngMaterial', 'uiGmapgoogle-maps']);
 
   angular.module('KidHubApp').config(function($urlRouterProvider, $stateProvider, $locationProvider, $mdThemingProvider){
     $locationProvider.html5Mode(true);

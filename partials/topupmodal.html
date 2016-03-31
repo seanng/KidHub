@@ -6,11 +6,11 @@
         <button class="close" type="button" data-dismiss="modal" aria-hidden="true">x</button>
         <h3 class="topupmodal-title">Top up tokens</h3>
         <br/>
-        <progressbar max="3" value="progressvalue"></progressbar>
+        <md-progress-linear md-mode="determinate" value="{{progressvalue}}"></md-progress-linear>
       </div>
 
       <div class="modal-body">
-        <div id="topup-step1" ng-show="progressvalue===1">
+        <div id="topup-step1" ng-show="progressvalue===33">
           <div class="btn-group btn-group-lg" role="group" id="tokenOptions">
             <div>
               <h4 id="selectPaymentOption">Select number of tokens:</h4>
@@ -35,17 +35,77 @@
             </label>
           </div>
         </div>
-        <div id="topup-step2" ng-show="progressvalue===2">
-          progressvalue2
+        <div id="topup-step2" ng-show="progressvalue===66">
+
+    <!--   Stripe payment -->
+
+          <form action="" method="POST" id="payment-form" name="paymentForm">
+            <span class="payment-errors"></span>
+            <md-content layout-gt-sm="row" layout-padding>
+              <div>
+                <md-input-container flex-gt-sm>
+                  <label>Card Number</label>
+                  <input type="text" data-stripe="number" size="20" />
+                </md-input-container>
+                <md-input-container flex-gt-sm>
+                  <label>CVC</label>
+                  <input type="text" data-stripe="cvc" size="4" />
+                </md-input-container>
+                <md-input-container>
+                  <label>MM</label>
+                  <input type="text" data-stripe="exp-month" size="2"/>
+                </md-input-container>
+                <md-input-container>
+                  <label>YYYY</label>
+                  <input type="text" data-stripe="exp-year" size="4" />
+                </md-input-container>
+              </div>
+            </md-content>
+          </form>
+
+<!--
+
+            <div class="form-row">
+              <label>
+                <span>Card Number</span>
+                <input type="text" size="20" data-stripe="number"/>
+              </label>
+            </div>
+            <div class="form-row">
+              <label>
+                <span>CVC</span>
+                <input type="text" size="4" data-stripe="cvc"/>
+              </label>
+            </div>
+            <div class="form-row">
+              <label>
+                <span>Expiration (MM/YYYY)</span>
+                <input type="text" size="2" data-stripe="exp-month"/>
+              </label>
+              <span> / </span>
+              <input type="text" size="4" data-stripe="exp-year"/>
+            </div>
+
+            <button type="submit">Submit Payment</button>
+          </form>
+
+          <md-input-container class="md-block" flex-gt-sm>
+            <label>Credit Card Number</label>
+            <input name="social" ng-model="user.social" ng-pattern="/^[0-9]{3}-[0-9]{2}-[0-9]{4}$/" />
+            <div class="hint" ng-if="showHints">####-####-####-####</div>
+            <div ng-messages="userForm.social.$error" ng-if="!showHints">
+              <div ng-message="pattern">####-####-####-#### - Please enter a valid credit card number.</div>
+            </div>
+          </md-input-container> -->
         </div>
-        <div id="topup-step3" ng-show="progressvalue===3">
+        <div id="topup-step3" ng-show="progressvalue===99">
           progressvalue3
         </div>
       </div>
 
       <div class="modal-footer">
-        <button class="btn btn-danger" ng-click="backAction()" ng-show="progressvalue===2">Back</button>
-        <button class="btn btn-primary" ng-click="nextAction()">{{nextButton}}</button>
+         <md-button class="md-warn" ng-click="backAction()" ng-show="progressvalue===66">Back</md-button>
+         <md-button md-no-ink class="md-primary" ng-click="nextAction()">{{nextButton}}</md-button>
       </div>
     </div>
   </div>

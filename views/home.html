@@ -9,16 +9,15 @@
     </a>
     <div id="allFilters">
       <div class="row">
-        <div class="col-sm-6 filteration" id="timeFilter">
-          <div id="timeSlider">
-            <rzslider
-              rz-slider-model = "timeSlider.min"
-              rz-slider-high = "timeSlider.max"
-              rz-slider-options = "timeSlider.options"></rzslider>
+        <div class="col-sm-4 filteration">
+          <div flex="10" layout layout-align="center center">
+            <h5 class="ages-label">Tokens</h5>
           </div>
+          <md-slider flex md-discrete ng-model="tokenSlider" step="1" min="1" max="5" aria-label="rating">
+          </md-slider>
         </div>
-        <div class="col-sm-6 filteration" id="ageFilter">
-          <h5 class="ages-label">Ages:</h5>
+        <div class="col-sm-5 filteration" id="ageFilter">
+          <h5 class="ages-label">Ages</h5>
           <ul class="age-filters">
             <li ng-repeat="ageRange in filters.age" class="age-filter-selection" ng-click="selectFilter('age', ageRange)">
               <a href="#" ng-class="{'filter-selected': isFilterSelected('age', ageRange)}">
@@ -27,21 +26,10 @@
             </li>
           </ul>
         </div>
-      </div>
-      <div class="row" id="filterBottom">
-        <div class="col-xs-6 filteration">
-          <div flex="10" layout layout-align="center center">
-            <span class="md-body-1">Tokens</span>
-          </div>
-          <rzslider
-            rz-slider-model = "tokenSlider.min"
-            rz-slider-high = "tokenSlider.max"
-            rz-slider-options = "tokenSlider.options"></rzslider>
-        </div>
-        <div class="col-xs-6 filteration">
-          <button type="button" class="btn btn-default btn-lg" ng-model="showMoreFilters" btn-checkbox btn-checkbox-true="true" btn-checkbox-false="false">
-            <span ng-show="!showMoreFilters">Show Advanced Filters</span>
-            <span ng-show="showMoreFilters">Hide Advanced Filters</span>
+        <div class="col-sm-3 filteration" id="moreFiltersButton">
+          <button type="button" class="btn btn-default" ng-model="showMoreFilters" btn-checkbox btn-checkbox-true="true" btn-checkbox-false="false">
+            <span ng-show="!showMoreFilters">More Filters</span>
+            <span ng-show="showMoreFilters">Less Filters</span>
           </button>
         </div>
       </div>
@@ -76,7 +64,7 @@
     </div>
     <div class="container-fluid" id="homeFeed">
       <div class="col-sm-6 feed-div" ng-repeat="timeslot in timeslots | filter:timeslotFilters" ng-click="">
-        <div class="feed-item-actual" style="background: linear-gradient(rgba(0,0,0,0.5),rgba(0,0,0,0.5)), url('{{timeslot.imageURL}}') center;">
+        <div class="feed-item-actual" style="background: linear-gradient(rgba(0,0,0,0.5),rgba(0,0,0,0.5)), url('{{timeslot.imageURL}}') center; background-size: contain cover;">
           <div class="row feed-item-top">
             <a ui-sref="activity({activityId: timeslot.activity_id})"><div class="col-sm-6 a-time">
             <p>{{timeslot.time}}</p>

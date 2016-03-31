@@ -14,11 +14,9 @@ if (Meteor.isClient) {
       var allTimeslots = Timeslots.find({activity_id: activityID}, {sort: {date: 1}}).fetch();
       // sort alltimeslots by time
       allTimeslots.forEach(function(elem){
-        var event = moment(elem.date).format("ddd, D/M")+ " "+ moment(elem.date).format("ha");
+        var event = moment(elem.date).format("ha") + " "+ moment(elem.date).format("dddd, DD MMMM");
         $scope.dates.push(event);
       });
-
-
 
       $scope.map = { center: { latitude: $scope.activity.placeLat, longitude: $scope.activity.placeLong}, zoom: 12};
 

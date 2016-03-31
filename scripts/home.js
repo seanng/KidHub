@@ -119,26 +119,8 @@ if (Meteor.isClient) {
       $scope.selectedDayTab = $scope.dayTabs[0].formatted;
     };
 
-    // SLIDERS
-
-    var times = ['5am', '6am', '7am', '8am', '9am', '10am', '11am', '12pm', '1pm', '2pm', '3pm', '4pm', '5pm', '6pm', '7pm', '8pm', '9pm', '10pm', '11pm'];
-    $scope.timeSlider = {
-      min: 0,
-      max: times.length-1,
-      options: {
-        stepsArray: times
-      }
-    };
-
-    $scope.tokenSlider= {
-      min: 1,
-      max: 5,
-      options: {
-        floor: 1,
-        ceil: 5,
-        showTicksValues: true
-      }
-    };
+    // SLIDER
+    $scope.tokenSlider = 5;
 
     // MAP Stuff
 

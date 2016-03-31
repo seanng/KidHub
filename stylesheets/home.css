@@ -22,14 +22,18 @@ ul.results-day-tabs {
   height: 10px;
 }
 
-.col-sm-6.filteration {
-  padding-left: 40px;
+.col-sm-4.filteration {
+  padding-left: 30px;
 }
 
 #moreFilters {
   text-align: left;
   border-top: 1px silver solid;
   border-bottom: 1px silver solid;
+}
+
+#moreFiltersButton {
+  padding-top: 35px;
 }
 
 .col-xs-6.a-cost {
@@ -91,10 +95,11 @@ ul.age-filters {
   text-align: justify;
   width: 100%;
   padding-left: 0px;
+  padding-top: 8px;
 }
 
 #moreFilterButtons {
-  text-align: right;
+  margin: auto;
   padding-right: 13%;
 }
 
@@ -103,9 +108,9 @@ ul.age-filters {
 }
 
 .age-filter-selection {
-  font-size: 14px;
+  font-size: 18px;
   display: table-cell;
-  text-align: left;
+  text-align: center;
 }
 
 li.day-tab {
