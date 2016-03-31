@@ -29,6 +29,9 @@ if (Meteor.isClient) {
       $scope.progressvalue--;
     };
 
+    //Step 1
+    $scope.paymentOption = null;
+
   }]);
 }
 

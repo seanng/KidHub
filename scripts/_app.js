@@ -13,9 +13,9 @@ Array.max = function( array ){
 
 if (Meteor.isClient) {
 
-  angular.module('KidHubApp', ['angular-meteor', 'accounts.ui', 'ui.router', 'ui.bootstrap', 'uiGmapgoogle-maps']);
+  angular.module('KidHubApp', ['angular-meteor', 'accounts.ui', 'ui.router', 'ui.bootstrap', 'ngMaterial', 'rzModule', 'uiGmapgoogle-maps']);
 
-  angular.module('KidHubApp').config(function($urlRouterProvider, $stateProvider, $locationProvider){
+  angular.module('KidHubApp').config(function($urlRouterProvider, $stateProvider, $locationProvider, $mdThemingProvider){
     $locationProvider.html5Mode(true);
 
     $stateProvider
@@ -39,23 +39,21 @@ if (Meteor.isClient) {
       });
 
     $urlRouterProvider.otherwise('/');
-  });
 
-  function resizeDiv() {
-    vpw = $(window).width();
-    vph = $(window).height();
-    $('body').css({'height': vph + 'px'});
-    console.log("vph=", vph);
-  }
+    $mdThemingProvider.theme('lime')
+      .primaryPalette('lime')
+      .accentPalette('orange')
+      .warnPalette('blue');
+
+    $mdThemingProvider.alwaysWatchTheme(true);
+
+  });
 
   function onReady(){
     angular.bootstrap(document, ['KidHubApp']);
-    resizeDiv();
   }
 
-  window.onresize = function(event) {
-    resizeDiv();
-  };
+
 
   angular.element(document).ready(onReady);
 }

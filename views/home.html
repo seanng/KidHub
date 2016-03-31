@@ -9,10 +9,15 @@
     </a>
     <div id="allFilters">
       <div class="row">
-        <div class="col-md-6 filteration" id="timeFilter">
-          <div id="timeSlider"></div>
+        <div class="col-sm-6 filteration" id="timeFilter">
+          <div id="timeSlider">
+            <rzslider
+              rz-slider-model = "timeSlider.min"
+              rz-slider-high = "timeSlider.max"
+              rz-slider-options = "timeSlider.options"></rzslider>
+          </div>
         </div>
-        <div class="col-md-6 filteration" id="ageFilter">
+        <div class="col-sm-6 filteration" id="ageFilter">
           <h5 class="ages-label">Ages:</h5>
           <ul class="age-filters">
             <li ng-repeat="ageRange in filters.age" class="age-filter-selection" ng-click="selectFilter('age', ageRange)">
@@ -25,11 +30,18 @@
       </div>
       <div class="row" id="filterBottom">
         <div class="col-xs-6 filteration">
-          <div id="creditFilterSlider"></div>
+          <div flex="10" layout layout-align="center center">
+            <span class="md-body-1">Tokens</span>
+          </div>
+          <rzslider
+            rz-slider-model = "tokenSlider.min"
+            rz-slider-high = "tokenSlider.max"
+            rz-slider-options = "tokenSlider.options"></rzslider>
         </div>
         <div class="col-xs-6 filteration">
           <button type="button" class="btn btn-default btn-lg" ng-model="showMoreFilters" btn-checkbox btn-checkbox-true="true" btn-checkbox-false="false">
-            More Filters
+            <span ng-show="!showMoreFilters">Show Advanced Filters</span>
+            <span ng-show="showMoreFilters">Hide Advanced Filters</span>
           </button>
         </div>
       </div>
@@ -62,7 +74,7 @@
         </div>
       </div>
     </div>
-    <div class="container-fluid" id="homeFeed" ng-hide="showMoreFilters">
+    <div class="container-fluid" id="homeFeed">
       <div class="col-sm-6 feed-div" ng-repeat="timeslot in timeslots | filter:timeslotFilters" ng-click="">
         <div class="feed-item-actual" style="background: linear-gradient(rgba(0,0,0,0.5),rgba(0,0,0,0.5)), url('{{timeslot.imageURL}}') center;">
           <div class="row feed-item-top">

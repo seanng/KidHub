@@ -4,14 +4,36 @@
 
       <div class="modal-header">
         <button class="close" type="button" data-dismiss="modal" aria-hidden="true">x</button>
-        <h4 class="topupmodal-title">Top up tokens</h4>
+        <h3 class="topupmodal-title">Top up tokens</h3>
         <br/>
         <progressbar max="3" value="progressvalue"></progressbar>
       </div>
 
       <div class="modal-body">
         <div id="topup-step1" ng-show="progressvalue===1">
-
+          <div class="btn-group btn-group-lg" role="group" id="tokenOptions">
+            <div>
+              <h4 id="selectPaymentOption">Select number of tokens:</h4>
+            </div>
+            <label class="btn btn-default payment-option" ng-model="paymentOption" btn-radio="'Left'" uncheckable>
+              <div class="token-selection">
+                <span class="token-number">5 <span class="glyphicon glyphicon-copyright-mark"></span></span><br>
+                <span class="token-cost">HK$500</span>
+              </div>
+            </label>
+            <label class="btn btn-default payment-option" ng-model="paymentOption" btn-radio="'Middle'" uncheckable>
+              <div class="token-selection">
+                <span class="token-number">10 <span class="glyphicon glyphicon-copyright-mark"></span></span><br>
+                <span class="token-cost">HK$950</span>
+              </div>
+            </label>
+            <label class="btn btn-default payment-option" ng-model="paymentOption" btn-radio="'Right'" uncheckable>
+              <div class="token-selection">
+                <span class="token-number">20 <span class="glyphicon glyphicon-copyright-mark"></span></span><br>
+                <span class="token-cost">HK$1,800</span>
+              </div>
+            </label>
+          </div>
         </div>
         <div id="topup-step2" ng-show="progressvalue===2">
           progressvalue2

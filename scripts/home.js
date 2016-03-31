@@ -86,39 +86,6 @@ if (Meteor.isClient) {
       }
     };
 
-    // $scope.moreFilters = {
-    //   district: {
-    //     "Hong Kong Island": false,
-    //     "Kowloon": false,
-    //     "New Territories": false
-    //   },
-    //   category: {
-    //     "Play": false,
-    //     "Academic": false,
-    //     "Camp": false,
-    //     "Arts & Crafts": false,
-    //     "Music": false,
-    //     "Science": false,
-    //     "Sports": false,
-    //     "Dance": false,
-    //     "Tech": false
-    //   }
-    // };
-
-    // $scope.applyFilters = function(){
-    //   for (var key in $scope.moreFilters){
-    //     if ($scope.moreFilters.hasOwnProperty(key)) {
-    //       for (var boolean in $scope.moreFilters[key]){
-    //         if ($scope.moreFilters[key][boolean] === true){
-
-    //           $scope.timeslotFilters[key].push(boolean);
-    //         }
-    //       }
-    //     }
-    //   }
-    // };
-
-    //Run this on ng-click a date
     $scope.selectDate = function (date) {
       $scope.selectedDayTab = date.formatted;
       populateFeedByDate(date.value);
@@ -152,7 +119,26 @@ if (Meteor.isClient) {
       $scope.selectedDayTab = $scope.dayTabs[0].formatted;
     };
 
+    // SLIDERS
 
+    var times = ['5am', '6am', '7am', '8am', '9am', '10am', '11am', '12pm', '1pm', '2pm', '3pm', '4pm', '5pm', '6pm', '7pm', '8pm', '9pm', '10pm', '11pm'];
+    $scope.timeSlider = {
+      min: 0,
+      max: times.length-1,
+      options: {
+        stepsArray: times
+      }
+    };
+
+    $scope.tokenSlider= {
+      min: 1,
+      max: 5,
+      options: {
+        floor: 1,
+        ceil: 5,
+        showTicksValues: true
+      }
+    };
 
     // MAP Stuff
 
@@ -185,11 +171,6 @@ if (Meteor.isClient) {
     //INITIALIZATION
     var init = function () {
       $scope.showMoreFilters = false;
-
-      $(function(){
-        $('#timeSlider').slider();
-        $('#creditFilterSlider').slider({max: 5}).slider("pips",{ rest: 'label'});
-      });
 
       generateDayTabs();
       populateFeedByDate($scope.dayTabs.value);

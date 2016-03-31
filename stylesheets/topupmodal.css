@@ -1,0 +1,33 @@
+#topup-step1 {
+  text-align: center;
+}
+
+#tokenOptions {
+  margin: 0 auto;
+}
+
+#selectPaymentOption {
+  margin-left: 30px;
+  text-align: left;
+  font-weight: 300;
+}
+
+.token-number {
+  text-align: center;
+  font-size: 22px;
+}
+
+.token-cost {
+  font-size: 14px;
+  padding-top: 20px;
+}
+
+.glyphicon.glyphicon-copyright-mark {
+  color: gold;
+}
+
+.btn-default.payment-option {
+  padding: 18px;
+  margin: 10px 30px;
+  border-radius: 0px;
+}
