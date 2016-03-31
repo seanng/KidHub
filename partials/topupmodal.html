@@ -38,26 +38,28 @@
         <div id="topup-step2" ng-show="progressvalue===66">
 
     <!--   Stripe payment -->
-
+          <div>
+            <h4 id="enterCardDetails">Enter your payment details:</h4>
+          </div>
           <form action="" method="POST" id="payment-form" name="paymentForm">
             <span class="payment-errors"></span>
             <md-content layout-gt-sm="row" layout-padding>
-              <div>
-                <md-input-container flex-gt-sm>
+              <div id="cardInfo">
+                <md-input-container class="cardDetails">
                   <label>Card Number</label>
                   <input type="text" data-stripe="number" size="20" />
                 </md-input-container>
-                <md-input-container flex-gt-sm>
+                <md-input-container class="cardDetails">
                   <label>CVC</label>
                   <input type="text" data-stripe="cvc" size="4" />
                 </md-input-container>
-                <md-input-container>
+                <md-input-container class="cardDetails">
                   <label>MM</label>
-                  <input type="text" data-stripe="exp-month" size="2"/>
+                  <input type="text" data-stripe="exp-month" size="4" />
                 </md-input-container>
-                <md-input-container>
+                <md-input-container class="cardDetails">
                   <label>YYYY</label>
-                  <input type="text" data-stripe="exp-year" size="4" />
+                  <input type="text" data-stripe="exp-year" size="4"  />
                 </md-input-container>
               </div>
             </md-content>

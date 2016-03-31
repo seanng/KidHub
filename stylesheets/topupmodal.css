@@ -12,6 +12,12 @@
   font-weight: 300;
 }
 
+#enterCardDetails {
+  margin-left: 30px;
+  text-align: left;
+  font-weight: 300;
+}
+
 .token-number {
   text-align: center;
   font-size: 22px;
@@ -24,6 +30,20 @@
 
 .glyphicon.glyphicon-copyright-mark {
   color: gold;
+}
+
+#card-expiration {
+  /*margin-left: 30px;*/
+}
+
+#cardInfo {
+  display: inline-table;
+  text-align: justify;
+  width: 100%;
+}
+
+.cardDetails {
+  display: table-cell;
 }
 
 .btn-default.payment-option {
