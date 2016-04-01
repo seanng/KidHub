@@ -13,9 +13,14 @@
 }
 
 #enterCardDetails {
-  margin-left: 30px;
+  margin-left: 15px;
   text-align: left;
   font-weight: 300;
+}
+
+#payment-instruction {
+  margin-top: 10px;
+  margin-bottom: 10px;
 }
 
 .token-number {
@@ -36,9 +41,15 @@
   /*margin-left: 30px;*/
 }
 
-#cardInfo {
+.cardInfo {
   display: inline-table;
-  text-align: justify;
+  text-align: center;
+  width: 50%;
+  margin: 10px auto;
+}
+
+.cardInfoContainer {
+  text-align: center;
   width: 100%;
 }
 

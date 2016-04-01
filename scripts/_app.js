@@ -48,14 +48,6 @@ if (Meteor.isClient) {
     $mdThemingProvider.alwaysWatchTheme(true);
 
   });
-
-  function onReady(){
-    angular.bootstrap(document, ['KidHubApp']);
-  }
-
-
-
-  angular.element(document).ready(onReady);
 }
 
 Meteor.methods({

@@ -19,6 +19,9 @@ if (Meteor.isClient) {
       });
 
       $scope.map = { center: { latitude: $scope.activity.placeLat, longitude: $scope.activity.placeLong}, zoom: 12};
+      $scope.marker = {
+
+      };
 
     } else {
       $state.go('home');

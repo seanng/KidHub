@@ -16,12 +16,16 @@
   border: 1px silver solid;
 }
 
+div.row.bottom {
+  height: 350px;
+}
+
 .row.activity-address {
   margin-bottom: 12px;
 }
 
-#activityGoogleMap > .angular-google-map {
-  height: 350px;
+#activityGoogleMap {
+  height: 100%;
 }
 
 #selectTimeslot {

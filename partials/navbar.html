@@ -23,18 +23,6 @@
         </div>
       </form> -->
 
-      <!-- User dropdown -->
-      <ul class="nav navbar-nav navbar-right" id="nav-bank">
-        <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-piggy-bank"></span></a>
-          <ul class="dropdown-menu" id="bank-hovered">
-            <li>You have:</li>
-            <li>5 tokens left</li>
-            <li><md-button class="md-raised" data-toggle="modal" data-target="#topup-modal">TOP UP</md-button></li>
-          </ul>
-        </li>
-      </ul>
-
       <!-- Credits details -->
       <ul class="nav navbar-nav navbar-right" id="nav-username">
         <li class="dropdown">
@@ -43,6 +31,18 @@
             <li><a id="profile-url" href="#">Profile</a></li>
             <li role="separator" class="divider"></li>
             <li ng-click="signOut()"><a>Sign-out</a></li>
+          </ul>
+        </li>
+      </ul>
+
+      <!-- User dropdown -->
+      <ul class="nav navbar-nav navbar-right" id="nav-bank">
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-piggy-bank"></span></a>
+          <ul class="dropdown-menu" id="bank-hovered">
+            <li>You have:</li>
+            <li>5 tokens left</li>
+            <li><md-button class="md-raised" data-toggle="modal" data-target="#topup-modal">TOP UP</md-button></li>
           </ul>
         </li>
       </ul>

@@ -10,6 +10,10 @@ if (Meteor.isClient) {
       $scope.progressvalue = 33;
       $scope.nextButton = "Next";
       $scope.$apply();
+      for (var key in $scope.cardDetails) {
+        $scope.cardDetails[key] = '';
+      }
+      $scope.paymentOption = null;
     });
 
     $scope.nextAction = function(){
@@ -33,6 +37,12 @@ if (Meteor.isClient) {
     $scope.paymentOption = null;
 
     //Step 2
+    $scope.cardDetails = {
+      number: '',
+      cvc: '',
+      expMonth: '',
+      expYear: ''
+    };
 
   }]);
 }

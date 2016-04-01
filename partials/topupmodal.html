@@ -38,28 +38,32 @@
         <div id="topup-step2" ng-show="progressvalue===66">
 
     <!--   Stripe payment -->
-          <div>
-            <h4 id="enterCardDetails">Enter your payment details:</h4>
+          <div id="payment-instruction">
+            <h4 id="enterCardDetails">Enter your card details:</h4>
           </div>
           <form action="" method="POST" id="payment-form" name="paymentForm">
             <span class="payment-errors"></span>
-            <md-content layout-gt-sm="row" layout-padding>
-              <div id="cardInfo">
+            <md-content layout-gt-sm="row" layout-padding class="cardInfoContainer">
+              <div class="cardInfo">
                 <md-input-container class="cardDetails">
                   <label>Card Number</label>
-                  <input type="text" data-stripe="number" size="20" />
+                  <input type="text" data-stripe="number" ng-model="cardDetails.number" size="20" />
                 </md-input-container>
                 <md-input-container class="cardDetails">
                   <label>CVC</label>
-                  <input type="text" data-stripe="cvc" size="4" />
+                  <input type="text" data-stripe="cvc" size="4" ng-model="cardDetails.cvc" />
                 </md-input-container>
+              </div>
+            </md-content>
+            <md-content layout-gt-sm="row" layout-padding class="cardInfoContainer">
+              <div class="cardInfo">
                 <md-input-container class="cardDetails">
                   <label>MM</label>
-                  <input type="text" data-stripe="exp-month" size="4" />
+                  <input type="text" data-stripe="exp-month" size="4" ng-model="cardDetails.expMonth" />
                 </md-input-container>
                 <md-input-container class="cardDetails">
                   <label>YYYY</label>
-                  <input type="text" data-stripe="exp-year" size="4"  />
+                  <input type="text" data-stripe="exp-year" size="4" ng-model="cardDetails.expYear" />
                 </md-input-container>
               </div>
             </md-content>

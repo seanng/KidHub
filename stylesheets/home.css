@@ -4,10 +4,6 @@
   height: calc(100vh - 72px);
 }
 
-.home-right {
-  height: 300px;
-}
-
 ul.results-day-tabs {
   padding-left: 0px;
   margin-bottom: 10px;
@@ -139,9 +135,14 @@ li.day-tab.selected-day-tab {
 #homeGoogleMap {
   padding-left: 0px;
   padding-right: 0px;
+  height: 100%;
 }
 
-#homeGoogleMap > .angular-google-map {
+.angular-google-map {
+  height: 100%;
+}
+
+.angular-google-map-container {
   height: 100%;
 }
 
