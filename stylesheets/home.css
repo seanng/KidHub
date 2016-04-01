@@ -7,10 +7,16 @@
 ul.results-day-tabs {
   padding-left: 0px;
   margin-bottom: 10px;
-  text-align: justify;
   width: 100%;
-  display: table;
   border: 1px silver solid;
+}
+
+#dateSelector:not(.md-no-tab-content):not(.md-dynamic-height) {
+  min-height: 0px;
+}
+
+#dateSelector {
+  margin: 10px auto;
 }
 
 #creditFilterSlider {
@@ -129,7 +135,7 @@ a.filter-selected {
 
 li.day-tab.selected-day-tab {
   background: blue;
-  color: white;
+  /*color: white;*/
 }
 
 #homeGoogleMap {

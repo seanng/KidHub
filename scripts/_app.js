@@ -13,6 +13,26 @@ Array.max = function( array ){
 
 if (Meteor.isClient) {
 
+  Meteor.startup(function () {
+    var stripeKey = Meteor.settings.public.stripe.testPublishableKey;
+    Stripe.setPublishableKey(stripeKey);
+
+    STRIPE = {
+      getToken: function (domElement, card, callback) {
+        Stripe.card.createToken(card, function(status,response){
+          if (response.error){
+            Bert.alert( response.error.message, "danger");
+          } else {
+            STRIPE.setToken(response.id, domElement, callback);
+          }
+        });
+      },
+      setToken: function(token, domElement, callback) {
+        $(domElement).append($('<input type="hidden" name="stripeToken" />').val(token));
+      }
+    };
+  });
+
   angular.module('KidHubApp', ['angular-meteor', 'accounts.ui', 'ui.router', 'ui.bootstrap', 'ngMaterial', 'uiGmapgoogle-maps']);
 
   angular.module('KidHubApp').config(function($urlRouterProvider, $stateProvider, $locationProvider, $mdThemingProvider){
@@ -35,6 +55,12 @@ if (Meteor.isClient) {
         url: '/activities/:activityId',
         templateUrl: 'views/activity.html',
         controller: 'ActivityCtrl',
+        authenticate: true
+      })
+      .state('profile',{
+        url: '/user/:userId',
+        templateUrl: 'views/profile.html',
+        controller: 'ProfileCtrl',
         authenticate: true
       });
 
@@ -84,10 +110,6 @@ if (Meteor.isServer) {
     });
     console.log('creating timeslots.');
   }
-
-  Meteor.startup(function () {
-    // code to run on server at startup
-  });
 
   Meteor.publish('activities', function(){
     // return queries that are called from client.

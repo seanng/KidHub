@@ -8,6 +8,8 @@ if (Meteor.isClient) {
       });
     };
 
+    $scope.currentuserid = Meteor.user()._id;
+
   }]);
 }
 

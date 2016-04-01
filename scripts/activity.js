@@ -18,7 +18,7 @@ if (Meteor.isClient) {
         $scope.dates.push(event);
       });
 
-      $scope.map = { center: { latitude: $scope.activity.placeLat, longitude: $scope.activity.placeLong}, zoom: 12};
+      $scope.map = { center: { latitude: $scope.activity.placeLat, longitude: $scope.activity.placeLong}, zoom: 17};
       $scope.marker = {
 
       };

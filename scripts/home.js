@@ -1,6 +1,6 @@
 if (Meteor.isClient) {
   angular.module('KidHubApp')
-  .controller('HomeCtrl', ['$scope','$meteor', function($scope, $meteor){
+  .controller('HomeCtrl', ['$scope', '$meteor', function($scope, $meteor){
 
     $scope.timeslotFilters = function(timeslot) {
       return checkFilter(timeslot, 'district') && checkFilter(timeslot, 'category') && checkAge(timeslot); // && checkRange(timeslot)

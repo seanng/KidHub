@@ -1,11 +1,17 @@
 <div class="homepage container-fluid">
   <div class="col-md-7 home-left">
     <a href="#">
-    <ul class="results-day-tabs">
+    <!-- <md-content class="md-padding"> -->
+      <md-tabs md-selected="selectedIndex" md-autoselect id="dateSelector">
+        <md-tab ng-repeat="date in dayTabs" label="{{date.formatted}}" ng-click="selectDate(date)">
+        </md-tab>
+      </md-tabs>
+    <!-- </md-content> -->
+    <!-- <ul class="results-day-tabs">
       <li class="hvr-float-shadow day-tab" ng-repeat="date in dayTabs" ng-click="selectDate(date)" ng-class="{'selected-day-tab': selectedDayTab == date.formatted}">
-        <span> {{date.formatted}} </span>
+        <span>{{date.formatted}} </span>
       </li>
-    </ul>
+    </ul> -->
     </a>
     <div id="allFilters">
       <div class="row">

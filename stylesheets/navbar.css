@@ -28,12 +28,20 @@ span.glyphicon.glyphicon-piggy-bank {
 }
 
 #nav-bank > .dropdown-menu li:hover .sub-menu {
-    visibility: visible;
+  visibility: visible;
 }
 
 #nav-bank > .dropdown:hover .dropdown-menu {
-    display: block;
-    text-align: center;
+  display: block;
+  text-align: center;
+}
+
+#nav-username > .dropdown-menu li:hover .sub-menu{
+  visibility: visible;
+}
+
+#nav-username > .dropdown:hover .dropdown-menu {
+  text-align: center;
 }
 
 #bank-hovered > li {

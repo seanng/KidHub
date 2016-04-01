@@ -2,6 +2,10 @@
   text-align: center;
 }
 
+#topup-step2 {
+
+}
+
 #tokenOptions {
   margin: 0 auto;
 }
@@ -21,6 +25,12 @@
 #payment-instruction {
   margin-top: 10px;
   margin-bottom: 10px;
+}
+
+.highlight-token-message {
+  color: red;
+  font-weight: 500px;
+  font-size: 24px;
 }
 
 .token-number {
@@ -44,14 +54,15 @@
 .cardInfo {
   display: inline-table;
   text-align: center;
-  width: 50%;
-  margin: 10px auto;
+  width: 70%;
+  margin: 20px auto;
 }
 
 .cardInfoContainer {
   text-align: center;
-  width: 100%;
 }
+
+
 
 .cardDetails {
   display: table-cell;

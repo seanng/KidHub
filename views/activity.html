@@ -1,70 +1,76 @@
-<div class="activity-page container-fluid">
-  <div class="row cover-photo" style="background: linear-gradient(rgba(0,0,0,0.5),rgba(0,0,0,0.5)), url('{{activity.imageURL}}'); background-size: cover;">
-    <div id="activity-title-container">
-      <h2>{{activity.name}}</h2>
-    </div>
+<div id="activity-page" class="container-fluid">
+  <div class="row cover-photo" style="background: url('{{activity.imageURL}}'); background-size: cover;">
   </div>
-  <div class="row middle">
-    <div class="col-md-6 mid-left">
-      <p>{{activity.description}}</p>
-    </div>
-    <div class="col-md-6 mid-right">
-      <div class="col-xs-6 activity-details">
-        <h6>Ages:</h6>
-        <p>{{ageLow}} - {{ageHigh}}</p>
-        <h6>Category:</h6>
-        <p>{{activity.category}}</p>
-        <h6>Retail Price:</h6>
-        <p>{{activity.retail_price}}</p>
-      </div>
-      <div class="col-xs-6 booking-section">
-        <div id="selectTimeslot">
-           <button id="reserveButton" class="btn btn-success btn-lg">Reserve ( {{activity.tokens}} <span class="glyphicon glyphicon-copyright-mark"></span> )</button>
-          <select class="form-control">
-            <option ng-repeat="date in dates">{{date}}</option>
-          </select>
+  <div class="col-md-7 activity-left">
+    <md-card>
+      <md-card-title>
+        <md-card-title-text>
+          <span class="md-display-1"> {{activity.name}} </span>
+          <span class="md-subhead activity-description"> {{activity.description}} </span>
+        </md-card-title-text>
+      </md-card-title>
+      <md-divider></md-divider>
+      <md-card-content>
+        <div layout="row">
+          <div flex class="activity-details">
+            <md-card-title-text>
+              <span class="md-title">Info</span><br/>
+              <span class="md-subhead">Ages: {{ageLow}} - {{ageHigh}}</span><br/>
+              <span class="md-subhead">Category: {{activity.category}}</span><br/>
+              <span class="md-subhead">Retail Price: {{activity.retail_price}}</span>
+            </md-card-title-text>
+          </div>
+          <div flex class="booking-section">
+            <div id="selectTimeslot">
+               <button id="reserveButton" class="btn btn-success btn-lg">Reserve ( {{activity.tokens}} <span class="glyphicon glyphicon-copyright-mark"></span> )</button>
+              <select class="form-control">
+                <option ng-repeat="date in dates">{{date}}</option>
+              </select>
+            </div>
+          </div>
         </div>
-      </div>
-    </div>
+      </md-card-content>
+      <md-card-content>
+        <md-divider></md-divider>
+        <div layout="row" class="information-card-row">
+          <div flex class="activity-rules-label">
+            <span class="md-body2"> Rules:</span>
+          </div>
+          <div flex class="activity-rules-content">
+            <span class="md-body2" ng-repeat="rule in activity.rules">- {{rule}} <br/></span>
+          </div>
+        </div>
+        <div layout="row" class="information-card-row">
+          <div flex class="activity-cancellable-label">
+            <span class="md-body2"> Cancellable:</span>
+          </div>
+          <div flex class="activity-cancellable-content">
+            <span class="md-body2">{{activity.cancellable}} <br/></span>
+          </div>
+        </div>
+        <div layout="row" class="information-card-row">
+          <div flex class="activity-address-label">
+            <span class="md-body2"> Address:</span>
+          </div>
+          <div flex class="activity-address-content">
+            <span class="md-body2">{{activity.address}} <br/></span>
+          </div>
+        </div>
+        <div layout="row" class="information-card-row">
+          <div flex class="activity-phone-label">
+            <span class="md-body2"> Phone Number:</span>
+          </div>
+          <div flex class="activity-phone-content">
+            <span class="md-body2">{{activity.phone}} <br/></span>
+          </div>
+        </div>
+      </md-card-content>
+    </md-card>
   </div>
-  <div class="row bottom">
-    <div class="col-md-6 information">
-      <div class="row activity-rules">
-        <div class="col-xs-4 activity-rules-label">
-          Rules:
-        </div>
-        <div class="col-xs-8 activity-rules-content">
-          <p ng-repeat="rule in activity.rules"> - {{rule}}</p>
-        </div>
-      </div>
-      <div class="row activity-cancellable">
-        <div class="col-xs-4 activity-cancellable-label">
-          Cancellable:
-        </div>
-        <div class="col-xs-8 activity-cancellable-content">
-          {{activity.cancellable}}
-        </div>
-      </div>
-      <div class="row activity-address">
-        <div class="col-xs-4 activity-address-label">
-          Address:
-        </div>
-        <div class="col-xs-8 activity-address-content">
-          {{activity.address}}
-        </div>
-      </div>
-      <div class="row activity-address">
-        <div class="col-xs-4 activity-phone-label">
-          Phone Number:
-        </div>
-        <div class="col-xs-8 activity-phone-content">
-          {{activity.phone}}
-        </div>
-      </div>
-    </div>
-    <div class="col-md-6" id="activityGoogleMap">
+  <div class="col-md-5 activity-right">
+    <div id="activityGoogleMap">
       <ui-gmap-google-map center="map.center" zoom="map.zoom">
-
+        <ui-gmap-marker options="marker.options" events="marker.events" idKey="activity._id" coords="{latitude: activity.placeLat, longitude: activity.placeLong}"></ui-gmap-marker>
       </ui-gmap-google-map>
     </div>
   </div>

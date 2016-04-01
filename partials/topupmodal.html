@@ -4,7 +4,7 @@
 
       <div class="modal-header">
         <button class="close" type="button" data-dismiss="modal" aria-hidden="true">x</button>
-        <h3 class="topupmodal-title">Top up tokens</h3>
+        <h3 class="topupmodal-title" ng-model="modalTitle">{{modalTitle}}</h3>
         <br/>
         <md-progress-linear md-mode="determinate" value="{{progressvalue}}"></md-progress-linear>
       </div>
@@ -13,62 +13,61 @@
         <div id="topup-step1" ng-show="progressvalue===33">
           <div class="btn-group btn-group-lg" role="group" id="tokenOptions">
             <div>
-              <h4 id="selectPaymentOption">Select number of tokens:</h4>
+              <h4 id="selectPaymentOption" ng-show="highlightTokenMessage" ng-class="{'highlight-token-message':highlightTokenMessage}">Select number of tokens:</h4>
             </div>
-            <label class="btn btn-default payment-option" ng-model="paymentOption" btn-radio="'Left'" uncheckable>
+            <label class="btn btn-default payment-option" ng-model="paymentOption" btn-radio="500" uncheckable>
               <div class="token-selection">
-                <span class="token-number">5 <span class="glyphicon glyphicon-copyright-mark"></span></span><br>
-                <span class="token-cost">HK$500</span>
+                <span class="token-number">{{plans[0].tokens}} <span class="glyphicon glyphicon-copyright-mark"></span></span><br>
+                <span class="token-cost">HK${{plans[0].amount/100}}</span>
               </div>
             </label>
-            <label class="btn btn-default payment-option" ng-model="paymentOption" btn-radio="'Middle'" uncheckable>
+            <label class="btn btn-default payment-option" ng-model="paymentOption" btn-radio="950" uncheckable>
               <div class="token-selection">
-                <span class="token-number">10 <span class="glyphicon glyphicon-copyright-mark"></span></span><br>
-                <span class="token-cost">HK$950</span>
+                <span class="token-number">{{plans[1].tokens}}<span class="glyphicon glyphicon-copyright-mark"></span></span><br>
+                <span class="token-cost">HK${{plans[1].amount/100}}</span>
               </div>
             </label>
-            <label class="btn btn-default payment-option" ng-model="paymentOption" btn-radio="'Right'" uncheckable>
+            <label class="btn btn-default payment-option" ng-model="paymentOption" btn-radio="1850" uncheckable>
               <div class="token-selection">
-                <span class="token-number">20 <span class="glyphicon glyphicon-copyright-mark"></span></span><br>
-                <span class="token-cost">HK$1,800</span>
+                <span class="token-number">{{plans[2].tokens}}<span class="glyphicon glyphicon-copyright-mark"></span></span><br>
+                <span class="token-cost">HK${{plans[2].amount/100}}</span>
               </div>
             </label>
           </div>
         </div>
         <div id="topup-step2" ng-show="progressvalue===66">
 
-    <!--   Stripe payment -->
-          <div id="payment-instruction">
-            <h4 id="enterCardDetails">Enter your card details:</h4>
+    <!--   Stripe payment --><!--
+          <div id="payment-form">
+            <form action="" method="POST" name="paymentForm" id="application-topup">
+              <span class="payment-errors"></span>
+              <md-content layout-gt-sm="row" layout-padding class="cardInfoContainer">
+                <div class="cardInfo">
+                  <md-input-container class="cardDetails">
+                    <label>Card Number</label>
+                    <input type="text" data-stripe="number" ng-model="cardDetails.number" size="20" />
+                  </md-input-container>
+                  <md-input-container class="cardDetails">
+                    <label>CVC</label>
+                    <input type="text" data-stripe="cvc" size="4" ng-model="cardDetails.cvc" />
+                  </md-input-container>
+                </div>
+              </md-content>
+              <md-content layout-gt-sm="row" layout-padding class="cardInfoContainer">
+                <div class="cardInfo">
+                  <md-input-container class="cardDetails">
+                    <label>MM</label>
+                    <input type="text" data-stripe="exp-month" size="4" ng-model="cardDetails.expMonth" />
+                  </md-input-container>
+                  <md-input-container class="cardDetails">
+                    <label>YYYY</label>
+                    <input type="text" data-stripe="exp-year" size="4" ng-model="cardDetails.expYear" />
+                  </md-input-container>
+                </div>
+              </md-content>
+            </form>
           </div>
-          <form action="" method="POST" id="payment-form" name="paymentForm">
-            <span class="payment-errors"></span>
-            <md-content layout-gt-sm="row" layout-padding class="cardInfoContainer">
-              <div class="cardInfo">
-                <md-input-container class="cardDetails">
-                  <label>Card Number</label>
-                  <input type="text" data-stripe="number" ng-model="cardDetails.number" size="20" />
-                </md-input-container>
-                <md-input-container class="cardDetails">
-                  <label>CVC</label>
-                  <input type="text" data-stripe="cvc" size="4" ng-model="cardDetails.cvc" />
-                </md-input-container>
-              </div>
-            </md-content>
-            <md-content layout-gt-sm="row" layout-padding class="cardInfoContainer">
-              <div class="cardInfo">
-                <md-input-container class="cardDetails">
-                  <label>MM</label>
-                  <input type="text" data-stripe="exp-month" size="4" ng-model="cardDetails.expMonth" />
-                </md-input-container>
-                <md-input-container class="cardDetails">
-                  <label>YYYY</label>
-                  <input type="text" data-stripe="exp-year" size="4" ng-model="cardDetails.expYear" />
-                </md-input-container>
-              </div>
-            </md-content>
-          </form>
-
+ -->
 <!--
 
             <div class="form-row">
@@ -110,8 +109,8 @@
       </div>
 
       <div class="modal-footer">
-         <md-button class="md-warn" ng-click="backAction()" ng-show="progressvalue===66">Back</md-button>
-         <md-button md-no-ink class="md-primary" ng-click="nextAction()">{{nextButton}}</md-button>
+         <md-button class="md-warn" ng-click="closeModal()">Cancel</md-button>
+         <md-button md-no-ink class="md-primary" ng-click="nextAction()">Pay</md-button>
       </div>
     </div>
   </div>
