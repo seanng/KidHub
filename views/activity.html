@@ -40,17 +40,16 @@
               <button id="reserveButton" class="btn btn-success btn-lg">Reserve ( {{activity.tokens}} <span class="glyphicon glyphicon-copyright-mark"></span> )</button>
               <md-input-container style="margin-right: 10px;">
               <label>Select date</label>
-                <md-select ng-model="selectedDate">
-                  <md-option ng-repeat="obj.date in eventDates | unique: 'obj.date'" value="{{obj.date}}">{{obj.date}}</md-option>
+                <md-select ng-model="uniqueDates">
+                  <md-option ng-repeat="(key, value) in uniqueDates" value="{{key}}" ng-click="selectDate(value)">{{key}}</md-option>
                 </md-select>
               </md-input-container>
               <md-input-container style="margin-right: 10px;" ng-disabled="!selectedDate">
               <label>Select time</label>
-                <md-select>
-                  <md-option ng-repeat="obj.date in eventDates | filter: 'selectedDate'" value="{{obj.time}}">{{obj.time}}</md-option>
+                <md-select ng-model="selectedDate">
+                  <md-option ng-repeat="time in selectedDate" value="{{time}}">{{time}}</md-option>
                 </md-select>
               </md-input-container>
-
             </div>
           </div>
         </div>
@@ -95,7 +94,7 @@
   <div class="col-md-5 activity-right">
     <div id="activityGoogleMap">
       <ui-gmap-google-map center="map.center" zoom="map.zoom">
-        <ui-gmap-marker options="marker.options" events="marker.events" idKey="activity._id" coords="{latitude: activity.placeLat, longitude: activity.placeLong}"></ui-gmap-marker>
+        <ui-gmap-marker ng-repeat="activity in activities" options="marker.options" events="marker.events" idKey="activity._id" coords="{latitude: activity.placeLat, longitude: activity.placeLong}"></ui-gmap-marker>
       </ui-gmap-google-map>
     </div>
   </div>
