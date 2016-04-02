@@ -4,13 +4,13 @@
     <div class="w3-container">
       <h2>Profile</h2>
     </div>
-    <form class="w3-container">
+    <form class="w3-container personal-info">
       <div class="w3-row-padding">
         <br/>
         <br/>
         <div class="w3-half">
           <label class="w3-label w3-validate">First Name</label>
-          <input class="w3-input w3-animate-input" style="width:70%" type="text" required >
+          <input class="w3-input w3-animate-input" style="width:70%" type="text" required>
         </div>
         <div class="w3-half">
           <label class="w3-label w3-validate">Last Name</label>
@@ -33,9 +33,28 @@
       <br/>
     </form>
     <div class="w3-container">
-      <h3>Children</h3>
+      <h3>Children</h3><br/>
+      <form class="w3-container child-info" ng-repeat="child in children track by $index">
+        <br/>
+        <div class="w3-row-padding">
+          <label class="w3-label w3-validate">Name</label>
+          <input type="text" ng-model="children[child].childName" class="w3-input w3-animate-input" style="width:50%" required>
+        </div>
+        <br/>
+        <div class="w3-row-padding">
+          <label class="w3-label w3-validate">Age</label>
+          <input type="text" ng-model="children[child].childAge" class="w3-input w3-animate-input" style="width:50%" required>
+        </div>
+        <br/>
+        <div class="w3-row-padding">
+          <label class="w3-label w3-validate">Gender</label>
+          <input type="text" ng-model="children[child].childGender" class="w3-input w3-animate-input" style="width:50%" required>
+        </div>
+        <br/>
+      </form>
       <br/>
-      <button id="addChildButton" class="w3-btn w3-ripple w3-teal w3-round w3-large">Add Child</button>
+      <button id="addChildButton" ng-click="addChildAction()" class="w3-btn w3-ripple w3-teal w3-round w3-large">Add Child</button>
+      <button id="saveProfileButton" ng-click="saveProfileAction()" class="w3-btn w3-ripple w3-teal w3-round w3-large">Save</button>
       <br/>
       <br/>
     </div>

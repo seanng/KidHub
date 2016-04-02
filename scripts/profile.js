@@ -12,11 +12,32 @@ if (Meteor.isClient) {
     // }
 
     $scope.founduser = Meteor.users.findOne({_id: Meteor.user()._id});
-    console.log($scope.user);
+    console.log($scope.founduser);
 
-    $scope.user = {
+    $scope.children = [];
+    //$scope.children.push(users children array);
 
+    // $scope.user = {
+    //   firstname: founduser.firstname || ' ',
+    //   lastname: founduser.lastname || ' ',
+    //   email: founduser.email,
+    //   phone: founduser.phone || ' '
+    // };
+
+    var newChild = {
+      name: $scope.childName,
+      age: $scope.childAge,
+      gender: $scope.childGender
     };
+
+    $scope.addChildAction = function(){
+      $scope.children.push(newChild);
+    };
+
+    $scope.saveProfileAction = function() {
+
+    }
+
 
 
   }]);
