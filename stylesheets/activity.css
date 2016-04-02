@@ -4,7 +4,7 @@
 }
 
 .row.cover-photo {
-  height: 350px;
+  height: 380px;
   margin-bottom: 15px;
 }
 
@@ -28,6 +28,10 @@ div.col-md-5.activity-right {
 
 div.activity-left {
   padding: 0;
+}
+
+div.activity-details {
+  padding-right: 50px;
 }
 
 div.row.activity-rules {

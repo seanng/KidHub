@@ -1,5 +1,5 @@
 <div id="activity-page" class="container-fluid">
-  <div class="row cover-photo" style="background: url('{{activity.imageURL}}'); background-size: cover;">
+  <div class="row cover-photo" style="background: url('{{activity.imageURL}}'); background-size: cover; background-position: 70%;">
   </div>
   <div class="col-md-7 activity-left">
     <md-card>
@@ -13,19 +13,44 @@
       <md-card-content>
         <div layout="row">
           <div flex class="activity-details">
-            <md-card-title-text>
-              <span class="md-title">Info</span><br/>
-              <span class="md-subhead">Ages: {{ageLow}} - {{ageHigh}}</span><br/>
-              <span class="md-subhead">Category: {{activity.category}}</span><br/>
-              <span class="md-subhead">Retail Price: {{activity.retail_price}}</span>
-            </md-card-title-text>
+            <!-- <md-card-title-text> -->
+            <table class="w3-table w3-bordered w3-card">
+              <thead>
+                <tr class="w3-blue">
+                  <th>Info</th>
+                  <th></th>
+                </tr>
+              </thead>
+              <tr>
+                <td>Ages:</td>
+                <td>{{ageLow}} - {{ageHigh}}</td>
+              </tr>
+              <tr>
+                <td>Category:</td>
+                <td>{{activity.category}}</td>
+              </tr>
+              <tr>
+                <td>Retail Price:</td>
+                <td>{{activity.retail_price}}</td>
+              </tr>
+            </table>
           </div>
           <div flex class="booking-section">
             <div id="selectTimeslot">
-               <button id="reserveButton" class="btn btn-success btn-lg">Reserve ( {{activity.tokens}} <span class="glyphicon glyphicon-copyright-mark"></span> )</button>
-              <select class="form-control">
-                <option ng-repeat="date in dates">{{date}}</option>
-              </select>
+              <button id="reserveButton" class="btn btn-success btn-lg">Reserve ( {{activity.tokens}} <span class="glyphicon glyphicon-copyright-mark"></span> )</button>
+              <md-input-container style="margin-right: 10px;">
+              <label>Select date</label>
+                <md-select ng-model="selectedDate">
+                  <md-option ng-repeat="obj.date in eventDates | unique: 'obj.date'" value="{{obj.date}}">{{obj.date}}</md-option>
+                </md-select>
+              </md-input-container>
+              <md-input-container style="margin-right: 10px;" ng-disabled="!selectedDate">
+              <label>Select time</label>
+                <md-select>
+                  <md-option ng-repeat="obj.date in eventDates | filter: 'selectedDate'" value="{{obj.time}}">{{obj.time}}</md-option>
+                </md-select>
+              </md-input-container>
+
             </div>
           </div>
         </div>

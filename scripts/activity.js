@@ -9,14 +9,20 @@ if (Meteor.isClient) {
       $scope.activity = Activities.findOne({_id: activityID});
       $scope.ageLow = Array.min($scope.activity.ages);
       $scope.ageHigh = Array.max($scope.activity.ages);
-      $scope.dates = [];
+
+      $scope.eventDates = [];
+      $scope.selectedDate = null;
 
       var allTimeslots = Timeslots.find({activity_id: activityID}, {sort: {date: 1}}).fetch();
-      // sort alltimeslots by time
-      allTimeslots.forEach(function(elem){
-        var event = moment(elem.date).format("ha") + " "+ moment(elem.date).format("dddd, DD MMMM");
-        $scope.dates.push(event);
-      });
+
+      var getDates = function(){
+        allTimeslots.forEach(function(elem){
+          var eventDate = moment(elem.date).format("dddd, DD MMMM");
+          var eventTime = moment(elem.date).format("ha");
+          $scope.eventDates.push({date: eventDate, time: eventTime});
+        });
+      };
+      getDates();
 
       $scope.map = { center: { latitude: $scope.activity.placeLat, longitude: $scope.activity.placeLong}, zoom: 17};
       $scope.marker = {

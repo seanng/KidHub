@@ -2,7 +2,7 @@ if (Meteor.isClient) {
   Meteor.subscribe('userInfo');
 
   angular.module('KidHubApp')
-  .controller('ProfileCtrl', ['$scope', '$location', '$meteor', '$stateParams', '$state', function($scope, $meteor, $stateParams, $state, $location){
+  .controller('ProfileCtrl', ['$scope', '$location', '$meteor', '$stateParams', '$state', '$mdDialog', '$mdMedia', function($scope, $meteor, $stateParams, $state, $location, $mdDialog, $mdMedia){
 
     console.log (Meteor.user()._id);
     console.log('hihihi', $stateParams.userId);
@@ -11,32 +11,46 @@ if (Meteor.isClient) {
     //   $state.go('welcome');
     // }
 
-    $scope.founduser = Meteor.users.findOne({_id: Meteor.user()._id});
-    console.log($scope.founduser);
+    var founduser = Meteor.users.findOne({_id: Meteor.user()._id});
+    console.log(founduser);
 
-    $scope.children = [];
-    //$scope.children.push(users children array);
-
-    // $scope.user = {
-    //   firstname: founduser.firstname || ' ',
-    //   lastname: founduser.lastname || ' ',
-    //   email: founduser.email,
-    //   phone: founduser.phone || ' '
-    // };
-
-    var newChild = {
-      name: $scope.childName,
-      age: $scope.childAge,
-      gender: $scope.childGender
+    $scope.user = {
+      firstname: founduser.firstname,
+      lastname: founduser.lastname,
+      email: founduser.emails[0].address,
+      phone: founduser.phone
     };
 
+    $scope.children = [];
     $scope.addChildAction = function(){
+      var newChild = { name: '', age: '', gender: '' };
       $scope.children.push(newChild);
     };
 
-    $scope.saveProfileAction = function() {
+    $scope.removeChild = function(i) {
+      $scope.children.splice(i, 1);
+    };
 
-    }
+    $scope.saveProfileAction = function(ev) {
+      if ($scope.children.length > 0 && $scope.user.firstname && $scope.user.lastname && $scope.user.email) {
+        // Meteor.user().insert ..?
+      } else {
+        showAlert(ev);
+        // Alert box
+      }
+    };
+
+    var showAlert = function(ev) {
+      $mdDialog.show(
+        $mdDialog.alert()
+          .parent(angular.element(document.querySelector('#warningContainer')))
+          .clickOutsideToClose(true)
+          .textContent('You must fill out your personal details and children information before saving.')
+          .ariaLabel('Alert Dialog')
+          .ok('Got it!')
+          .targetEvent(ev)
+        );
+    };
 
 
 

@@ -1,4 +1,50 @@
 #profile-card {
-  margin: 10px auto;
+  padding: 30px 70px;
   width: 50%;
+  margin: 30px auto;
+}
+
+#profile-form {
+
+}
+
+#personal-info {
+  margin-bottom: 20px;
+}
+
+#personal-info-form {
+  /*border: 1px #ccc solid;
+  border-radius: 8px;
+  padding: 20px 10px;*/
+  padding: 20px 0px;
+}
+
+#no-children {
+  font-style: italic;
+  font-weight: 200px;
+  color: red;
+  margin: 15px;
+  margin-bottom: 25px;
+}
+
+#children-info {
+  margin-bottom: 20px;
+}
+
+#childrendiv {
+  margin-bottom: 15px;
+}
+.glyphicon.glyphicon-remove-circle {
+  float: right;
+  font-size: 16px;
+}
+
+#child-info-form {
+  border: 1px #ccc solid;
+  border-radius: 5px;
+  padding: 20px 10px;
+}
+
+#saveProfileButton {
+  float: right;
 }

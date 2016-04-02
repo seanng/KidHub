@@ -1,67 +1,64 @@
 <div id="profile">
-
   <div class="w3-card-4" id="profile-card">
-    <div class="w3-container">
-      <h2>Profile</h2>
-    </div>
-    <form class="w3-container personal-info">
-      <div class="w3-row-padding">
-        <br/>
-        <br/>
-        <div class="w3-half">
-          <label class="w3-label w3-validate">First Name</label>
-          <input class="w3-input w3-animate-input" style="width:70%" type="text" required>
+    <div id="profile-form">
+      <div id="personal-info">
+        <h1 class="w3-padding-16 info-heading">Profile</h1>
+        <form class="w3-container" id="personal-info-form">
+          <div class="w3-row-padding">
+            <div class="w3-twothird">
+              <label class="w3-label w3-validate">First Name</label>
+              <input class="w3-input w3-border w3-round w3-animate-input" ng-model="user.firstname" style="width:60%" type="text" required>
+            </div>
+            <div class="w3-third">
+              <label class="w3-label w3-validate">Last Name</label>
+              <input class="w3-input w3-border w3-round w3-animate-input" ng-model="user.lastname" style="width:60%" type="text" required>
+            </div>
+          </div>
+          <br/>
+          <br/>
+          <div class="w3-row-padding">
+            <div class="w3-twothird">
+              <label class="w3-label w3-validate">Email</label>
+              <input class="w3-input w3-border w3-round w3-animate-input" ng-model="user.email" style="width:60%" type="email" required>
+            </div>
+            <div class="w3-third">
+              <label class="w3-label w3-validate">Phone No.</label>
+              <input class="w3-input w3-border w3-round w3-animate-input" ng-model="user.phone" style="width:60%" type="text" required>
+            </div>
+          </div>
+        </form>
+      </div>
+      <div id="children-info">
+        <h3 class="w3-padding-8 info-heading">Your Children</h3>
+        <div id="no-children" ng-hide="children.length > 0">
+          <h4>Please add children</h4>
         </div>
-        <div class="w3-half">
-          <label class="w3-label w3-validate">Last Name</label>
-          <input class="w3-input w3-animate-input" style="width:70%" type="text" required>
+        <div id="childrendiv" ng-repeat="child in children track by $index">
+          <span class="glyphicon glyphicon-remove-circle" ng-click="removeChild(child)"></span>
+          <form class="w3-container" id="child-info-form">
+            <div class="w3-row-padding child-info-input">
+              <div class="w3-half">
+                <label class="w3-label w3-validate">Name</label>
+                <input type="text" ng-model="child.name" class="w3-input w3-border w3-round" required>
+              </div>
+              <div class="w3-quarter">
+                <label class="w3-label w3-validate">Age</label>
+                <input type="number" ng-model="child.age" class="w3-input w3-border w3-round" required>
+              </div>
+              <div class="w3-quarter">
+                <label class="w3-label w3-validate">Gender</label>
+                <input type="text" ng-model="child.gender" class="w3-input w3-border w3-round" required>
+              </div>
+            </div>
+          </form>
         </div>
       </div>
-      <br/>
-      <br/>
-      <div class="w3-row-padding">
-        <div class="w3-half">
-          <label class="w3-label w3-validate">Email</label>
-          <input class="w3-input w3-animate-input" style="width:80%" type="email" required>
-        </div>
-        <div class="w3-half">
-          <label class="w3-label w3-validate">Phone Number</label>
-          <input class="w3-input w3-animate-input" style="width:40%" type="number" required>
-        </div>
+      <div id="button-div">
+        <button id="addChildButton" ng-click="addChildAction()" class="w3-btn w3-ripple w3-purple w3-round-large w3-medium">Add Child</button>
+        <button id="saveProfileButton" ng-click="saveProfileAction($event)" class="w3-btn w3-ripple w3-round-large w3-blue w3-medium">Save Profile</button>
       </div>
-      <br/>
-      <br/>
-    </form>
-    <div class="w3-container">
-      <h3>Children</h3><br/>
-      <form class="w3-container child-info" ng-repeat="child in children track by $index">
-        <br/>
-        <div class="w3-row-padding">
-          <label class="w3-label w3-validate">Name</label>
-          <input type="text" ng-model="children[child].childName" class="w3-input w3-animate-input" style="width:50%" required>
-        </div>
-        <br/>
-        <div class="w3-row-padding">
-          <label class="w3-label w3-validate">Age</label>
-          <input type="text" ng-model="children[child].childAge" class="w3-input w3-animate-input" style="width:50%" required>
-        </div>
-        <br/>
-        <div class="w3-row-padding">
-          <label class="w3-label w3-validate">Gender</label>
-          <input type="text" ng-model="children[child].childGender" class="w3-input w3-animate-input" style="width:50%" required>
-        </div>
-        <br/>
-      </form>
-      <br/>
-      <button id="addChildButton" ng-click="addChildAction()" class="w3-btn w3-ripple w3-teal w3-round w3-large">Add Child</button>
-      <button id="saveProfileButton" ng-click="saveProfileAction()" class="w3-btn w3-ripple w3-teal w3-round w3-large">Save</button>
-      <br/>
-      <br/>
     </div>
   </div>
 
-
-
-
-  HIHI THIS IS {{user}}
+  {{user}}
 </div>
