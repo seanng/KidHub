@@ -93,7 +93,7 @@
   </div>
   <div class="col-md-5 activity-right">
     <div id="activityGoogleMap">
-      <ui-gmap-google-map center="map.center" zoom="map.zoom">
+      <ui-gmap-google-map center="map.center" zoom="map.zoom" options="map.options">
         <ui-gmap-marker ng-repeat="activity in activities" options="marker.options" events="marker.events" idKey="activity._id" coords="{latitude: activity.placeLat, longitude: activity.placeLong}"></ui-gmap-marker>
       </ui-gmap-google-map>
     </div>
