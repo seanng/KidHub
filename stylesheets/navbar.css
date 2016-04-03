@@ -41,6 +41,7 @@ span.glyphicon.glyphicon-piggy-bank {
 }
 
 #nav-username > .dropdown:hover .dropdown-menu {
+  display: block;
   text-align: center;
 }
 

@@ -15,9 +15,9 @@ if (Meteor.isClient) {
       console.log(password);
       Meteor.loginWithPassword(email, password, function(){
         //data-toggle close modal with jQuery
-        window.location.href = '/home';
         $scope.user.email = '';
         $scope.user.password = '';
+        window.location.href = '/user/'+Meteor.userId();
       });
     };
 
@@ -29,7 +29,7 @@ if (Meteor.isClient) {
         password: password
       }, function(){
         //data-toggle close modal with jQuery
-        window.location.href = '/home';
+        window.location.href = '/user/'+Meteor.userId();
         $scope.user.email = '';
         $scope.user.password = '';
       });

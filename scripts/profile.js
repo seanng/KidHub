@@ -11,29 +11,43 @@ if (Meteor.isClient) {
     //   $state.go('welcome');
     // }
 
-    var founduser = Meteor.users.findOne({_id: Meteor.user()._id});
+    var founduser = Meteor.users.findOne({_id: Meteor.userId()});
+
     console.log(founduser);
 
     $scope.user = {
-      firstname: founduser.firstname,
-      lastname: founduser.lastname,
+      firstname:'',
+      lastname: '',
       email: founduser.emails[0].address,
-      phone: founduser.phone
+      phone: '',
+      children:[]
     };
 
-    $scope.children = [];
+    if (founduser.profile) {
+      $scope.user.firstname = founduser.profile.firstname;
+      $scope.user.lastname = founduser.profile.lastname;
+      $scope.user.children = founduser.profile.children;
+      if (founduser.profile.phone) {
+        $scope.user.phone = founduser.profile.phone;
+      }
+    }
+
     $scope.addChildAction = function(){
       var newChild = { name: '', age: '', gender: '' };
-      $scope.children.push(newChild);
+      $scope.user.children.push(newChild);
     };
 
     $scope.removeChild = function(i) {
-      $scope.children.splice(i, 1);
+      $scope.user.children.splice(i, 1);
     };
 
     $scope.saveProfileAction = function(ev) {
-      if ($scope.children.length > 0 && $scope.user.firstname && $scope.user.lastname && $scope.user.email) {
-        // Meteor.user().insert ..?
+      console.log($state);
+      if ($scope.user.children.length > 0 && $scope.user.firstname && $scope.user.lastname && $scope.user.email) {
+        Meteor.users.update({_id: founduser._id}, {$set: {'profile.firstname': $scope.user.firstname, 'profile.lastname': $scope.user.lastname, 'profile.email': $scope.user.email, 'profile.phone': $scope.user.phone, 'profile.children': $scope.user.children}});
+        console.log('success');
+        $state.go('home');
+
       } else {
         showAlert(ev);
         // Alert box

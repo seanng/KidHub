@@ -94,7 +94,14 @@
   <div class="col-md-5 home-right" id="homeGoogleMap">
 
     <ui-gmap-google-map center="map.center" zoom="map.zoom" options="map.options">
-      <ui-gmap-marker ng-repeat="timeslot in timeslots | filter:timeslotFilter" options="marker.options" events="marker.events" idKey="timeslot._id" coords="{latitude: timeslot.placeLat, longitude: timeslot.placeLong}"></ui-gmap-marker>
+      <ui-gmap-marker ng-repeat="timeslot in timeslots | filter:timeslotFilter"
+        idKey="timeslot._id"
+        coords="{latitude: timeslot.placeLat, longitude: timeslot.placeLong}"
+        options="{icon: markerIcon(timeslot.category)}">
+        <ui-gmap-window options="{visible: false}">
+          <a ui-sref="activity({activityId: timeslot.activity_id})">{{timeslot.name}}</a>
+        </ui-gmap-window>
+      </ui-gmap-marker>
     </ui-gmap-google-map>
   </div>
 </div>

@@ -30,10 +30,10 @@
       </div>
       <div id="children-info">
         <h3 class="w3-padding-8 info-heading">Your Children</h3>
-        <div id="no-children" ng-hide="children.length > 0">
+        <div id="no-children" ng-hide="user.children.length > 0">
           <h4>Please add children</h4>
         </div>
-        <div id="childrendiv" ng-repeat="child in children track by $index">
+        <div id="childrendiv" ng-repeat="child in user.children track by $index">
           <span class="glyphicon glyphicon-remove-circle" ng-click="removeChild(child)"></span>
           <form class="w3-container" id="child-info-form">
             <div class="w3-row-padding child-info-input">
@@ -59,6 +59,4 @@
       </div>
     </div>
   </div>
-
-  {{user}}
 </div>

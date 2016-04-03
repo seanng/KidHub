@@ -42,7 +42,8 @@ if (Meteor.isClient) {
     $scope.appliedFilters = {
       district: [],
       category: [],
-      age:      []
+      age:      [],
+
     };
 
     $scope.ageGroups = {
@@ -67,7 +68,8 @@ if (Meteor.isClient) {
     $scope.filters = {
       district: ["Hong Kong Island", "Kowloon", "New Territories"],
       category: ["Play", "Academic", "Camp", "Arts & Crafts", "Music", "Science", "Sports", "Dance", "Tech"],
-      age: ['0-2', '2-5', '5-10', '10+']
+      age: ['0-2', '2-5', '5-10', '10+'],
+
     };
 
     $scope.selectFilter = function (key, value) {
@@ -122,29 +124,6 @@ if (Meteor.isClient) {
     $scope.tokenSlider = 5;
 
     // MAP Stuff
-
-    // var drawMarker = function(map, timeslot){
-    //   var latlng = {lat: timeslot.placeLat, lng: timeslot.placeLong};
-    //   var marker = new google.maps.Marker({
-    //     position: latlng,
-    //     map: map,
-    //     title: timeslot.name
-    //   });
-
-    //   marker.addListener('click', function(){
-    //     $('[data-name="'+pin.place.name+'"]')[0].click(function () {
-    //     });
-    //   });
-    // };
-
-    // var renderMap = function() {
-    //   var map = new google.maps.Map(document.getElementById('googlemap'), {
-    //     center: {lat: 22.2783, lng: 114.1747},
-    //     scrollwheel: false,
-    //     zoom: 12
-    //   });
-
-    // };
 
     var lightdream = [
           {
@@ -263,8 +242,19 @@ if (Meteor.isClient) {
       options: {styles: lightdream}
     };
 
-    $scope.marker = {    };
-
+    $scope.markerIcon = function(cat) {
+      if (cat=="Play"){
+        return 'http://maps.google.com/intl/en_us/mapfiles/ms/micons/blue-dot.png';
+      } else if (cat=="Academic"){
+        return 'http://maps.google.com/intl/en_us/mapfiles/ms/micons/red-dot.png';
+      } else if (cat=="Arts & Crafts"){
+        return 'http://maps.google.com/intl/en_us/mapfiles/ms/micons/orange-dot.png';
+      } else if (cat=="Sports"){
+        return 'http://maps.google.com/intl/en_us/mapfiles/ms/micons/purple-dot.png';
+      } else if (cat=="Science"){
+        return 'http://maps.google.com/intl/en_us/mapfiles/ms/micons/yellow-dot.png';
+      }
+    };
 
     //INITIALIZATION
     var init = function () {
