@@ -13,6 +13,7 @@
       </li>
     </ul> -->
     </a>
+    <md-divider></md-divider>
     <div id="allFilters">
       <div class="row">
         <div class="col-sm-4 filteration">
@@ -39,6 +40,7 @@
           </button>
         </div>
       </div>
+      <md-divider></md-divider>
       <div collapse="!showMoreFilters" id="moreFilters">
         <div class="row filter-subtitle">
           <div class="col-xs-4">
@@ -66,28 +68,43 @@
                ng-class="{'filter-selected': isFilterSelected('category', cat)}">{{cat}}</a>
           </div>
         </div>
+      <md-divider></md-divider>
       </div>
     </div>
     <div class="container-fluid" id="homeFeed">
       <div class="col-sm-6 feed-div" ng-repeat="timeslot in timeslots | filter:timeslotFilters" ng-click="">
-        <div class="feed-item-actual" style="background: linear-gradient(rgba(0,0,0,0.5),rgba(0,0,0,0.5)), url('{{timeslot.imageURL}}') center; background-size: contain cover;">
-          <div class="row feed-item-top">
-            <a ui-sref="activity({activityId: timeslot.activity_id})"><div class="col-sm-6 a-time">
-            <p>{{timeslot.time}}</p>
-            <p>60 minutes</p>
-            </div></a>
-            <div class="col-xs-6 a-cost"><button type="submit" class="btn btn-warning btn-large">{{timeslot.tokens}} <span class="glyphicon glyphicon-copyright-mark"></span></button></div>
+        <md-card class="w3-hover-shadow">
+          <div class="feed-item-actual" style="background: url('{{timeslot.imageURL}}') center; background-size: contain cover;">
+            <div class="row feed-item-top">
+              <a ui-sref="activity({activityId: timeslot.activity_id})">
+                <div class="col-xs-6 a-time">
+                  <div class="alpha-darken">
+                    <span class="feed-text feed-time"><b>{{timeslot.time}}</b></span>
+                    <br/><span class="feed-duration">(60 min)</span>
+                  </div>
+                </div>
+              </a>
+                <div class="col-xs-6 a-cost">
+                  <button type="submit" class="w3-btn w3-xlarge w3-green" ng-click="verifyRegister(timeslot, $event)">
+                    <b style="font-size: 30px;">{{timeslot.tokens}} <span class="glyphicon glyphicon-copyright-mark"></span></b>
+                  </button>
+                </div>
+            </div>
+            <a ui-sref="activity({activityId: timeslot.activity_id})">
+              <div class="row feed-item-middle">
+                <div class="alpha-darken">
+                  <span class="feed-text feed-title">{{timeslot.name}}</span>
+                  <p class="feed-text">{{timeslot.district}}</p>
+                </div>
+              </div>
+              <div class="row feed-item-bottom">
+                <div class="alpha-darken">
+                  <p class="feed-text">Ages: {{timeslot.ageLow}} - {{timeslot.ageHigh}}</p>
+                </div>
+              </div>
+            </a>
           </div>
-          <a ui-sref="activity({activityId: timeslot.activity_id})">
-            <div class="row feed-item-middle">
-              <h5>{{timeslot.name}}</h5>
-              <p>{{timeslot.district}}</p>
-            </div>
-            <div class="row feed-item-bottom">
-              Ages: {{timeslot.ageLow}} - {{timeslot.ageHigh}}
-            </div>
-          </a>
-        </div>
+        </md-card>
       </div>
     </div>
   </div>

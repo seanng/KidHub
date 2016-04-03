@@ -1,6 +1,6 @@
 if (Meteor.isClient) {
   angular.module('KidHubApp')
-  .controller('HomeCtrl', ['$scope', '$meteor', function($scope, $meteor){
+  .controller('HomeCtrl', ['$scope', '$meteor', '$mdDialog', function($scope, $meteor, $mdDialog){
 
     $scope.timeslotFilters = function(timeslot) {
       return checkFilter(timeslot, 'district') && checkFilter(timeslot, 'category') && checkAge(timeslot); // && checkRange(timeslot)
@@ -75,7 +75,6 @@ if (Meteor.isClient) {
     $scope.selectFilter = function (key, value) {
       var valueIndex = $scope.appliedFilters[key].indexOf(value);
       valueIndex === -1 ? $scope.appliedFilters[key].push(value) : $scope.appliedFilters[key].splice(valueIndex, 1);
-      console.log($scope.appliedFilters);
     };
 
     $scope.isFilterSelected = function (key, value) {
@@ -119,6 +118,29 @@ if (Meteor.isClient) {
       }
       $scope.selectedDayTab = $scope.dayTabs[0].formatted;
     };
+
+    $scope.verifyRegister = function(timeslot, ev) {
+      console.log(timeslot);
+      var confirm = $mdDialog.confirm()
+        .title('Would you like to register for '+timeslot.name+'?')
+        .textContent('It would cost you '+timeslot.tokens + ' tokens to register the '+timeslot.time+' timeslot.')
+        .ok('Yes!')
+        .cancel('Nah')
+        .targetEvent(ev);
+      $mdDialog.show(confirm).then(function(){
+        // Pay the fee.
+        console.log ('confirmed');
+        $mdDialog.show(
+          $mdDialog.alert()
+            .clickOutsideToClose(true)
+            .title('You paid '+ timeslot.tokens + ' tokens!')
+            .textContent('Child registration pending. Check out your registration history to register your child.')
+            .ok("Got it!")
+          );
+      });
+    };
+
+
 
     // SLIDER
     $scope.tokenSlider = 5;

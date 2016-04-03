@@ -30,12 +30,20 @@ ul.results-day-tabs {
 
 #moreFilters {
   text-align: left;
-  border-top: 1px silver solid;
-  border-bottom: 1px silver solid;
 }
 
 #moreFiltersButton {
   padding-top: 35px;
+}
+
+.alpha-darken {
+  padding: 10px 12px;
+  background: linear-gradient( rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.75));
+  text-align: left;
+}
+
+.a-time > .alpha-darken {
+  text-align: center;
 }
 
 .col-xs-6.a-cost {
@@ -52,19 +60,52 @@ ul.results-day-tabs {
 .col-sm-6.feed-div {
   margin-bottom: 5px;
   text-decoration: none;
-  padding: 0px 8px;
+  /*padding: 0px 8px;*/
+}
+
+
+.grid-item {
+  width: 30%;
+}
+
+.timeslot-tokens {
+  float: right;
 }
 
 .feed-item-actual {
   margin: 5px;
-  padding: 16px;
+  height: 280px;
+}
+
+.feed-item-middle {
+  padding: 20px 15px;
+}
+
+.feed-title {
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.feed-item-bottom {
+  position: absolute;
+  padding: 0px 15px;
+}
+
+.feed-time {
+  font-size: 18px;
+  margin-right: 12px;
+}
+
+.feed-duration {
+  font-style: italic;
+  font-size: 14px;
 }
 
 div.feed-item-actual > a {
   color: white;
 }
 
-div.col-sm-6.a-time {
+div.col-xs-6.a-time {
   color: white;
 }
 
@@ -152,9 +193,9 @@ li.day-tab.selected-day-tab {
   height: 100%;
 }
 
-.marker-label
-
 #allFilters {
+  padding-top: 15px;
+  padding-bottom: 10px;
   margin-bottom: 15px;
 }
 
