@@ -10,11 +10,12 @@ if (Meteor.isClient) {
       $scope.activities = Activities.find().fetch();
       $scope.ageLow = Array.min($scope.activity.ages);
       $scope.ageHigh = Array.max($scope.activity.ages);
-      $scope.uniqueDates = {};
       $scope.selectedDate = null;
-      var allTimeslots = Timeslots.find({activity_id: activityID}, {sort: {date: 1}}).fetch();
 
-      var getDates = function(){
+      $scope.getDates = function(){
+        $scope.uniqueDates = {};
+        var allTimeslots = null;
+        allTimeslots = Timeslots.find({activity_id: activityID}, {sort: {date: 1}}).fetch();
         allTimeslots.forEach(function(elem){
           var eventDate = moment(elem.date).format("dddd, DD MMMM").toString();
           var eventTime = moment(elem.date).format("ha");
@@ -25,11 +26,12 @@ if (Meteor.isClient) {
         });
       };
 
-      getDates();
+      $scope.selectDate = function() {
+        console.log($scope.selectedDate);
+      };
 
-      $scope.selectDate = function(value) {
-        console.log(value);
-        $scope.selectedDate = value;
+      $scope.selectTime = function(){
+        console.log($scope.selectedTime);
       };
 
       var lightdream = [
@@ -300,7 +302,7 @@ if (Meteor.isClient) {
 
 if (Meteor.isServer) {
   Meteor.publish('activityInfo', function(){
-    console.log(Activities);
+    // console.log(Activities);
     return Activities.find({});
   });
 

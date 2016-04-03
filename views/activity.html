@@ -40,13 +40,13 @@
               <button id="reserveButton" class="btn btn-success btn-lg">Reserve ( {{activity.tokens}} <span class="glyphicon glyphicon-copyright-mark"></span> )</button>
               <md-input-container style="margin-right: 10px;">
               <label>Select date</label>
-                <md-select ng-model="uniqueDates">
-                  <md-option ng-repeat="(key, value) in uniqueDates" value="{{key}}" ng-click="selectDate(value)">{{key}}</md-option>
+                <md-select ng-model="selectedDate" md-on-open="getDates()" md-on-close="selectDate()">
+                  <md-option ng-repeat="(key, value) in uniqueDates" value="{{value}}">{{key}}</md-option>
                 </md-select>
               </md-input-container>
               <md-input-container style="margin-right: 10px;" ng-disabled="!selectedDate">
-              <label>Select time</label>
-                <md-select ng-model="selectedDate">
+              <label>Time</label>
+                <md-select ng-model="selectedTime" md-on-close="selectTime()">
                   <md-option ng-repeat="time in selectedDate" value="{{time}}">{{time}}</md-option>
                 </md-select>
               </md-input-container>

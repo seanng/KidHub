@@ -102,7 +102,6 @@ if (Meteor.isClient) {
         act.time = moment(act.date).format('hA');
       });
       $scope.timeslots = timeslots;
-      console.log($scope.timeslots);
       stroll.bind('.feed-item-actual');
     };
 
