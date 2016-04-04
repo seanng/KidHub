@@ -10,15 +10,20 @@
     <md-dialog-content>
       <div class="md-dialog-content">
         <div class="select-child-text-title">Please select the child you wish to register for the {{timeslot.time}} timeslot. </div>
-        <ul class="children-cards">
-          <li ng-repeat="child in children">
-            <span>
-              <h2>{{child.name}}</h2>
-              <p>({{child.age}} years old)</p>
-            </span>
-          </li>
-        </ul>
+        <md-radio-group class="children-radio" ng-model="selectedChild">
+          <md-radio-button class="child-option" ng-repeat="child in children" value="{{child}}">
+            {{child.name}}
+          </md-radio-button>
+        </md-radio-group>
       </div>
     </md-dialog-content>
+    <md-dialog-actions layout="row">
+      <span class="invalid-selection" ng-show="invalidSelection">
+        Please select a child to register.
+      </span>
+      <md-button class="md-raised md-primary" ng-click="register($event)">
+        Register
+      </md-button>
+    </md-dialog-actions>
   </form>
 </md-dialog>

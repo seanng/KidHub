@@ -3,16 +3,27 @@
 }
 
 .select-child-text-title {
-  font-size: 22px;
+  font-size: 20px;
   margin-top: 22px;
   margin-bottom: 22px;
   list-style-type: none;
 }
 
-.children-cards {
-  text-align: center;
+.children-radio {
+
 }
 
-.children-cards > li {
+.md-dialog-content-body {
+  padding-top: 20px;
+}
+
+.invalid-selection{
+  margin-right: 20px;
+  color: red;
+  font-size: 18px;
+}
+
+.child-option {
   display: inline;
+  margin-right: 35px;
 }
