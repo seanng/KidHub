@@ -3,7 +3,7 @@ if (Meteor.isClient) {
   .controller('HomeCtrl', ['$scope', '$meteor', '$mdDialog', function($scope, $meteor, $mdDialog){
 
     $scope.timeslotFilters = function(timeslot) {
-      return checkFilter(timeslot, 'district') && checkFilter(timeslot, 'category') && checkAge(timeslot); // && checkRange(timeslot)
+      return checkFilter(timeslot, 'district') && checkFilter(timeslot, 'category') && checkAge(timeslot) && checkTokens(timeslot);
     };
 
     function checkFilter (timeslot, key) { // 'district'
@@ -17,6 +17,14 @@ if (Meteor.isClient) {
         }
       }
       return true;
+    }
+
+    function checkTokens (timeslot) {
+      var cost = timeslot.tokens;
+      if ($scope.tokenSlider >= cost) {
+        return true;
+      }
+      return false;
     }
 
     function checkAge (timeslot) {
@@ -42,8 +50,7 @@ if (Meteor.isClient) {
     $scope.appliedFilters = {
       district: [],
       category: [],
-      age:      [],
-
+      age:      []
     };
 
     $scope.ageGroups = {
@@ -68,14 +75,15 @@ if (Meteor.isClient) {
     $scope.filters = {
       district: ["Hong Kong Island", "Kowloon", "New Territories"],
       category: ["Play", "Academic", "Camp", "Arts & Crafts", "Music", "Science", "Sports", "Dance", "Tech"],
-      age: ['0-2', '2-5', '5-10', '10+'],
-
+      age: ['0-2', '2-5', '5-10', '10+']
     };
 
     $scope.selectFilter = function (key, value) {
       var valueIndex = $scope.appliedFilters[key].indexOf(value);
       valueIndex === -1 ? $scope.appliedFilters[key].push(value) : $scope.appliedFilters[key].splice(valueIndex, 1);
     };
+
+    // $scope.selectTokens = function ()
 
     $scope.isFilterSelected = function (key, value) {
       return $scope.appliedFilters[key].indexOf(value) != -1;
@@ -140,7 +148,6 @@ if (Meteor.isClient) {
           );
       });
     };
-
 
 
     // SLIDER
