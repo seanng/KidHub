@@ -11,7 +11,7 @@
       <div class="md-dialog-content">
         <div class="select-child-text-title">Please select the child you wish to register for the {{timeslot.time}} timeslot. </div>
         <md-radio-group class="children-radio" ng-model="selectedChild">
-          <md-radio-button class="child-option" ng-repeat="child in children" value="{{child}}">
+          <md-radio-button class="child-option" ng-repeat="child in children" value="{{child.name}}">
             {{child.name}}
           </md-radio-button>
         </md-radio-group>

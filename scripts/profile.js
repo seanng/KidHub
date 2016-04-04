@@ -21,13 +21,14 @@ if (Meteor.isClient) {
     if (founduser.profile) {
       $scope.user.firstname = founduser.profile.firstname;
       $scope.user.lastname = founduser.profile.lastname;
-      $scope.user.children = founduser.profile.children;
+      $scope.user.children = founduser.profile.children || [];
       if (founduser.profile.phone) {
         $scope.user.phone = founduser.profile.phone;
       }
     }
 
     $scope.addChildAction = function(){
+      console.log($scope.user);
       var newChild = { name: '', age: '', gender: '' };
       $scope.user.children.push(newChild);
     };
@@ -37,12 +38,14 @@ if (Meteor.isClient) {
     };
 
     $scope.saveProfileAction = function(ev) {
-      console.log($state);
       if ($scope.user.children.length > 0 && $scope.user.firstname && $scope.user.lastname && $scope.user.email) {
-        Meteor.users.update({_id: founduser._id}, {$set: {'profile.firstname': $scope.user.firstname, 'profile.lastname': $scope.user.lastname, 'profile.email': $scope.user.email, 'profile.phone': $scope.user.phone, 'profile.children': $scope.user.children}});
-        console.log('success');
-        $state.go('home');
-
+        Meteor.users.update({_id: founduser._id}, {$set: {'profile.firstname': $scope.user.firstname, 'profile.lastname': $scope.user.lastname, 'profile.email': $scope.user.email, 'profile.phone': $scope.user.phone, 'profile.children': $scope.user.children}}, function(err){
+          if (err){
+            return console.log(err);
+          }
+          console.log ($state);
+          window.location.href ='/home';
+        });
       } else {
         showAlert(ev);
         // Alert box

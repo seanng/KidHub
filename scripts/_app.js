@@ -146,7 +146,8 @@ if (Meteor.isServer) {
           placeLong: activity.placeLong,
           date: date,
           endTime: moment(date).add(60, 'm'),
-          imageURL: activity.imageURL
+          imageURL: activity.imageURL,
+          registrations: []
         });
       }
     });

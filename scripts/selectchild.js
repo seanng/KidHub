@@ -4,7 +4,7 @@ if (Meteor.isClient) {
     .controller('SelectChildCtrl', ['$scope', '$meteor', '$mdDialog', 'timeslot', function($scope, $meteor, $mdDialog, timeslot){
 
       $scope.invalidSelection = false;
-
+      var user = Meteor.user();
       console.log(timeslot);
       $scope.timeslot = timeslot;
 
@@ -16,21 +16,49 @@ if (Meteor.isClient) {
 
       $scope.children = Meteor.user().profile.children;
 
+      var registerChild = function() {
+        var newHistory = user.profile.history.push({timeslot_id: timeslot._id, activity_name: timeslot.name, date: timeslot.date, activity_cost: timeslot.tokens, date_purchased: newDate});
+        var newDate = new Date();
+
+        //Update user
+        Meteor.users.update({_id: user._id}, {$set: {'profile.tokens': (user.profile.tokens - timeslot.tokens), 'profile.history': newHistory}}, function(err){
+          if (err) { return console.log(err); }
+          var oldRegistrations = Timeslots.findOne({_id: timeslot._id}).registrations;
+          var newRegistrations = oldRegistrations.push({userid: user._id, child: $scope.selectedChild});
+
+          //Update timeslot
+          Timeslots.update({_id: timeslot._id}, {$set:{registrations: newRegistrations}}, function(err){
+            if (err){ return console.log(err); }
+            console.log('child registration is successful!!');
+            $mdDialog.show(
+              $mdDialog.alert()
+                .clickOutsideToClose(true)
+                .title($scope.selectedChild + ' has been registered.')
+                .textContent('You have paid ' + timeslot.tokens + " tokens. Don't be late for the "+ timeslot.time + " slot!")
+                .ok("Got it!")
+                .targetEvent(ev)
+            );
+          });
+        });
+      };
+
       $scope.register = function(ev){
         if ($scope.selectedChild) {
-          // Pay tokens.
-          $mdDialog.show(
-            $mdDialog.alert()
-              .clickOutsideToClose(true)
-              .title($scope.selectedChild.name+ ' has been registered.')
-              .textContent('You paid ' + timeslot.tokens + " tokens. Don't be late for the "+ timeslot.time + " class!")
-              .ok("Got it!")
-              .targetEvent(ev)
-          );
+          if (user.profile.tokens >= timeslot.tokens){
+            registerChild();
+          } else {
+            $mdDialog.show(
+              $mdDialog.alert()
+                .clickOutsideToClose(true)
+                .title('You do not have enough tokens.')
+                .ok("Got it!")
+                .targetEvent(ev)
+            );
+          }
         } else {
-          $scope.invalidSelection = true;
-        }
-      };
+        $scope.invalidSelection = true;
+      }
+    };
   }]);
 }
 

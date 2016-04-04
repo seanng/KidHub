@@ -6,8 +6,8 @@
 
       <div class="modal-header"> <!-- modal-header -->
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-        <h4 class="signinmodal-title" ng-show="signin">Sign in</h4>
-        <h4 class="signinmodal-title" ng-hide="signin">Sign up</h4>
+        <h4 class="signinmodal-title" id="signintitle" ng-show="signin">Sign in</h4>
+        <h4 class="signinmodal-title" id="signuptitle" ng-hide="signin">Sign up</h4>
       </div> <!-- /.modal-header -->
 
       <div class="modal-body"> <!-- modal-body -->
@@ -31,10 +31,10 @@
             </div> <!-- /.input-group -->
           </div>
           <div id="lower-modal-text" ng-hide="signin">
-            Have an account? <a ng-click="signin=!signin">Sign in</a>
+            Have an account? <a href="#" ng-click="signin=!signin">Sign in</a>
           </div>
           <div id="lower-modal-text" ng-show="signin">
-            Don't have an account? <a ng-click="signin=!signin">Sign up!</a>
+            Don't have an account? <a href="#" ng-click="signin=!signin">Sign up!</a>
           </div> <!-- /.checkbox -->
         </form>
       </div> <!-- /.modal-body -->

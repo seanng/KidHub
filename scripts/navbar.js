@@ -3,11 +3,12 @@ if (Meteor.isClient) {
   .controller('NavbarCtrl', ['$scope','$meteor', '$location', '$state', function($scope, $meteor,$location, $state){
 
     if (Meteor.user()){
-      $scope.currentuserid = Meteor.userId();
+      $scope.currentuser = Meteor.user();
     }
 
     $scope.signOut = function() {
-      Meteor.logout(function(){
+      Meteor.logout(function(error){
+        console.log (error);
         $state.go('welcome');
       });
     };
