@@ -4,16 +4,11 @@ if (Meteor.isClient) {
   angular.module('KidHubApp')
   .controller('ProfileCtrl', ['$scope', '$location', '$meteor', '$stateParams', '$state', '$mdDialog', '$mdMedia', function($scope, $meteor, $stateParams, $state, $location, $mdDialog, $mdMedia){
 
-    console.log (Meteor.user()._id);
-    console.log('hihihi', $stateParams.userId);
-
     // if (Meteor.user()._id !== $stateParams.userId){
     //   $state.go('welcome');
     // }
 
     var founduser = Meteor.users.findOne({_id: Meteor.userId()});
-
-    console.log(founduser);
 
     $scope.user = {
       firstname:'',

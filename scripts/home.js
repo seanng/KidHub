@@ -131,23 +131,22 @@ if (Meteor.isClient) {
       console.log(timeslot);
       var confirm = $mdDialog.confirm()
         .title('Would you like to register for '+timeslot.name+'?')
-        .textContent('It would cost you '+timeslot.tokens + ' tokens to register the '+timeslot.time+' timeslot.')
         .clickOutsideToClose(true)
         .ok('Yes!')
         .cancel('Nah')
         .targetEvent(ev);
       $mdDialog.show(confirm).then(function(){
-        // Pay the fee.
-        console.log ('confirmed');
-        $mdDialog.show(
-          $mdDialog.alert()
-            .clickOutsideToClose(true)
-            .title('You paid '+ timeslot.tokens + ' tokens!')
-            .textContent('Child registration pending. Check out your registration history to register your child.')
-            .ok("Got it!")
-          );
+        $mdDialog.show({
+          controller: SelectChildCtrl,
+          templateUrl: 'partials/selectchild.html',
+          parent: angular.element(document.body),
+          openFrom: {top: -50, width: 30, height: 80},
+          clickOutsideToClose: true
+        });
       });
     };
+
+    // Pay the fee. If successful,
 
 
     // SLIDER
@@ -299,6 +298,16 @@ if (Meteor.isClient) {
 
 }
 
+function SelectChildCtrl ($scope, $mdDialog){
+
+  $mdDialog.show(
+    $mdDialog.alert()
+      .clickOutsideToClose(true)
+      .title('You paid '+ timeslot.tokens + ' tokens!')
+      .textContent('Child registration pending. Check out your registration history to register your child.')
+      .ok("Got it!")
+  );
+}
 
 if (Meteor.isServer) {
 

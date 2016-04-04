@@ -3,7 +3,6 @@ Activities = new Mongo.Collection('activities', {idGeneration: 'MONGO'});
 Timeslots = new Mongo.Collection('timeslots', {idGeneration: 'MONGO'});
 ObjectID = Meteor.Collection.ObjectID;
 
-
 Array.min = function( array ){
   return Math.min.apply( Math, array );
 };
@@ -98,6 +97,12 @@ if (Meteor.isClient) {
         url: '/user/:userId',
         templateUrl: 'views/profile.html',
         controller: 'ProfileCtrl',
+        authenticate: true
+      })
+      .state('userinfo',{
+        url: '/user/:userId/userinfo',
+        templateUrl: 'views/history.html',
+        controller: 'UserInfoCtrl',
         authenticate: true
       });
 
