@@ -1,11 +1,14 @@
 #activity-page {
-  height: calc(100vh - 72px);
   padding: 0;
 }
 
 .row.cover-photo {
   height: 380px;
   margin-bottom: 15px;
+}
+
+#activity-actual-information {
+  height: 650px;
 }
 
 #activity-title-container {
@@ -18,6 +21,7 @@
 }
 
 .information-card-row {
+  font-size: 18px;
   margin-top: 17px;
 }
 
@@ -27,11 +31,24 @@ div.col-md-5.activity-right {
 }
 
 div.activity-left {
+  font-family: 'Maven Pro', sans-serif;
+  height: 100%;
+  overflow: auto;
   padding: 0;
 }
 
+.activity-description {
+  padding-top: 18px;
+  font-size: 18px;
+}
+
+.activity-info-table {
+  font-size: 16px;
+}
+
 div.activity-details {
-  padding-right: 50px;
+  padding-right: 70px;
+  font-size: 16px;
 }
 
 div.row.activity-rules {
@@ -47,7 +64,7 @@ div.row.activity-rules {
 }
 
 #selectTimeslot {
-  text-align: center;
+  text-align: right;
 }
 
 #reserveButton {

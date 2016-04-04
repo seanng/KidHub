@@ -1,101 +1,103 @@
 <div id="activity-page" class="container-fluid">
   <div class="row cover-photo" style="background: url('{{activity.imageURL}}'); background-size: cover; background-position: 70%;">
   </div>
-  <div class="col-md-7 activity-left">
-    <md-card>
-      <md-card-title>
-        <md-card-title-text>
-          <span class="md-display-1"> {{activity.name}} </span>
-          <span class="md-subhead activity-description"> {{activity.description}} </span>
-        </md-card-title-text>
-      </md-card-title>
-      <md-divider></md-divider>
-      <md-card-content>
-        <div layout="row">
-          <div flex class="activity-details">
-            <!-- <md-card-title-text> -->
-            <table class="w3-table w3-bordered w3-card">
-              <thead>
-                <tr class="w3-blue">
-                  <th>Info</th>
-                  <th></th>
+  <div id="activity-actual-information">
+    <div class="col-md-7 activity-left">
+      <md-card>
+        <md-card-title>
+          <md-card-title-text>
+            <span class="md-display-2"> {{activity.name}} </span>
+            <span class="activity-description"> {{activity.description}} </span>
+          </md-card-title-text>
+        </md-card-title>
+        <md-divider></md-divider>
+        <md-card-content>
+          <div layout="row">
+            <div flex class="activity-details">
+              <!-- <md-card-title-text> -->
+              <table class="w3-table w3-bordered w3-card">
+                <thead>
+                  <tr class="activity-info-table w3-blue">
+                    <th>Info</th>
+                    <th></th>
+                  </tr>
+                </thead>
+                <tr>
+                  <td>Ages:</td>
+                  <td>{{ageLow}} - {{ageHigh}}</td>
                 </tr>
-              </thead>
-              <tr>
-                <td>Ages:</td>
-                <td>{{ageLow}} - {{ageHigh}}</td>
-              </tr>
-              <tr>
-                <td>Category:</td>
-                <td>{{activity.category}}</td>
-              </tr>
-              <tr>
-                <td>Retail Price:</td>
-                <td>{{activity.retail_price}}</td>
-              </tr>
-            </table>
-          </div>
-          <div flex class="booking-section">
-            <div id="selectTimeslot">
-              <button id="reserveButton" class="btn btn-success btn-lg">Reserve ( {{activity.tokens}} <span class="glyphicon glyphicon-copyright-mark"></span> )</button>
-              <md-input-container style="margin-right: 10px;">
-              <label>Select date</label>
-                <md-select ng-model="selectedDate" md-on-open="getDates()" md-on-close="selectDate()">
-                  <md-option ng-repeat="(key, value) in uniqueDates" value="{{value}}">{{key}}</md-option>
-                </md-select>
-              </md-input-container>
-              <md-input-container style="margin-right: 10px;" ng-disabled="!selectedDate">
-              <label>Time</label>
-                <md-select ng-model="selectedTime" md-on-close="selectTime()">
-                  <md-option ng-repeat="time in selectedDate" value="{{time}}">{{time}}</md-option>
-                </md-select>
-              </md-input-container>
+                <tr>
+                  <td>Category:</td>
+                  <td>{{activity.category}}</td>
+                </tr>
+                <tr>
+                  <td>Retail Price:</td>
+                  <td>{{activity.retail_price}}</td>
+                </tr>
+              </table>
+            </div>
+            <div flex class="booking-section">
+              <div id="selectTimeslot">
+                <button id="reserveButton" class="btn btn-success btn-lg">Reserve ( {{activity.tokens}} <span class="glyphicon glyphicon-copyright-mark"></span> )</button>
+                <md-input-container style="margin-right: 10px;">
+                <label>Select date</label>
+                  <md-select ng-model="selectedDate" md-on-open="getDates()" md-on-close="selectDate()">
+                    <md-option ng-repeat="(key, value) in uniqueDates" value="{{value}}">{{key}}</md-option>
+                  </md-select>
+                </md-input-container>
+                <md-input-container style="margin-right: 10px;" ng-disabled="!selectedDate">
+                <label>Time</label>
+                  <md-select ng-model="selectedTime" md-on-close="selectTime()">
+                    <md-option ng-repeat="time in selectedDate" value="{{time}}">{{time}}</md-option>
+                  </md-select>
+                </md-input-container>
+              </div>
             </div>
           </div>
-        </div>
-      </md-card-content>
-      <md-card-content>
+        </md-card-content>
         <md-divider></md-divider>
-        <div layout="row" class="information-card-row">
-          <div flex class="activity-rules-label">
-            <span class="md-body2"> Rules:</span>
+        <md-card-content>
+          <div layout="row" class="information-card-row">
+            <div flex class="activity-rules-label">
+              <span class="md-body2"> Rules:</span>
+            </div>
+            <div flex class="activity-rules-content">
+              <span class="md-body2" ng-repeat="rule in activity.rules">- {{rule}} <br/></span>
+            </div>
           </div>
-          <div flex class="activity-rules-content">
-            <span class="md-body2" ng-repeat="rule in activity.rules">- {{rule}} <br/></span>
+          <div layout="row" class="information-card-row">
+            <div flex class="activity-cancellable-label">
+              <span class="md-body2"> Cancellable:</span>
+            </div>
+            <div flex class="activity-cancellable-content">
+              <span class="md-body2">{{activity.cancellable}} <br/></span>
+            </div>
           </div>
-        </div>
-        <div layout="row" class="information-card-row">
-          <div flex class="activity-cancellable-label">
-            <span class="md-body2"> Cancellable:</span>
+          <div layout="row" class="information-card-row">
+            <div flex class="activity-address-label">
+              <span class="md-body2"> Address:</span>
+            </div>
+            <div flex class="activity-address-content">
+              <span class="md-body2">{{activity.address}} <br/></span>
+            </div>
           </div>
-          <div flex class="activity-cancellable-content">
-            <span class="md-body2">{{activity.cancellable}} <br/></span>
+          <div layout="row" class="information-card-row">
+            <div flex class="activity-phone-label">
+              <span class="md-body2"> Phone Number:</span>
+            </div>
+            <div flex class="activity-phone-content">
+              <span class="md-body2">{{activity.phone}} <br/></span>
+            </div>
           </div>
-        </div>
-        <div layout="row" class="information-card-row">
-          <div flex class="activity-address-label">
-            <span class="md-body2"> Address:</span>
-          </div>
-          <div flex class="activity-address-content">
-            <span class="md-body2">{{activity.address}} <br/></span>
-          </div>
-        </div>
-        <div layout="row" class="information-card-row">
-          <div flex class="activity-phone-label">
-            <span class="md-body2"> Phone Number:</span>
-          </div>
-          <div flex class="activity-phone-content">
-            <span class="md-body2">{{activity.phone}} <br/></span>
-          </div>
-        </div>
-      </md-card-content>
-    </md-card>
-  </div>
-  <div class="col-md-5 activity-right">
-    <div id="activityGoogleMap">
-      <ui-gmap-google-map center="map.center" zoom="map.zoom" options="map.options">
-        <ui-gmap-marker ng-repeat="activity in activities" options="marker.options" events="marker.events" idKey="activity._id" coords="{latitude: activity.placeLat, longitude: activity.placeLong}"></ui-gmap-marker>
-      </ui-gmap-google-map>
+        </md-card-content>
+      </md-card>
+    </div>
+    <div class="col-md-5 activity-right">
+      <div id="activityGoogleMap">
+        <ui-gmap-google-map center="map.center" zoom="map.zoom" options="map.options">
+          <ui-gmap-marker ng-repeat="activity in activities" options="marker.options" events="marker.events" idKey="activity._id" coords="{latitude: activity.placeLat, longitude: activity.placeLong}"></ui-gmap-marker>
+        </ui-gmap-google-map>
+      </div>
     </div>
   </div>
 </div>

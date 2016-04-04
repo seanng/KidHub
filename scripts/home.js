@@ -124,6 +124,7 @@ if (Meteor.isClient) {
       var confirm = $mdDialog.confirm()
         .title('Would you like to register for '+timeslot.name+'?')
         .textContent('It would cost you '+timeslot.tokens + ' tokens to register the '+timeslot.time+' timeslot.')
+        .clickOutsideToClose(true)
         .ok('Yes!')
         .cancel('Nah')
         .targetEvent(ev);

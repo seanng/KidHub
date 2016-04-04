@@ -18,13 +18,13 @@
       <div class="row">
         <div class="col-sm-4 filteration">
           <div flex="10" layout layout-align="center center">
-            <h5 class="ages-label">Tokens</h5>
+            <span class="ages-label">Tokens</span>
           </div>
           <md-slider flex md-discrete ng-model="tokenSlider" step="1" min="1" max="5" aria-label="rating">
           </md-slider>
         </div>
         <div class="col-sm-5 filteration" id="ageFilter">
-          <h5 class="ages-label">Ages</h5>
+          <span class="ages-label">Ages</span>
           <ul class="age-filters">
             <li ng-repeat="ageRange in filters.age" class="age-filter-selection" ng-click="selectFilter('age', ageRange)">
               <a href="#" ng-class="{'filter-selected': isFilterSelected('age', ageRange)}">
@@ -44,7 +44,7 @@
       <div collapse="!showMoreFilters" id="moreFilters">
         <div class="row filter-subtitle">
           <div class="col-xs-4">
-            <h5 class="filter-subtitle-label">Locations:</h5>
+            <span class="filter-subtitle-label">Locations:</span>
           </div>
         </div>
         <div class="row filter-locations">
@@ -57,7 +57,7 @@
         </div>
         <div class="row filter-subtitle">
           <div class="col-xs-4">
-            <h5 class="filter-subtitle-label">Categories:</h5>
+            <span class="filter-subtitle-label">Categories:</span>
           </div>
         </div>
         <div class="row filter-categories">
