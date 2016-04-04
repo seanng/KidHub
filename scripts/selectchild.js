@@ -20,7 +20,7 @@ if (Meteor.isClient) {
         console.log(user);
         var newDate = new Date();
         var newHistory = user.profile.history;
-        newHistory.push({timeslot_id: timeslot._id, activity_name: timeslot.name, date: timeslot.date, activity_cost: timeslot.tokens, date_purchased: newDate});
+        newHistory.push({timeslot_id: timeslot._id, activity_name: timeslot.name, timeslot: timeslot.date, activity_cost: timeslot.tokens, date_purchased: newDate});
 
         //Update user
         Meteor.users.update({_id: user._id}, {$set: {'profile.tokens': (user.profile.tokens - timeslot.tokens), 'profile.history': newHistory}}, function(err){
@@ -36,7 +36,7 @@ if (Meteor.isClient) {
               $mdDialog.alert()
                 .clickOutsideToClose(true)
                 .title($scope.selectedChild + ' has been registered.')
-                .textContent('You have paid ' + timeslot.tokens + " tokens. Don't be late for the "+ timeslot.time + " slot!")
+                .textContent('You have paid ' + timeslot.tokens + " tokens. Remember, it's " +timeslot.time+ ". Don't be late!")
                 .ok("Got it!")
                 .targetEvent(ev)
             );
