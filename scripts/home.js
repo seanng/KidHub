@@ -272,7 +272,7 @@ if (Meteor.isClient) {
 
     $scope.map = {
       center: { latitude: 22.2783, longitude: 114.1747},
-      zoom: 12,
+      zoom: 11,
       options: {styles: lightdream}
     };
 
