@@ -2,12 +2,23 @@
   <form>
     <md-toolbar>
       <div class="md-toolbar-tools">
-        <h2>Mango (Fruit)</h2>
+        <h2>{{timeslot.name}}</h2>
         <span flex></span>
-        <md-button class="md-icon-button" ng-click="cancel()">
-          <md-icon md-svg-src="img/icons/ic_close_24px.svg" aria-label="Close dialog"></md-icon>
-        </md-button>
+        <button type="button" class="close select-child-close" ng-click="cancel()">×</button>
       </div>
     </md-toolbar>
+    <md-dialog-content>
+      <div class="md-dialog-content">
+        <div class="select-child-text-title">Please select the child you wish to register for the {{timeslot.time}} timeslot. </div>
+        <ul class="children-cards">
+          <li ng-repeat="child in children">
+            <span>
+              <h2>{{child.name}}</h2>
+              <p>({{child.age}} years old)</p>
+            </span>
+          </li>
+        </ul>
+      </div>
+    </md-dialog-content>
   </form>
 </md-dialog>

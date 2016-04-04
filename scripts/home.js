@@ -1,4 +1,5 @@
 if (Meteor.isClient) {
+
   angular.module('KidHubApp')
   .controller('HomeCtrl', ['$scope', '$meteor', '$mdDialog', function($scope, $meteor, $mdDialog){
 
@@ -135,10 +136,14 @@ if (Meteor.isClient) {
         .ok('Yes!')
         .cancel('Nah')
         .targetEvent(ev);
+
       $mdDialog.show(confirm).then(function(){
         $mdDialog.show({
-          controller: SelectChildCtrl,
+          controller: 'SelectChildCtrl',
           templateUrl: 'partials/selectchild.html',
+          locals: {
+            timeslot: timeslot
+          },
           parent: angular.element(document.body),
           openFrom: {top: -50, width: 30, height: 80},
           clickOutsideToClose: true
@@ -298,16 +303,6 @@ if (Meteor.isClient) {
 
 }
 
-function SelectChildCtrl ($scope, $mdDialog){
-
-  $mdDialog.show(
-    $mdDialog.alert()
-      .clickOutsideToClose(true)
-      .title('You paid '+ timeslot.tokens + ' tokens!')
-      .textContent('Child registration pending. Check out your registration history to register your child.')
-      .ok("Got it!")
-  );
-}
 
 if (Meteor.isServer) {
 

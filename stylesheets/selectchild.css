@@ -1,0 +1,18 @@
+.close.select-child-close {
+  color: white;
+}
+
+.select-child-text-title {
+  font-size: 22px;
+  margin-top: 22px;
+  margin-bottom: 22px;
+  list-style-type: none;
+}
+
+.children-cards {
+  text-align: center;
+}
+
+.children-cards > li {
+  display: inline;
+}
