@@ -1,0 +1,17 @@
+.userinfo-card {
+  width: 90%;
+  margin: 20px auto;
+  padding-bottom: 15px
+}
+
+.w3-container.userinfo-title {
+  margin-bottom: 10px;
+}
+
+.userinfo-table {
+  padding: 10px;
+}
+
+.userinfo-table > thead {
+  line-height: 2;
+}

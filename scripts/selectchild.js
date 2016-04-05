@@ -1,7 +1,7 @@
 if (Meteor.isClient) {
 
   angular.module('KidHubApp')
-    .controller('SelectChildCtrl', ['$scope', '$meteor', '$mdDialog', 'timeslot', function($scope, $meteor, $mdDialog, timeslot){
+    .controller('SelectChildCtrl', ['$scope', '$meteor', '$mdDialog', 'timeslot', '$location', function($scope, $meteor, $mdDialog, timeslot, $location){
 
       $scope.invalidSelection = false;
       var user = Meteor.user();
@@ -20,7 +20,7 @@ if (Meteor.isClient) {
         console.log(user);
         var newDate = new Date();
         var newHistory = user.profile.history;
-        newHistory.push({timeslot_id: timeslot._id, activity_name: timeslot.name, timeslot: timeslot.date, activity_cost: timeslot.tokens, date_purchased: newDate});
+        newHistory.push({timeslot_id: timeslot._id, activity_name: timeslot.name, timeslot: timeslot.date, activity_cost: timeslot.tokens, date_purchased: newDate, child: $scope.selectedChild});
 
         //Update user
         Meteor.users.update({_id: user._id}, {$set: {'profile.tokens': (user.profile.tokens - timeslot.tokens), 'profile.history': newHistory}}, function(err){
@@ -39,7 +39,9 @@ if (Meteor.isClient) {
                 .textContent('You have paid ' + timeslot.tokens + " tokens. Remember, it's " +timeslot.time+ ". Don't be late!")
                 .ok("Got it!")
                 .targetEvent(ev)
-            );
+            ).then(function(){
+              window.location.href= '/home';
+            });
           });
         });
       };

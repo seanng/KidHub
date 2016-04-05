@@ -1,0 +1,30 @@
+<div id="userinfo-page">
+  <div class="w3-card-2 userinfo-card">
+    <header class="w3-container w3-blue userinfo-title">
+      <h1>{{firstname}}'s Registration History</h1>
+    </header>
+    <div class="w3-container">
+      <table class="w3-table userinfo-table">
+        <thead>
+          <tr>
+            <th>Date of Registration</th>
+            <th>Activity</th>
+            <th>Timeslot</th>
+            <th>Child</th>
+            <th>Cost</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr ng-repeat="order in history">
+            <td>{{order.date_purchased_formatted}}</td>
+            <td>{{order.activity_name}}</td>
+            <td>{{order.formatted_slot}}</td>
+            <td>{{order.child}}</td>
+            <td>{{order.activity_cost}} Tokens</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+

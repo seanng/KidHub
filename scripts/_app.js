@@ -100,8 +100,8 @@ if (Meteor.isClient) {
         authenticate: true
       })
       .state('userinfo',{
-        url: '/user/:userId/userinfo',
-        templateUrl: 'views/history.html',
+        url: '/user/info/:userId',
+        templateUrl: 'views/userinfo.html',
         controller: 'UserInfoCtrl',
         authenticate: true
       });
