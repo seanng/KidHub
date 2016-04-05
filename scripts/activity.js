@@ -3,7 +3,7 @@ if (Meteor.isClient) {
   Meteor.subscribe('activityInfo');
 
   angular.module('KidHubApp')
-  .controller('ActivityCtrl', ['$scope','$meteor', '$stateParams', '$state', function($scope, $meteor, $stateParams, $state){
+  .controller('ActivityCtrl', ['$scope','$meteor', '$stateParams', '$mdDialog', '$state', function($scope, $meteor, $stateParams, $mdDialog, $state){
     if ($stateParams.activityId.length === 24) {
       var activityID = new ObjectID($stateParams.activityId);
       $scope.activity = Activities.findOne({_id: activityID});
@@ -16,271 +16,54 @@ if (Meteor.isClient) {
         $scope.uniqueDates = {};
         var allTimeslots = null;
         allTimeslots = Timeslots.find({activity_id: activityID}, {sort: {date: 1}}).fetch();
+        console.log(allTimeslots);
         allTimeslots.forEach(function(elem){
           var eventDate = moment(elem.date).format("dddd, DD MMMM").toString();
-          var eventTime = moment(elem.date).format("ha");
+          elem.time = moment(elem.date).format("ha");
           if (!$scope.uniqueDates[eventDate]){
             $scope.uniqueDates[eventDate] = [];
           }
-          $scope.uniqueDates[eventDate].push(eventTime);
+          $scope.uniqueDates[eventDate].push({eventTime: elem.time, date: elem});
         });
       };
 
       $scope.selectDate = function() {
-        console.log($scope.selectedDate);
       };
 
       $scope.selectTime = function(){
-        console.log($scope.selectedTime);
       };
 
-      var lightdream = [
-          {
-              "featureType": "landscape",
-              "elementType": "all",
-              "stylers": [
-                  {
-                      "hue": "#FFBB00"
-                  },
-                  {
-                      "saturation": 43.400000000000006
-                  },
-                  {
-                      "lightness": 37.599999999999994
-                  },
-                  {
-                      "gamma": 1
-                  }
-              ]
-          },
-          {
-              "featureType": "poi",
-              "elementType": "all",
-              "stylers": [
-                  {
-                      "hue": "#00FF6A"
-                  },
-                  {
-                      "saturation": -1.0989010989011234
-                  },
-                  {
-                      "lightness": 11.200000000000017
-                  },
-                  {
-                      "gamma": 1
-                  }
-              ]
-          },
-          {
-              "featureType": "road.highway",
-              "elementType": "all",
-              "stylers": [
-                  {
-                      "hue": "#FFC200"
-                  },
-                  {
-                      "saturation": -61.8
-                  },
-                  {
-                      "lightness": 45.599999999999994
-                  },
-                  {
-                      "gamma": 1
-                  }
-              ]
-          },
-          {
-              "featureType": "road.arterial",
-              "elementType": "all",
-              "stylers": [
-                  {
-                      "hue": "#FF0300"
-                  },
-                  {
-                      "saturation": -100
-                  },
-                  {
-                      "lightness": 51.19999999999999
-                  },
-                  {
-                      "gamma": 1
-                  }
-              ]
-          },
-          {
-              "featureType": "road.local",
-              "elementType": "all",
-              "stylers": [
-                  {
-                      "hue": "#FF0300"
-                  },
-                  {
-                      "saturation": -100
-                  },
-                  {
-                      "lightness": 52
-                  },
-                  {
-                      "gamma": 1
-                  }
-              ]
-          },
-          {
-              "featureType": "water",
-              "elementType": "all",
-              "stylers": [
-                  {
-                      "hue": "#0078FF"
-                  },
-                  {
-                      "saturation": -13.200000000000003
-                  },
-                  {
-                      "lightness": 2.4000000000000057
-                  },
-                  {
-                      "gamma": 1
-                  }
-              ]
-          }
-      ];
+      $scope.reserveAction = function(ev) {
+        if ($scope.selectedTime){
+          var timeslot = $scope.selectedTime;
+          $mdDialog.show({
+            controller: 'SelectChildCtrl',
+            templateUrl: 'partials/selectchild.html',
+            locals: {
+              timeslot: timeslot
+            },
+            parent: angular.element(document.body),
+            openFrom: {top: -50, width: 30, height: 80},
+            clickOutsideToClose: true
+          });
+        } else {
+          $mdDialog.show(
+            $mdDialog.alert()
+              .clickOutsideToClose(true)
+              .title('No timeslot selected.')
+              .textContent('Please select a date and a timeslot to make a reservation.')
+              .ok("Got it!")
+              .targetEvent(ev)
+          );
+        }
+      };
 
-      var mapbox = [
-          {
-              "featureType": "water",
-              "stylers": [
-                  {
-                      "saturation": 43
-                  },
-                  {
-                      "lightness": -11
-                  },
-                  {
-                      "hue": "#0088ff"
-                  }
-              ]
-          },
-          {
-              "featureType": "road",
-              "elementType": "geometry.fill",
-              "stylers": [
-                  {
-                      "hue": "#ff0000"
-                  },
-                  {
-                      "saturation": -100
-                  },
-                  {
-                      "lightness": 99
-                  }
-              ]
-          },
-          {
-              "featureType": "road",
-              "elementType": "geometry.stroke",
-              "stylers": [
-                  {
-                      "color": "#808080"
-                  },
-                  {
-                      "lightness": 54
-                  }
-              ]
-          },
-          {
-              "featureType": "landscape.man_made",
-              "elementType": "geometry.fill",
-              "stylers": [
-                  {
-                      "color": "#ece2d9"
-                  }
-              ]
-          },
-          {
-              "featureType": "poi.park",
-              "elementType": "geometry.fill",
-              "stylers": [
-                  {
-                      "color": "#ccdca1"
-                  }
-              ]
-          },
-          {
-              "featureType": "road",
-              "elementType": "labels.text.fill",
-              "stylers": [
-                  {
-                      "color": "#767676"
-                  }
-              ]
-          },
-          {
-              "featureType": "road",
-              "elementType": "labels.text.stroke",
-              "stylers": [
-                  {
-                      "color": "#ffffff"
-                  }
-              ]
-          },
-          {
-              "featureType": "poi",
-              "stylers": [
-                  {
-                      "visibility": "off"
-                  }
-              ]
-          },
-          {
-              "featureType": "landscape.natural",
-              "elementType": "geometry.fill",
-              "stylers": [
-                  {
-                      "visibility": "on"
-                  },
-                  {
-                      "color": "#b8cb93"
-                  }
-              ]
-          },
-          {
-              "featureType": "poi.park",
-              "stylers": [
-                  {
-                      "visibility": "on"
-                  }
-              ]
-          },
-          {
-              "featureType": "poi.sports_complex",
-              "stylers": [
-                  {
-                      "visibility": "on"
-                  }
-              ]
-          },
-          {
-              "featureType": "poi.medical",
-              "stylers": [
-                  {
-                      "visibility": "on"
-                  }
-              ]
-          },
-          {
-              "featureType": "poi.business",
-              "stylers": [
-                  {
-                      "visibility": "simplified"
-                  }
-              ]
-          }
-      ];
+var flatmap = [{"featureType":"water","elementType":"all","stylers":[{"hue":"#7fc8ed"},{"saturation":55},{"lightness":-6},{"visibility":"on"}]},{"featureType":"water","elementType":"labels","stylers":[{"hue":"#7fc8ed"},{"saturation":55},{"lightness":-6},{"visibility":"off"}]},{"featureType":"poi.park","elementType":"geometry","stylers":[{"hue":"#83cead"},{"saturation":1},{"lightness":-15},{"visibility":"on"}]},{"featureType":"landscape","elementType":"geometry","stylers":[{"hue":"#f3f4f4"},{"saturation":-84},{"lightness":59},{"visibility":"on"}]},{"featureType":"landscape","elementType":"labels","stylers":[{"hue":"#ffffff"},{"saturation":-100},{"lightness":100},{"visibility":"off"}]},{"featureType":"road","elementType":"geometry","stylers":[{"hue":"#ffffff"},{"saturation":-100},{"lightness":100},{"visibility":"on"}]},{"featureType":"road","elementType":"labels","stylers":[{"hue":"#bbbbbb"},{"saturation":-100},{"lightness":26},{"visibility":"on"}]},{"featureType":"road.arterial","elementType":"geometry","stylers":[{"hue":"#ffcc00"},{"saturation":100},{"lightness":-35},{"visibility":"simplified"}]},{"featureType":"road.highway","elementType":"geometry","stylers":[{"hue":"#ffcc00"},{"saturation":100},{"lightness":-22},{"visibility":"on"}]},{"featureType":"poi.school","elementType":"all","stylers":[{"hue":"#d7e4e4"},{"saturation":-60},{"lightness":23},{"visibility":"on"}]}];
 
       $scope.map = {
         center: { latitude: $scope.activity.placeLat, longitude: $scope.activity.placeLong},
         zoom: 17,
-        options: { styles: mapbox }
+        options: { styles: flatmap }
       };
 
       $scope.marker = {

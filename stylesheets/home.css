@@ -1,7 +1,7 @@
 .homepage.container-fluid {
   padding-right: 0px;
   padding-left: 0px;
-  height: calc(100vh - 72px);
+  height: calc(100vh - 69px);
 }
 
 ul.results-day-tabs {
@@ -25,7 +25,7 @@ ul.results-day-tabs {
 }
 
 .col-sm-4.filteration {
-  padding-left: 50px;
+  padding-left: 30px;
 }
 
 #moreFilters {
@@ -33,7 +33,7 @@ ul.results-day-tabs {
 }
 
 #moreFiltersButton {
-  padding-top: 22px;
+  padding-top: 10px;
 }
 
 .alpha-darken {
@@ -66,7 +66,7 @@ ul.results-day-tabs {
 .col-sm-6.feed-div {
   margin-bottom: 5px;
   text-decoration: none;
-  /*padding: 0px 8px;*/
+  padding: 0px;
 }
 
 
@@ -151,13 +151,12 @@ ul.age-filters {
   padding-top: 8px;
 }
 
-#moreFilterButtons {
-  margin: auto;
-  padding-right: 13%;
-}
-
 .btn-success.apply-button {
   margin-left: 10%;
+}
+
+.btn.btn-info.btn-lg {
+  font-size: 16px;
 }
 
 .age-filter-selection {
@@ -213,4 +212,8 @@ li.day-tab.selected-day-tab {
 
 #filterBottom {
   margin-bottom: 15px;
+}
+
+#homeFeed {
+  padding: 0px;
 }

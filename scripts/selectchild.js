@@ -48,6 +48,7 @@ if (Meteor.isClient) {
 
       $scope.register = function(ev){
         if ($scope.selectedChild) {
+          console.log(user);
           if (user.profile.tokens >= timeslot.tokens){
             registerChild(user, ev);
           } else {

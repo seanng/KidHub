@@ -1,15 +1,30 @@
+#profile {
+  padding: 30px;
+  background-color: #fff7d6;
+  background-image: url("http://www.transparenttextures.com/patterns/asfalt-dark.png");
+}
+
 #profile-card {
   padding: 30px 70px;
   width: 50%;
-  margin: 30px auto;
+  margin: 0 auto;
+  background: white;
 }
 
 #profile-form {
 
 }
 
+h1.info-heading {
+  border-bottom: 1px #2196F3 solid;
+}
+
 #personal-info {
   margin-bottom: 20px;
+}
+
+.w3-label.w3-validate {
+  color: #9c27b0;
 }
 
 #personal-info-form {

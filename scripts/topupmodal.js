@@ -38,12 +38,15 @@ if (Meteor.isClient) {
 
     $scope.plans = Meteor.settings.public.plans;
 
-    //Step 2
     $scope.cardDetails = {
       number: '',
       cvc: '',
       expMonth: '',
       expYear: ''
+    };
+
+    $scope.checkpaymentOption = function(){
+      console.log($scope.paymentOption);
     };
 
     var payButton = function() {
@@ -52,6 +55,18 @@ if (Meteor.isClient) {
         amount: paymentAmount,
         name: 'Token Payment',
         description: '',
+        closed: function(){
+          if (paymentAmount == 50000){
+            Meteor.users.update({_id: Meteor.userId()}, {$set: {'profile.tokens': Meteor.user().profile.tokens += 5}});
+            window.location.href='/home';
+          } else if (paymentAmount == 95000){
+            Meteor.users.update({_id: Meteor.userId()}, {$set: {'profile.tokens': Meteor.user().profile.tokens += 10}});
+            window.location.href='/home';
+          } else if (paymentAmount == 185000){
+            Meteor.users.update({_id: Meteor.userId()}, {$set: {'profile.tokens': Meteor.user().profile.tokens += 20}});
+            window.location.href='/home';
+          }
+        },
         panelLabel: 'Pay Now',
         token: function(res) {
           stripeToken = res.id;

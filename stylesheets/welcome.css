@@ -3,6 +3,13 @@
     border-left: none;
     position: relative;
 }
+
+div.title-container > a > h1 {
+  font-family: 'Tillana', cursive;
+  font-weight: 700;
+  color: white;
+}
+
 .no-video .video-container video,
 .touch .video-container video {
     display: none;

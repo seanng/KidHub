@@ -3,16 +3,30 @@
 }
 
 nav.navbar.navbar-default.appnavbar {
-  margin-bottom: 1px;
   padding: 5px;
+  background-color: #c8eaff;
+  margin-bottom: 0px;
+  padding-left: 15px;
+  border: 0px;
+  border-bottom: black 1px solid;
+  border-top: black 1px solid;
+  border-radius: 0px;
 }
 
 .navbar-brand {
   font-size: 30px;
+  color: black;
+  padding: 5px 10px;
 }
 
 span.glyphicon.glyphicon-user {
   font-size: 24px;
+  color: black;
+}
+
+#dateSelector {
+  padding-left: 15px;
+  padding-right: 15px;
 }
 
 #nav-username {
@@ -25,6 +39,7 @@ span.glyphicon.glyphicon-user {
 
 span.glyphicon.glyphicon-piggy-bank {
   font-size: 24px;
+  color: black;
 }
 
 #nav-bank > .dropdown-menu li:hover .sub-menu {

@@ -104,7 +104,21 @@ if (Meteor.isClient) {
     var populateFeedByDate = function(value){
       var start = moment(value).startOf('day').toDate();
       var end = moment(value).endOf('day').toDate();
+      var count = 1;
       var timeslots = Timeslots.find({date: {$gte: start, $lte: end}}).fetch();
+      setTimeslots(timeslots);
+      var interval = setInterval(function(){
+        console.log(count, timeslots);
+        if (timeslots.length > 0 || count > 3) {
+          clearInterval(interval);
+        }
+        timeslots = Timeslots.find({date: {$gte: start, $lte: end}}).fetch();
+        setTimeslots(timeslots);
+        count++;
+      }, 500);
+    };
+
+    var setTimeslots = function (timeslots) {
       timeslots.forEach(function(act){
         console.log("test");
         act.ageLow = Array.min(act.ages);
@@ -113,7 +127,6 @@ if (Meteor.isClient) {
         act.time = moment(act.date).format('hA');
       });
       $scope.timeslots = timeslots;
-      stroll.bind('.feed-item-actual');
     };
 
     var generateDayTabs = function() {
@@ -160,121 +173,144 @@ if (Meteor.isClient) {
 
     // MAP Stuff
 
-    var lightdream = [
-          {
-              "featureType": "landscape",
-              "elementType": "all",
-              "stylers": [
-                  {
-                      "hue": "#FFBB00"
-                  },
-                  {
-                      "saturation": 43.400000000000006
-                  },
-                  {
-                      "lightness": 37.599999999999994
-                  },
-                  {
-                      "gamma": 1
-                  }
-              ]
-          },
-          {
-              "featureType": "poi",
-              "elementType": "all",
-              "stylers": [
-                  {
-                      "hue": "#00FF6A"
-                  },
-                  {
-                      "saturation": -1.0989010989011234
-                  },
-                  {
-                      "lightness": 11.200000000000017
-                  },
-                  {
-                      "gamma": 1
-                  }
-              ]
-          },
-          {
-              "featureType": "road.highway",
-              "elementType": "all",
-              "stylers": [
-                  {
-                      "hue": "#FFC200"
-                  },
-                  {
-                      "saturation": -61.8
-                  },
-                  {
-                      "lightness": 45.599999999999994
-                  },
-                  {
-                      "gamma": 1
-                  }
-              ]
-          },
-          {
-              "featureType": "road.arterial",
-              "elementType": "all",
-              "stylers": [
-                  {
-                      "hue": "#FF0300"
-                  },
-                  {
-                      "saturation": -100
-                  },
-                  {
-                      "lightness": 51.19999999999999
-                  },
-                  {
-                      "gamma": 1
-                  }
-              ]
-          },
-          {
-              "featureType": "road.local",
-              "elementType": "all",
-              "stylers": [
-                  {
-                      "hue": "#FF0300"
-                  },
-                  {
-                      "saturation": -100
-                  },
-                  {
-                      "lightness": 52
-                  },
-                  {
-                      "gamma": 1
-                  }
-              ]
-          },
-          {
-              "featureType": "water",
-              "elementType": "all",
-              "stylers": [
-                  {
-                      "hue": "#0078FF"
-                  },
-                  {
-                      "saturation": -13.200000000000003
-                  },
-                  {
-                      "lightness": 2.4000000000000057
-                  },
-                  {
-                      "gamma": 1
-                  }
-              ]
-          }
+    var mapbox = [
+        {
+            "featureType": "water",
+            "stylers": [
+                {
+                    "saturation": 43
+                },
+                {
+                    "lightness": -11
+                },
+                {
+                    "hue": "#0088ff"
+                }
+            ]
+        },
+        {
+            "featureType": "road",
+            "elementType": "geometry.fill",
+            "stylers": [
+                {
+                    "hue": "#ff0000"
+                },
+                {
+                    "saturation": -100
+                },
+                {
+                    "lightness": 99
+                }
+            ]
+        },
+        {
+            "featureType": "road",
+            "elementType": "geometry.stroke",
+            "stylers": [
+                {
+                    "color": "#808080"
+                },
+                {
+                    "lightness": 54
+                }
+            ]
+        },
+        {
+            "featureType": "landscape.man_made",
+            "elementType": "geometry.fill",
+            "stylers": [
+                {
+                    "color": "#ece2d9"
+                }
+            ]
+        },
+        {
+            "featureType": "poi.park",
+            "elementType": "geometry.fill",
+            "stylers": [
+                {
+                    "color": "#ccdca1"
+                }
+            ]
+        },
+        {
+            "featureType": "road",
+            "elementType": "labels.text.fill",
+            "stylers": [
+                {
+                    "color": "#767676"
+                }
+            ]
+        },
+        {
+            "featureType": "road",
+            "elementType": "labels.text.stroke",
+            "stylers": [
+                {
+                    "color": "#ffffff"
+                }
+            ]
+        },
+        {
+            "featureType": "poi",
+            "stylers": [
+                {
+                    "visibility": "off"
+                }
+            ]
+        },
+        {
+            "featureType": "landscape.natural",
+            "elementType": "geometry.fill",
+            "stylers": [
+                {
+                    "visibility": "on"
+                },
+                {
+                    "color": "#b8cb93"
+                }
+            ]
+        },
+        {
+            "featureType": "poi.park",
+            "stylers": [
+                {
+                    "visibility": "on"
+                }
+            ]
+        },
+        {
+            "featureType": "poi.sports_complex",
+            "stylers": [
+                {
+                    "visibility": "on"
+                }
+            ]
+        },
+        {
+            "featureType": "poi.medical",
+            "stylers": [
+                {
+                    "visibility": "on"
+                }
+            ]
+        },
+        {
+            "featureType": "poi.business",
+            "stylers": [
+                {
+                    "visibility": "simplified"
+                }
+            ]
+        }
     ];
+
+    var flatmap = [{"featureType":"water","elementType":"all","stylers":[{"hue":"#7fc8ed"},{"saturation":55},{"lightness":-6},{"visibility":"on"}]},{"featureType":"water","elementType":"labels","stylers":[{"hue":"#7fc8ed"},{"saturation":55},{"lightness":-6},{"visibility":"off"}]},{"featureType":"poi.park","elementType":"geometry","stylers":[{"hue":"#83cead"},{"saturation":1},{"lightness":-15},{"visibility":"on"}]},{"featureType":"landscape","elementType":"geometry","stylers":[{"hue":"#f3f4f4"},{"saturation":-84},{"lightness":59},{"visibility":"on"}]},{"featureType":"landscape","elementType":"labels","stylers":[{"hue":"#ffffff"},{"saturation":-100},{"lightness":100},{"visibility":"off"}]},{"featureType":"road","elementType":"geometry","stylers":[{"hue":"#ffffff"},{"saturation":-100},{"lightness":100},{"visibility":"on"}]},{"featureType":"road","elementType":"labels","stylers":[{"hue":"#bbbbbb"},{"saturation":-100},{"lightness":26},{"visibility":"on"}]},{"featureType":"road.arterial","elementType":"geometry","stylers":[{"hue":"#ffcc00"},{"saturation":100},{"lightness":-35},{"visibility":"simplified"}]},{"featureType":"road.highway","elementType":"geometry","stylers":[{"hue":"#ffcc00"},{"saturation":100},{"lightness":-22},{"visibility":"on"}]},{"featureType":"poi.school","elementType":"all","stylers":[{"hue":"#d7e4e4"},{"saturation":-60},{"lightness":23},{"visibility":"on"}]}]
 
     $scope.map = {
       center: { latitude: 22.2783, longitude: 114.1747},
-      zoom: 11,
-      options: {styles: lightdream}
+      zoom: 12,
+      options: {styles: flatmap}
     };
 
     $scope.markerIcon = function(cat) {
@@ -289,6 +325,13 @@ if (Meteor.isClient) {
       } else if (cat=="Science"){
         return 'https://maps.google.com/intl/en_us/mapfiles/ms/micons/yellow-dot.png';
       }
+    };
+
+    $scope.onClick = function (map,event,timeslot, d){
+      console.log(map);
+      console.log(event);
+      console.log(timeslot);
+      console.log(d);
     };
 
     //INITIALIZATION

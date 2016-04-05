@@ -38,7 +38,7 @@
             </div>
             <div flex class="booking-section">
               <div id="selectTimeslot">
-                <button id="reserveButton" class="btn btn-success btn-lg">Reserve ( {{activity.tokens}} <span class="glyphicon glyphicon-copyright-mark"></span> )</button>
+                <button id="reserveButton" class="btn btn-success btn-lg" ng-click="reserveAction($event)">Reserve ( {{activity.tokens}} <span class="glyphicon glyphicon-copyright-mark"></span> )</button>
                 <md-input-container style="margin-right: 10px;">
                   <label>Select date</label>
                   <md-select ng-model="selectedDate" md-on-open="getDates()" md-on-close="selectDate()">
@@ -48,7 +48,7 @@
                 <md-input-container style="margin-right: 10px;" ng-disabled="!selectedDate">
                   <label>Time</label>
                   <md-select ng-model="selectedTime" md-on-close="selectTime()">
-                    <md-option ng-repeat="time in selectedDate" ng-value="time">{{time}}</md-option>
+                    <md-option ng-repeat="date in selectedDate" ng-value="date.date">{{date.eventTime}}</md-option>
                   </md-select>
                 </md-input-container>
               </div>

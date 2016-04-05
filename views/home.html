@@ -34,7 +34,7 @@
           </ul>
         </div>
         <div class="col-sm-3 filteration" id="moreFiltersButton">
-          <button type="button" class="btn btn-default" ng-model="showMoreFilters" btn-checkbox btn-checkbox-true="true" btn-checkbox-false="false">
+          <button type="button" class="btn btn-info btn-lg" ng-model="showMoreFilters" btn-checkbox btn-checkbox-true="true" btn-checkbox-false="false">
             <span ng-show="!showMoreFilters">More Filters</span>
             <span ng-show="showMoreFilters">Less Filters</span>
           </button>
@@ -114,7 +114,8 @@
       <ui-gmap-marker ng-repeat="timeslot in timeslots | filter:timeslotFilter"
         idKey="timeslot._id"
         coords="{latitude: timeslot.placeLat, longitude: timeslot.placeLong}"
-        options="{icon: markerIcon(timeslot.category)}">
+        options="{icon: markerIcon(timeslot.category)}"
+        click="onClick">
         <ui-gmap-window options="{visible: false}">
           <a ui-sref="activity({activityId: timeslot.activity_id})">{{timeslot.name}}</a>
         </ui-gmap-window>
