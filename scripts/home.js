@@ -106,6 +106,7 @@ if (Meteor.isClient) {
       var end = moment(value).endOf('day').toDate();
       var timeslots = Timeslots.find({date: {$gte: start, $lte: end}}).fetch();
       timeslots.forEach(function(act){
+        console.log("test");
         act.ageLow = Array.min(act.ages);
         act.ageHigh = Array.max(act.ages);
         act.activity_id = act.activity_id._str;
@@ -278,15 +279,15 @@ if (Meteor.isClient) {
 
     $scope.markerIcon = function(cat) {
       if (cat=="Play"){
-        return 'http://maps.google.com/intl/en_us/mapfiles/ms/micons/blue-dot.png';
+        return 'https://maps.google.com/intl/en_us/mapfiles/ms/micons/blue-dot.png';
       } else if (cat=="Academic"){
-        return 'http://maps.google.com/intl/en_us/mapfiles/ms/micons/red-dot.png';
+        return 'https://maps.google.com/intl/en_us/mapfiles/ms/micons/red-dot.png';
       } else if (cat=="Arts & Crafts"){
-        return 'http://maps.google.com/intl/en_us/mapfiles/ms/micons/orange-dot.png';
+        return 'https://maps.google.com/intl/en_us/mapfiles/ms/micons/orange-dot.png';
       } else if (cat=="Sports"){
-        return 'http://maps.google.com/intl/en_us/mapfiles/ms/micons/purple-dot.png';
+        return 'https://maps.google.com/intl/en_us/mapfiles/ms/micons/purple-dot.png';
       } else if (cat=="Science"){
-        return 'http://maps.google.com/intl/en_us/mapfiles/ms/micons/yellow-dot.png';
+        return 'https://maps.google.com/intl/en_us/mapfiles/ms/micons/yellow-dot.png';
       }
     };
 
