@@ -71,6 +71,12 @@ if (Meteor.isClient) {
     };
   });
 
+  angular.module('KidHubApp').filter('reverse', function() {
+    return function(items) {
+      return items.slice().reverse();
+    };
+  });
+
   angular.module('KidHubApp').config(function($urlRouterProvider, $stateProvider, $locationProvider, $mdThemingProvider){
     $locationProvider.html5Mode(true);
 
@@ -135,6 +141,10 @@ if (Meteor.isServer) {
     activities.forEach(function(activity){
       for (var i = 0; i < 8; i++){
         var date = faker.date.between(currentdate, enddate);
+        var arrHours = [9,10,11,12,13,14,15,16,17,18];
+        var hour = arrHours[Math.floor(Math.random()*arrHours.length)];
+        date.setHours(hour, 0,0,0);
+        console.log(date);
         Timeslots.insert({
           name: activity.name,
           activity_id: activity._id,
@@ -145,7 +155,6 @@ if (Meteor.isServer) {
           placeLat: activity.placeLat,
           placeLong: activity.placeLong,
           date: date,
-          endTime: moment(date).add(60, 'm'),
           imageURL: activity.imageURL,
           registrations: []
         });

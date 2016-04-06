@@ -1,0 +1,21 @@
+{
+  "name": "public",
+  "authors": [
+    "seanng <shonum@gmail.com>"
+  ],
+  "description": "",
+  "main": "",
+  "moduleType": [],
+  "license": "MIT",
+  "homepage": "",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "AniJS": "anijs#^0.9.3"
+  }
+}

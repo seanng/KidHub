@@ -3,6 +3,12 @@ if (Meteor.isClient) {
   angular.module('KidHubApp')
   .controller('HomeCtrl', ['$scope', '$meteor', '$mdDialog', function($scope, $meteor, $mdDialog){
 
+    $scope.getActivityObj = function (timeslot) {
+      return {
+        activityId: timeslot.activity_id
+      };
+    };
+
     $scope.timeslotFilters = function(timeslot) {
       return checkFilter(timeslot, 'district') && checkFilter(timeslot, 'category') && checkAge(timeslot) && checkTokens(timeslot);
     };
@@ -105,14 +111,14 @@ if (Meteor.isClient) {
       var start = moment(value).startOf('day').toDate();
       var end = moment(value).endOf('day').toDate();
       var count = 1;
-      var timeslots = Timeslots.find({date: {$gte: start, $lte: end}}).fetch();
+      var timeslots = Timeslots.find({date: {$gte: start, $lte: end}}, {sort: {date: 1}}).fetch();
       setTimeslots(timeslots);
       var interval = setInterval(function(){
         console.log(count, timeslots);
         if (timeslots.length > 0 || count > 3) {
           clearInterval(interval);
         }
-        timeslots = Timeslots.find({date: {$gte: start, $lte: end}}).fetch();
+        timeslots = Timeslots.find({date: {$gte: start, $lte: end}}, {sort: {date: 1}}).fetch();
         setTimeslots(timeslots);
         count++;
       }, 500);
@@ -125,6 +131,20 @@ if (Meteor.isClient) {
         act.ageHigh = Array.max(act.ages);
         act.activity_id = act.activity_id._str;
         act.time = moment(act.date).format('hA');
+        act.isActive = false;
+        act.icon = 'https://maps.google.com/intl/en_us/mapfiles/ms/micons/red-dot.png';
+        act.activateMarker = function (){
+          console.log('entered');
+          // $scope.map.control.refresh({latitude: this.placeLat, longitude: this.placeLong});
+          $scope.map.center = {latitude: this.placeLat, longitude: this.placeLong};
+          this.isActive = true;
+          this.icon = 'https://maps.google.com/intl/en_us/mapfiles/ms/micons/yellow-dot.png';
+        };
+        act.deactivateMarker = function(){
+          console.log('left');
+          this.isActive = false;
+          this.icon = 'https://maps.google.com/intl/en_us/mapfiles/ms/micons/red-dot.png';
+        };
       });
       $scope.timeslots = timeslots;
     };
@@ -305,13 +325,19 @@ if (Meteor.isClient) {
         }
     ];
 
-    var flatmap = [{"featureType":"water","elementType":"all","stylers":[{"hue":"#7fc8ed"},{"saturation":55},{"lightness":-6},{"visibility":"on"}]},{"featureType":"water","elementType":"labels","stylers":[{"hue":"#7fc8ed"},{"saturation":55},{"lightness":-6},{"visibility":"off"}]},{"featureType":"poi.park","elementType":"geometry","stylers":[{"hue":"#83cead"},{"saturation":1},{"lightness":-15},{"visibility":"on"}]},{"featureType":"landscape","elementType":"geometry","stylers":[{"hue":"#f3f4f4"},{"saturation":-84},{"lightness":59},{"visibility":"on"}]},{"featureType":"landscape","elementType":"labels","stylers":[{"hue":"#ffffff"},{"saturation":-100},{"lightness":100},{"visibility":"off"}]},{"featureType":"road","elementType":"geometry","stylers":[{"hue":"#ffffff"},{"saturation":-100},{"lightness":100},{"visibility":"on"}]},{"featureType":"road","elementType":"labels","stylers":[{"hue":"#bbbbbb"},{"saturation":-100},{"lightness":26},{"visibility":"on"}]},{"featureType":"road.arterial","elementType":"geometry","stylers":[{"hue":"#ffcc00"},{"saturation":100},{"lightness":-35},{"visibility":"simplified"}]},{"featureType":"road.highway","elementType":"geometry","stylers":[{"hue":"#ffcc00"},{"saturation":100},{"lightness":-22},{"visibility":"on"}]},{"featureType":"poi.school","elementType":"all","stylers":[{"hue":"#d7e4e4"},{"saturation":-60},{"lightness":23},{"visibility":"on"}]}]
+    var flatmap = [{"featureType":"water","elementType":"all","stylers":[{"hue":"#7fc8ed"},{"saturation":55},{"lightness":-6},{"visibility":"on"}]},{"featureType":"water","elementType":"labels","stylers":[{"hue":"#7fc8ed"},{"saturation":55},{"lightness":-6},{"visibility":"off"}]},{"featureType":"poi.park","elementType":"geometry","stylers":[{"hue":"#83cead"},{"saturation":1},{"lightness":-15},{"visibility":"on"}]},{"featureType":"landscape","elementType":"geometry","stylers":[{"hue":"#f3f4f4"},{"saturation":-84},{"lightness":59},{"visibility":"on"}]},{"featureType":"landscape","elementType":"labels","stylers":[{"hue":"#ffffff"},{"saturation":-100},{"lightness":100},{"visibility":"off"}]},{"featureType":"road","elementType":"geometry","stylers":[{"hue":"#ffffff"},{"saturation":-100},{"lightness":100},{"visibility":"on"}]},{"featureType":"road","elementType":"labels","stylers":[{"hue":"#bbbbbb"},{"saturation":-100},{"lightness":26},{"visibility":"on"}]},{"featureType":"road.arterial","elementType":"geometry","stylers":[{"hue":"#ffcc00"},{"saturation":100},{"lightness":-35},{"visibility":"simplified"}]},{"featureType":"road.highway","elementType":"geometry","stylers":[{"hue":"#ffcc00"},{"saturation":100},{"lightness":-22},{"visibility":"on"}]},{"featureType":"poi.school","elementType":"all","stylers":[{"hue":"#d7e4e4"},{"saturation":-60},{"lightness":23},{"visibility":"on"}]}];
 
     $scope.map = {
       center: { latitude: 22.2783, longitude: 114.1747},
-      zoom: 12,
-      options: {styles: flatmap}
+      zoom: 13,
+      options: {styles: flatmap},
+      refresh: false,
+      control: {
+        refresh: ({latitude: 22.2783, longitude: 114.1747})
+      }
     };
+
+    window.debug = $scope.map;
 
     $scope.markerIcon = function(cat) {
       if (cat=="Play"){

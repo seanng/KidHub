@@ -18,4 +18,12 @@ if (Meteor.isClient) {
       controller: "TopupCtrl"
     };
   });
+
+  angular.module('KidHubApp').directive("activityLink", function() {
+    return {
+      restrict: 'E',
+      template: '<a ui-sref="activity({activityId: {{activityId}} })">{{activityId}}{{name}}</a>',
+      scope: { activityId: '@', name: '@'}
+    };
+  });
 }

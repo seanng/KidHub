@@ -1,7 +1,9 @@
 #profile {
   padding: 30px;
-  background-color: #fff7d6;
-  background-image: url("http://www.transparenttextures.com/patterns/asfalt-dark.png");
+  background: url("images/childrenswimming.jpeg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
 }
 
 #profile-card {
@@ -9,11 +11,9 @@
   width: 50%;
   margin: 0 auto;
   background: white;
+  opacity: 0.94;
 }
 
-#profile-form {
-
-}
 
 h1.info-heading {
   border-bottom: 1px #2196F3 solid;
@@ -24,7 +24,7 @@ h1.info-heading {
 }
 
 .w3-label.w3-validate {
-  color: #9c27b0;
+  color: #2196F3;
 }
 
 #personal-info-form {

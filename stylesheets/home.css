@@ -16,7 +16,8 @@ ul.results-day-tabs {
 }
 
 #dateSelector {
-  margin: 10px auto;
+  padding-top: 10px;
+  margin: 0px auto;
 }
 
 #creditFilterSlider {
@@ -61,6 +62,17 @@ ul.results-day-tabs {
   overflow: auto;
   text-decoration: none;
   font-family: 'Maven Pro', sans-serif;
+  background: url("images/childrenswimming.jpeg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  padding: 0px;
+}
+
+div.background-white {
+  background: white;
+  opacity: 0.94;
+  padding: 0 15px;
 }
 
 .col-sm-6.feed-div {
@@ -207,7 +219,7 @@ li.day-tab.selected-day-tab {
 #allFilters {
   padding-top: 15px;
   padding-bottom: 10px;
-  margin-bottom: 15px;
+  padding-bottom: 15px;
 }
 
 #filterBottom {
@@ -216,4 +228,11 @@ li.day-tab.selected-day-tab {
 
 #homeFeed {
   padding: 0px;
+  background-color: white;
+  opacity: 0.95;
+}
+
+ui-gmap-marker.active {
+  color: black;
+  background-color: black;
 }

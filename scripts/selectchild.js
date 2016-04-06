@@ -20,7 +20,7 @@ if (Meteor.isClient) {
         console.log(user);
         var newDate = new Date();
         var newHistory = user.profile.history;
-        newHistory.push({timeslot_id: timeslot._id, activity_name: timeslot.name, timeslot: timeslot.date, activity_cost: timeslot.tokens, date_purchased: newDate, child: $scope.selectedChild});
+        newHistory.push({timeslot_id: timeslot._id, activity_name: timeslot.name, timeslot: timeslot.date, activity_cost: timeslot.tokens, date_purchased: newDate, child: $scope.selectedChild, activity_id: timeslot.activity_id});
 
         //Update user
         Meteor.users.update({_id: user._id}, {$set: {'profile.tokens': (user.profile.tokens - timeslot.tokens), 'profile.history': newHistory}}, function(err){

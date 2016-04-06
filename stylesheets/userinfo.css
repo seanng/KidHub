@@ -1,7 +1,25 @@
+#userinfo-page {
+  padding: 30px;
+  height: calc(100vh - 69px);
+  background: url("images/hotchild.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+}
+
 .userinfo-card {
-  width: 90%;
-  margin: 20px auto;
-  padding-bottom: 15px
+  width: 88%;
+  margin: 0px auto;
+  padding: 30px 70px;
+  opacity: 0.8;
+  padding-bottom: 50px;
+  background-color: white;
+  font-family: 'Maven Pro', sans-serif;
+  font-size: 16px;
+}
+
+tr > td {
+  padding-bottom: 10px;
 }
 
 .w3-container.userinfo-title {
