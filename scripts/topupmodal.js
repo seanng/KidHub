@@ -53,7 +53,7 @@ if (Meteor.isClient) {
       StripeCheckout.open({
         key: Meteor.settings.public.stripe.testPublishableKey,
         amount: paymentAmount,
-        name: 'Token Payment',
+        name: 'Purchase Coins',
         description: '',
         closed: function(){
           if (paymentAmount == 50000){

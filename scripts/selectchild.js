@@ -36,7 +36,7 @@ if (Meteor.isClient) {
               $mdDialog.alert()
                 .clickOutsideToClose(true)
                 .title($scope.selectedChild + ' has been registered.')
-                .textContent('You have paid ' + timeslot.tokens + " tokens. Remember, it's " +timeslot.time+ ". Don't be late!")
+                .textContent('You have paid ' + timeslot.tokens + " coins. Remember, it's " +timeslot.time+ ". Don't be late!")
                 .ok("Got it!")
                 .targetEvent(ev)
             ).then(function(){
@@ -55,7 +55,7 @@ if (Meteor.isClient) {
             $mdDialog.show(
               $mdDialog.alert()
                 .clickOutsideToClose(true)
-                .title('You do not have enough tokens.')
+                .title('You do not have enough coins.')
                 .ok("Got it!")
                 .targetEvent(ev)
             );
