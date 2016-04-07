@@ -45,7 +45,7 @@ if (Meteor.isClient) {
         window.location.href = '/user/'+userid;
         $scope.user.email = '';
         $scope.user.password = '';
-        Meteor.users.update({_id: userid}, {$set: {'profile.tokens': 20, 'profile.history': []}});
+        Meteor.users.update({_id: userid}, {$set: {'profile.tokens': 0, 'profile.history': []}});
       });
     };
 

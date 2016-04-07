@@ -1,7 +1,7 @@
 if (Meteor.isClient) {
 
   angular.module('KidHubApp')
-    .controller('SelectChildCtrl', ['$scope', '$meteor', '$mdDialog', 'timeslot', '$location', function($scope, $meteor, $mdDialog, timeslot, $location){
+    .controller('SelectChildCtrl', ['$scope', '$meteor', '$mdDialog', 'timeslot', '$location', '$state', function($scope, $meteor, $mdDialog, timeslot, $location, $state){
 
       $scope.invalidSelection = false;
       var user = Meteor.user();
@@ -40,7 +40,7 @@ if (Meteor.isClient) {
                 .ok("Got it!")
                 .targetEvent(ev)
             ).then(function(){
-              window.location.href= '/home';
+              $state.go('userinfo');
             });
           });
         });

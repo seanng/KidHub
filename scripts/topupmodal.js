@@ -2,7 +2,7 @@ var paymentAmount = null;
 
 if (Meteor.isClient) {
   angular.module('KidHubApp')
-  .controller('TopupCtrl', ['$scope','$meteor', '$location', '$timeout', function($scope, $meteor, $timeout, $location){
+  .controller('TopupCtrl', ['$scope','$meteor', '$location', '$timeout', function($scope, $meteor, $location, $timeout){
 
     $scope.progressvalue = 33;
 

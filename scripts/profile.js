@@ -2,7 +2,7 @@ if (Meteor.isClient) {
   Meteor.subscribe('userInfo');
 
   angular.module('KidHubApp')
-  .controller('ProfileCtrl', ['$scope', '$location', '$meteor', '$stateParams', '$state', '$mdDialog', '$mdMedia', function($scope, $meteor, $stateParams, $state, $location, $mdDialog, $mdMedia){
+  .controller('ProfileCtrl', ['$scope', '$meteor', '$stateParams', '$state', '$location', '$mdDialog', '$mdMedia', function($scope, $meteor, $stateParams, $state, $location, $mdDialog, $mdMedia){
 
     // if (Meteor.user()._id !== $stateParams.userId){
     //   $state.go('welcome');

@@ -139,7 +139,7 @@ if (Meteor.isServer) {
   if (allTimeslots.length <= 24) {
     var activities = Activities.find({}).fetch();
     activities.forEach(function(activity){
-      for (var i = 0; i < 8; i++){
+      for (var i = 0; i < 12; i++){
         var date = faker.date.between(currentdate, enddate);
         var arrHours = [9,10,11,12,13,14,15,16,17,18];
         var hour = arrHours[Math.floor(Math.random()*arrHours.length)];
