@@ -36,7 +36,7 @@
           <h4>Please add children</h4>
         </div>
         <div id="childrendiv" ng-repeat="child in user.children track by $index">
-          <span class="glyphicon glyphicon-remove-circle" ng-click="removeChild(child)"></span>
+          <span class="glyphicon glyphicon-remove-circle" ng-click="removeChild($index)"></span>
           <form class="w3-container" id="child-info-form">
             <div class="w3-row-padding child-info-input">
               <div class="w3-half">
