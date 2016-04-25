@@ -1,6 +1,6 @@
 if (Meteor.isClient) {
   angular.module('KidHubApp')
-  .controller('SigninCtrl', ['$scope','$meteor', '$location', function($scope, $meteor, $location){
+  .controller('SigninCtrl', ['$scope','$meteor', '$location', '$state', function($scope, $meteor, $location, $state){
 
     $scope.signin = true;
 
@@ -24,9 +24,7 @@ if (Meteor.isClient) {
         $scope.user.email = '';
         $scope.user.password = '';
 
-        if (Meteor.users.findOne({_id: Meteor.userId()})) {
-          window.location.href = '/user/'+Meteor.userId();
-        }
+        window.location.href = '/user/'+Meteor.userId();
       });
     };
 
