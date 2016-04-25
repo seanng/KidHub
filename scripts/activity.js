@@ -10,12 +10,13 @@ if (Meteor.isClient) {
       $scope.activities = Activities.find().fetch();
       $scope.ageLow = Array.min($scope.activity.ages);
       $scope.ageHigh = Array.max($scope.activity.ages);
-      $scope.selectedDate = null;
 
       $scope.getDates = function(){
-        $scope.uniqueDates = {};
+        $scope.selectedDate = null;
         var allTimeslots = null;
-        allTimeslots = Timeslots.find({activity_id: activityID}, {sort: {date: 1}}).fetch();
+        $scope.uniqueDates = {};
+        var currentdate = new Date();
+        allTimeslots = Timeslots.find({activity_id: activityID, date: { $gte: currentdate}}, {sort: {date: 1}}).fetch();
         console.log(allTimeslots);
         allTimeslots.forEach(function(elem){
           var eventDate = moment(elem.date).format("dddd, DD MMMM").toString();

@@ -129,13 +129,14 @@ Meteor.methods({
 });
 
 if (Meteor.isServer) {
+  console.log('running');
   //fake data
-  var allActivities = Activities.find( {}).fetch();
+  var allActivities = Activities.find({}).fetch();
 
   var currentdate = new Date();
   var enddate = moment().add(14, 'd');
 
-  var allTimeslots = Timeslots.find({}).fetch();
+  var allTimeslots = Timeslots.find({date: { $gte: currentdate } }).fetch();
   if (allTimeslots.length <= 24) {
     var activities = Activities.find({}).fetch();
     activities.forEach(function(activity){
