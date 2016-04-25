@@ -2,8 +2,9 @@ if (Meteor.isClient) {
   angular.module('KidHubApp')
   .controller('NavbarCtrl', ['$scope','$meteor', '$location', '$state', function($scope, $meteor,$location, $state){
 
-
-    $scope.currentuser = Meteor.user();
+    if (Meteor.user()){
+      $scope.currentuser = Meteor.user();
+    }
 
     $scope.signOut = function() {
       Meteor.logout(function(error){
