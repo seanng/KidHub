@@ -23,7 +23,10 @@ if (Meteor.isClient) {
         //data-toggle close modal with jQuery
         $scope.user.email = '';
         $scope.user.password = '';
-        window.location.href = '/user/'+Meteor.userId();
+
+        if (Meteor.users.findOne({_id: Meteor.userId()})) {
+          window.location.href = '/user/'+Meteor.userId();
+        }
       });
     };
 
