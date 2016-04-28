@@ -3,6 +3,7 @@ if (Meteor.isClient) {
   .controller('NavbarCtrl', ['$scope','$meteor', '$location', '$state', function($scope, $meteor,$location, $state){
 
     if (Meteor.user()){
+      console.log($scope.currentuser);
       $scope.currentuser = Meteor.user();
     }
 
