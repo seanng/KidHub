@@ -4,9 +4,13 @@ if (Meteor.isClient) {
   angular.module('KidHubApp')
   .controller('ProfileCtrl', ['$scope', '$meteor', '$stateParams', '$state', '$location', '$mdDialog', '$mdMedia', function($scope, $meteor, $stateParams, $state, $location, $mdDialog, $mdMedia){
 
-    // if (Meteor.user()._id !== $stateParams.userId){
-    //   $state.go('welcome');
-    // }
+    if (Meteor.user()._id !== $stateParams.userId){
+      $state.go('welcome');
+    }
+
+    var findUser = function() {
+      console.log ('finding user');
+    };
 
     var founduser = Meteor.users.findOne({_id: Meteor.userId()});
 
@@ -63,9 +67,6 @@ if (Meteor.isClient) {
           .targetEvent(ev)
         );
     };
-
-
-
   }]);
 }
 
