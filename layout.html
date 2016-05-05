@@ -12,7 +12,7 @@
 </head>
 
 <body ng-app="KidHubApp">
-  <navbar ng-show="$root.currentUser"></navbar>
+  <navbar ng-if="$root.currentUser"></navbar>
 
   <div ui-view id="mainView"></div>
 
