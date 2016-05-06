@@ -1,5 +1,4 @@
 if (Meteor.isClient) {
-  Meteor.subscribe('userInfo');
 
   angular.module('KidHubApp')
   .controller('ProfileCtrl', ['$scope', '$meteor', '$stateParams', '$state', '$location', '$mdDialog', '$mdMedia', function($scope, $meteor, $stateParams, $state, $location, $mdDialog, $mdMedia){
@@ -7,6 +6,18 @@ if (Meteor.isClient) {
     // if (Meteor.user()._id !== $stateParams.userId){
     //   $state.go('welcome');
     // }
+
+    Meteor.subscribe('userInfo', {
+      onReady: function(){
+        $scope.user = {
+          firstname: extractUserProfile('firstname'),
+          lastname: extractUserProfile('lastname'),
+          email: extractUserEmail(),
+          phone: extractUserProfile('phone') || '' ,
+          children: extractUserProfile('children') || []
+        };
+      }
+    });
 
     var extractUserEmail = function () {
       var user = Meteor.user();
@@ -19,13 +30,6 @@ if (Meteor.isClient) {
       return user && user.profile[key];
     };
 
-    $scope.user = {
-      firstname: extractUserProfile('firstname'),
-      lastname: extractUserProfile('lastname'),
-      email: extractUserEmail(),
-      phone: extractUserProfile('phone') || '' ,
-      children: extractUserProfile('children') || []
-    };
 
     $scope.addChildAction = function(){
       console.log($scope.user);
@@ -68,6 +72,7 @@ if (Meteor.isClient) {
 
 if (Meteor.isServer) {
   Meteor.publish('userInfo', function(){
-    // return Users.find({});
+    var userid = this.userId;
+    return Meteor.users.find({_id: userid});
   });
 }

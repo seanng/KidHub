@@ -3,10 +3,21 @@
 
 if (Meteor.isClient) {
   angular.module('KidHubApp')
-  .controller('WelcomeCtrl', ['$scope','$meteor', '$location', function($scope, $meteor, $location){
-    if (Meteor.user()){
-      $location.path('/home');
-    }
+  .controller('WelcomeCtrl', ['$scope', '$meteor', '$location', function($scope, $meteor, $location){
+
+    Meteor.subscribe('checkAuth', {
+      onError: function(error){
+        console.log('there was an error:', error);
+      },
+      onReady: function(){
+        if (Meteor.user()){
+          console.log('user authenticated.');
+          $location.path('/home');
+        } else {
+          console.log ('user not authenticated.');
+        }
+      }
+    });
 
     scaleVideoContainer();
 
@@ -72,4 +83,8 @@ if (Meteor.isClient) {
 
 
 if (Meteor.isServer) {
+  Meteor.publish('checkAuth', function(){
+    var userid = this.userId;
+    return Meteor.users.find({_id: userid});
+  });
 }

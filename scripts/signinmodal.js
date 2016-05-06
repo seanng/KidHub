@@ -25,6 +25,7 @@ if (Meteor.isClient) {
         $scope.user.password = '';
 
         if (Meteor.users.findOne({_id: Meteor.userId()})) {
+          // window.location.href = '/home';
           window.location.href = '/user/'+Meteor.userId();
         }
       });
