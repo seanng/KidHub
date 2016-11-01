@@ -377,3 +377,6 @@ if (Meteor.isClient) {
 if (Meteor.isServer) {
 
 }
+
+// making some changes
+// here
