@@ -130,12 +130,20 @@ Meteor.methods({
 });
 
 if (Meteor.isServer) {
+
+  import { HTTP } from 'meteor/http';
+
   console.log('running');
   //fake data
   var allActivities = Activities.find({}).fetch();
 
   var currentdate = new Date();
   var enddate = moment().add(14, 'd');
+
+  //keep heroku dynos awake
+  setInterval(function() {
+    HTTP.get("http://kidcoin.herokuapp.com");
+  }, 1500000); // every 5 minutes (300000)
 
   var allTimeslots = Timeslots.find({date: { $gte: currentdate } }).fetch();
   if (allTimeslots.length <= 24) {
@@ -146,7 +154,6 @@ if (Meteor.isServer) {
         var arrHours = [9,10,11,12,13,14,15,16,17,18];
         var hour = arrHours[Math.floor(Math.random()*arrHours.length)];
         date.setHours(hour, 0,0,0);
-        console.log(date);
         Timeslots.insert({
           name: activity.name,
           activity_id: activity._id,
@@ -162,7 +169,7 @@ if (Meteor.isServer) {
         });
       }
     });
-    console.log('creating timeslots.');
+
   }
 
   Meteor.publish('activities', function(){
