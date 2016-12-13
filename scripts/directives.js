@@ -1,4 +1,3 @@
-// if meteor is client::
 if (Meteor.isClient) {
 
   angular.module('KidHubApp').directive("navbar", function() {
