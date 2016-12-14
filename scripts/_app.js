@@ -131,19 +131,12 @@ Meteor.methods({
 
 if (Meteor.isServer) {
 
-  // import { HTTP } from 'meteor/http';
-
   console.log('running');
   //fake data
   var allActivities = Activities.find({}).fetch();
 
   var currentdate = new Date();
   var enddate = moment().add(14, 'd');
-
-  //keep heroku dynos awake
-  // setInterval(function() {
-  //   HTTP.get("https://kidcoin.herokuapp.com");
-  // }, 1500000); // every 5 minutes (300000)
 
   var allTimeslots = Timeslots.find({date: { $gte: currentdate } }).fetch();
   if (allTimeslots.length <= 24) {
