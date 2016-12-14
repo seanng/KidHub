@@ -1,4 +1,5 @@
 // Users = new Mongo.Collection('users');
+// Before Dependency update;
 Activities = new Mongo.Collection('activities', {idGeneration: 'MONGO'});
 Timeslots = new Mongo.Collection('timeslots', {idGeneration: 'MONGO'});
 ObjectID = Meteor.Collection.ObjectID;
